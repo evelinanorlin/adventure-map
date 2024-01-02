@@ -7,6 +7,8 @@ import axios from 'axios'
 function App() {
   const [count, setCount] = useState(0)
   useEffect(() => {
+    const url = import.meta.env.REACT_APP_URL;
+    console.log(url);
     async function fetchData(){
       try{
         const data = await axios.get('http://localhost:3000/admin');
