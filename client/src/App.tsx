@@ -7,11 +7,10 @@ import axios from 'axios'
 function App() {
   const [count, setCount] = useState(0)
   useEffect(() => {
-    const url = import.meta.env.REACT_APP_URL;
-    console.log(url);
+    const url = import.meta.env.VITE_APP_URL;
     async function fetchData(){
       try{
-        const data = await axios.get('http://localhost:3000/admin');
+        const data = await axios.get(`${url}/admin`);
         console.log(data.data);
       }
       catch{
