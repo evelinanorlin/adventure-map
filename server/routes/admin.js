@@ -4,8 +4,8 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   req.app.locals.db.collection('admin').find().toArray()
   .then(results => {
-    console.log(results)
-    res.send(results)
+    console.log(results[0].username)
+    res.send(results[0].username)
   })
 });
 
