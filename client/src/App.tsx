@@ -10,7 +10,7 @@ function App() {
     const url = import.meta.env.VITE_APP_URL;
     async function fetchData(){
       try{
-        const data = await axios.get(`${url}/admin`);
+        const data = await axios.get(`${url}admin`);
         console.log(data.data);
       }
       catch{
