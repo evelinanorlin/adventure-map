@@ -20,7 +20,7 @@ MongoClient.connect(uri, {
   app.locals.db = db;
 })
 .catch(err => {
-  console.error('Error connecting to the database:', err);
+  console.error('Error connecting to the databas:', err);
   process.exit(1); // Terminate the application on database connection error
 });
 
