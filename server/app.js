@@ -5,8 +5,9 @@ var logger = require('morgan');
 
 const MongoClient = require('mongodb').MongoClient;
 
+const Db = process.env.ATLAS_URI;
+
 MongoClient.connect('mongodb+srv://norlinevelina:Laxlada1@adventuremap.noo8vnu.mongodb.net/?retryWrites=true&w=majority', {
-  useUnifiedTopology: true
 })
 .then(client => {
   console.log('Connected to Database');
