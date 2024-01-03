@@ -1,0 +1,21 @@
+.btn{
+  font-weight: 600;
+  &-primary, &-secondary{
+    border: none;
+    padding: 0rem 1rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease-in-out;
+    filter: drop-shadow(1px 1px 1px #858585);
+    &:hover, &:focus{
+      outline: none;
+      text-decoration: none;
+    }
+  }
+  &-primary{
+    background-color: $color-orange;
+    color: $color-black;
+    &:hover, &:focus{
+      background-color: darken($color-orange, 10%);
+    }
+  }
+}

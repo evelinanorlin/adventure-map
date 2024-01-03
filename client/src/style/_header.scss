@@ -1,0 +1,12 @@
+.header{
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(1px 2px 5px #858585);
+  .logotype{
+    display: block;
+    height: 100%;
+    img{
+      height: 30px;
+    }
+  }
+}
