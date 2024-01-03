@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import close from "./icons/close.svg";
 
 import adventurer from "/public/adventurer.webp";
@@ -14,7 +15,7 @@ export default function WelcomePopup() {
             <p>Of single-origin mug kale 3-moon farm-to-table forage jomo. Crucifix they taiyaki v hella. Cornhole fit plaid hot artisan taiyaki banjo kombucha readymade iceland. Snackwave live-edge ascot gochujang cloud scenester vibecession praxis yuccie. Ethical franzen sustainable snackwave charcoal celiac skateboard braid tbh taiyaki. Cray mug photo bag scenester big bottle coloring mlkshk xoxo. Woke blue vice craft marfa salvia. Pitchfork mood biodiesel mi vegan distillery +1 tumeric raw. Vaporware shabby sold thundercats tilde book squid synth probably heard.</p>
             <div className="row direction-row m-t-5">
               <button className="btn btn-secondary">Utforska</button>
-              <button className="btn btn-tertiary">Om Äventyrskartan</button>
+              <Link to="/about" className="btn btn-tertiary">Om Äventyrskartan</Link>
             </div>
           </div>
         </div>
