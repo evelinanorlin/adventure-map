@@ -1,7 +1,10 @@
+import Logotype from "./icons/Logotype";
+
 export default function Header() {
   return (
     <header className="header">
-      <p>header</p>
+      <Logotype />
+      <h1>Adventure Map</h1>
     </header>
   );
 }

@@ -1,0 +1,152 @@
+/* ADD THIS LINE UNDER IN ALL FILES YOU WANT TO REACH VARIABLES AND MIXINS EASY */
+/// <reference path="standardize.scss" />
+
+section {
+    &.m {
+        &-standard {
+            margin: 80px 0;
+
+            @include md-tablet {
+                margin: 60px 0;
+            }
+
+            @include lg-phone {
+                margin: 50px 0;
+            }
+        }
+
+        &-small {
+            margin: 60px 0;
+
+            @include md-tablet {
+                margin: 40px 0;
+            }
+        }
+    }
+
+    &.p {
+        &-standard {
+            padding: 80px 0;
+
+            @include md-tablet {
+                padding: 60px 0;
+            }
+
+            @include lg-phone {
+                padding: 50px 0;
+            }
+        }
+
+        &-small {
+            padding: 60px 0;
+
+            @include md-tablet {
+                padding: 40px 0;
+            }
+        }
+    }
+
+    &.fullscreen {
+        min-height: calc(100vh + 40px);
+        width: 100%;
+    }
+}
+
+//Standard continers
+.content {
+    &-full {
+        width: 100%;
+    }
+
+    &-wide {
+        width: 100%;
+        max-width: 1620px;
+        margin: 0 auto;
+    }
+
+    &-standard {
+        width: 100%;
+        max-width: 1380px;
+        margin: 0 auto;
+    }
+
+    &-small {
+        width: 100%;
+        max-width: 1120px;
+        margin: 0 auto;
+    }
+
+    //Standard padding for content-containers
+    &-wide, &-standard, &-small, &-mini {
+        padding: 0 40px;
+
+        @include tablet {
+            padding: 0 30px;
+        }
+
+        @include lg-phone {
+            padding: 0 25px;
+        }
+    }
+}
+
+.text-block {
+    position: relative;
+    z-index: 1;
+
+    h1, h2, h3, p {
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    &-xxl {
+        width: 100%;
+        max-width: 920px;
+    }
+
+    &-xl {
+        width: 80%;
+        max-width: 850px;
+    }
+
+    &-lg {
+        width: 100%;
+        max-width: 720px;
+    }
+
+    &-md {
+        width: 100%;
+        max-width: 620px;
+    }
+
+    &-sm {
+        width: 100%;
+        max-width: 520px;
+    }
+
+    &-xs {
+        width: 100%;
+        max-width: 420px;
+    }
+
+    &-xxs {
+        width: 100%;
+        max-width: 340px;
+    }
+
+    &-center {
+        margin: 0 auto;
+    }
+
+    &-xxl, &-xl, &-lg, &-md, &-sm, &-xs, &-xxs {
+        position: relative;
+        z-index: 1;
+
+        h1, h2, h3, p {
+            &:first-child {
+                margin-top: 0;
+            }
+        }
+    }
+}
