@@ -9,18 +9,21 @@ export interface SearchLocationProps {
 }
 
 export default function SearchLocation({setLocation}: SearchLocationProps) {
-  // console.log(props)
 
-  const [ city, setCity ] = useState<string>();
+  const [ searchValue, setSearchValue ] = useState<string>();
   const API_KEY = import.meta.env.VITE_MAPTILER_KEY;
+  //let places: string[] = [];
+  const [places, setPlaces] = useState<string[]>([]);
 
   const handleChange = (event:ChangeEvent<HTMLInputElement>) => {
     if(event.target.value.length > 2){
-      setCity(event.target.value);
-      console.log(city)
-      if (city){
-        submitHandler(city)
+      setSearchValue(event.target.value);
+      console.log(searchValue)
+      if (searchValue){
+        submitHandler(searchValue)
       }
+    } else {
+      setPlaces([]);
     }
 
     setLocation(
@@ -30,8 +33,8 @@ export default function SearchLocation({setLocation}: SearchLocationProps) {
 )
   };
 
-  function submitHandler(city:string) {
-    const url = `https://api.maptiler.com/geocoding/${city}.json?fuzzyMatch=true&limit=10&language=sv&autocomplete=true&key=${API_KEY}`;
+  function submitHandler(searchValue:string) {
+    const url = `https://api.maptiler.com/geocoding/${searchValue}.json?fuzzyMatch=true&limit=3&language=sv&autocomplete=true&key=${API_KEY}`;
    
     fetch(url, {
       method: "GET",
@@ -43,7 +46,10 @@ export default function SearchLocation({setLocation}: SearchLocationProps) {
         }
       })
       .then((data) => {
-          console.log(data)
+          console.log(data);
+          const placesArr = (data.features.map((place: {place_name_sv: string}) => place.place_name_sv))
+          setPlaces(placesArr);
+          console.log(places)
         //   setLocation({
         //   latitude: data[0].lat,
         //   longitude: data[0].lon,
@@ -54,7 +60,12 @@ export default function SearchLocation({setLocation}: SearchLocationProps) {
 
   return (
     <div className="search-location">
-       <input className="search-field" type="text" placeholder="Search for a city" onChange={handleChange} />
+       <input className="search-field" type="text" placeholder="Search for a city" onChange={handleChange} list="locations"/>
+       <datalist className="location-list bg-white p-l-z" id="locations">
+          {places.map((place, index) => (
+            <option key={index} value={place} />
+          ))}
+       </datalist>
     </div>
   );
 }

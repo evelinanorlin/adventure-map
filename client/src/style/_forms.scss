@@ -1,4 +1,9 @@
-.search-field{
+.search-location{
   position: relative;
   z-index: 5;
+  .location-list{
+    width: fit-content;
+    filter: $drop-shadow;
+      width: fit-content;
+  }
 }

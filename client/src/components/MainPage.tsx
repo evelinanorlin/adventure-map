@@ -13,8 +13,6 @@ export function MainPage() {
     display_name: "",
   });
 
-  // const API_KEY = import.meta.env.VITE_MAPTILER_KEY;
-
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       getCurrentCityName,
