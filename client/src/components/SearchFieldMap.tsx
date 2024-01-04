@@ -1,7 +1,17 @@
-export default function SearchFieldMap() {
+import SearchLocation from "./SearchLocation";
+
+interface SearchFieldMapProps {
+  setLocation: React.Dispatch<React.SetStateAction<{
+    latitude: number;
+    longitude: number;
+    display_name: string;
+  }>>;
+}
+
+export default function SearchFieldMap({setLocation}: SearchFieldMapProps) {
   return (
     <div className="search-field-map">
-      <p>search field</p>
+      <SearchLocation setLocation={setLocation}/>
     </div>
   );
 }

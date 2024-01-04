@@ -1,23 +1,41 @@
-import {MapContainer, TileLayer} from "react-leaflet"
+// https://dineshigdd.medium.com/how-to-integrate-openstreetmap-with-react-typescript-861605b67ea3
+import { Marker, Popup } from "react-leaflet";
+import "leaflet-control-geocoder/dist/Control.Geocoder.css";
+import "leaflet-control-geocoder/dist/Control.Geocoder.js";
 import osm from "../Leaflet/osm-providers";
+// shape of the props
+// {
+//  positionInfos: [{address: "some address"}]
+// }
+import { TileLayer , MapContainer  } from "react-leaflet"
 import "leaflet/dist/leaflet.css";
 
-export default function AdventureMap() {
-  // const [center, setCenter] = useState({ lat: 51.505, lng: -0.09 });
-  const center = { lat: 	57.708870, lng: 11.974560 };
-  const ZOOM_LEVEL = 8;
-  const key=import.meta.env.VITE_MAPTILER_KEY;
-  console.log(key)
- // const mapRef = useRef();
+export interface LocationLatLong {
+  latitude:number
+  longitude:number,
+  display_name:string
+}
+
+interface props {
+  location: LocationLatLong
+}
+
+export default function Map( { location }: props) {
+  const currentCity: LocationLatLong = location;
+  const API_KEY = import.meta.env.VITE_MAPTILER_KEY;
+ 
   return (
-    <div className="map">
-      <MapContainer
-        center={center}
-        zoom={ZOOM_LEVEL}
-       // ref={mapRef}
-      >
-        <TileLayer url={`https://api.maptiler.com/maps/outdoor-v2/256/{z}/{x}/{y}.png?key=${key}`} attribution={osm.maptiler.attribution} />
-      </MapContainer>
-    </div>
-  );
+    <MapContainer center={[0,0]} zoom={ 2 } scrollWheelZoom={true}>
+
+    <TileLayer
+      url={`https://api.maptiler.com/maps/outdoor-v2/256/{z}/{x}/{y}.png?key=${API_KEY}`} attribution={osm.maptiler.attribution}
+    />
+
+    <Marker position={[ location.latitude, location.longitude ]}>
+        <Popup>
+          { currentCity.display_name }
+        </Popup>
+    </Marker> 
+</MapContainer>
+)
 }
