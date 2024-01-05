@@ -5,5 +5,8 @@
     width: fit-content;
     filter: $drop-shadow;
       width: fit-content;
+      li{
+        cursor: pointer;
+      }
   }
 }

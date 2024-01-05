@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import close from "./icons/close.svg";
 import { setIsVisited } from "./functions/storage";
 
-import adventurer from "/public/adventurer.webp";
+import adventurer from "/adventurer.webp";
 import { useState } from "react";
 
 export default function WelcomePopup() {

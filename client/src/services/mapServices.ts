@@ -7,7 +7,6 @@ export const getCityName = async (lat: number, lng: number) => {
   try {
     const response = await axios.get(url);
     if (response.data && response.data.address && response.data.address.city) {
-      console.log(response.data.address.city, response.data.address.country);
       return `${ response.data.address.city }, ${ response.data.address.country }`
     } else {
       console.log('City name not found in the response structure.');

@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { getLocationSearchResults } from "../services/mapServices";
 
 export interface SearchLocationProps {
@@ -6,27 +6,23 @@ export interface SearchLocationProps {
     latitude: number;
     longitude: number;
     display_name: string;
+    zoom: number;
   }>>;
 }
 
 export default function SearchLocation({setLocation}: SearchLocationProps) {
-  const [ searchValue, setSearchValue ] = useState<string>();
+  const [ searchValue, setSearchValue ] = useState<string>("");
   const [places, setPlaces] = useState<string[]>([]);
   // search for location when user types
-  const handleChange = (event:ChangeEvent<HTMLInputElement>) => {
-    if(event.target.value.length > 2){
-      setSearchValue(event.target.value);
-      if (searchValue){
+  const handleChange = (searchValue: string) => {
+    setSearchValue(searchValue);
+
+      if (searchValue.length > 2){
         submitHandler(searchValue)
       }
-    } else {
+    else {
       setPlaces([]);
     }
-    setLocation(
-      {latitude: 10,
-      longitude: 10,
-      display_name: "",}
-    )
   };
 
   async function submitHandler(searchValue:string) {
@@ -35,14 +31,33 @@ export default function SearchLocation({setLocation}: SearchLocationProps) {
     setPlaces(placesList);
   }
 
+  function clickedSuggestion(place: string) {
+    setSearchValue(place);
+    changeLocation(place);
+  }
+
+  async function changeLocation(searchValue:string) {
+    const places = await getLocationSearchResults(searchValue);
+    if (places.length > 0) {
+      setLocation(
+        {latitude: places[0].geometry.coordinates[1],
+        longitude: places[0].geometry.coordinates[0],
+        display_name: places[0].place_name_sv,
+        zoom: 10,}
+      )
+      setPlaces([]);
+    }
+
+  }
+
   return (
     <div className="search-location">
-       <input className="search-field" type="text" placeholder="Search for a city" onChange={handleChange} list="locations"/>
-       <datalist className="location-list bg-white p-l-z" id="locations">
-          {places.map((place, index) => (
-            <option key={index} value={place} />
-          ))}
-       </datalist>
+        <input className="search-field" type="text" placeholder="Search for a city" value={searchValue} onChange={e => {handleChange(e.target.value);}} onKeyDown={e => e.key === 'Enter' ? changeLocation(searchValue):''}/>
+        <ul className="location-list bg-white p-l-z" id="locations">
+            {places.map((place, index) => (
+              <li key={index} onClick={() => clickedSuggestion(place)}>{place}</li>
+            ))}
+        </ul>
     </div>
   );
 }

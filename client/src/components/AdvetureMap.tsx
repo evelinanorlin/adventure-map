@@ -5,11 +5,14 @@ import "leaflet-control-geocoder/dist/Control.Geocoder.js";
 import osm from "../Leaflet/osm-providers";
 import { TileLayer , MapContainer  } from "react-leaflet"
 import "leaflet/dist/leaflet.css";
+import { LatLngExpression } from "leaflet";
+
 
 export interface LocationLatLong {
   latitude:number
   longitude:number,
-  display_name:string
+  display_name:string,
+  zoom: number;
 }
 
 interface props {
@@ -19,19 +22,17 @@ interface props {
 export default function Map( { location }: props) {
   const currentCity: LocationLatLong = location;
   const API_KEY = import.meta.env.VITE_MAPTILER_KEY;
- 
+  
   return (
-    <MapContainer center={[62,11]} zoom={ 5 } scrollWheelZoom={true}>
+    <MapContainer key={`${location.latitude}-${location.longitude}`} center={[location.latitude, location.longitude]} zoom={ location.zoom } scrollWheelZoom={true}>
 
       <TileLayer
         url={`https://api.maptiler.com/maps/outdoor-v2/256/{z}/{x}/{y}.png?key=${API_KEY}`} attribution={osm.maptiler.attribution}
       />
-
-      <Marker position={[ location.latitude, location.longitude ]}>
-          <Popup>
-            { currentCity.display_name }
-          </Popup>
-      </Marker> 
+      <Marker  position={[ location.latitude, location.longitude ]}>
+      </Marker>
+      <Marker  position={[0,0]}>
+      </Marker>
     </MapContainer>
   )
 }
