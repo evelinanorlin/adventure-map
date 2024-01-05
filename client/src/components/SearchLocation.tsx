@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from "react";
+import { getLocationSearchResults } from "../services/mapServices";
 
 export interface SearchLocationProps {
   setLocation: React.Dispatch<React.SetStateAction<{
@@ -11,14 +12,12 @@ export interface SearchLocationProps {
 export default function SearchLocation({setLocation}: SearchLocationProps) {
 
   const [ searchValue, setSearchValue ] = useState<string>();
-  const API_KEY = import.meta.env.VITE_MAPTILER_KEY;
   //let places: string[] = [];
   const [places, setPlaces] = useState<string[]>([]);
 
   const handleChange = (event:ChangeEvent<HTMLInputElement>) => {
     if(event.target.value.length > 2){
       setSearchValue(event.target.value);
-      console.log(searchValue)
       if (searchValue){
         submitHandler(searchValue)
       }
@@ -33,29 +32,33 @@ export default function SearchLocation({setLocation}: SearchLocationProps) {
 )
   };
 
-  function submitHandler(searchValue:string) {
-    const url = `https://api.maptiler.com/geocoding/${searchValue}.json?fuzzyMatch=true&limit=3&language=sv&autocomplete=true&key=${API_KEY}`;
+  async function submitHandler(searchValue:string) {
+    const placesFeatures = await getLocationSearchResults(searchValue);
+    const placesList = placesFeatures.map((place: {place_name_sv: string}) => place.place_name_sv);
+    setPlaces(placesList);
+
+    // const url = `https://api.maptiler.com/geocoding/${searchValue}.json?fuzzyMatch=true&limit=3&language=sv&autocomplete=true&key=${API_KEY}`;
    
-    fetch(url, {
-      method: "GET",
-      mode: "cors",
-    })
-      .then((response) => {
-        if (response.ok) {                  
-          return response.json();
-        }
-      })
-      .then((data) => {
-          console.log(data);
-          const placesArr = (data.features.map((place: {place_name_sv: string}) => place.place_name_sv))
-          setPlaces(placesArr);
-          console.log(places)
-        //   setLocation({
-        //   latitude: data[0].lat,
-        //   longitude: data[0].lon,
-        //   display_name: data[0].display_name,
-        // })
-      }).catch(() => console.log("Please Check your input"));
+    // fetch(url, {
+    //   method: "GET",
+    //   mode: "cors",
+    // })
+    //   .then((response) => {
+    //     if (response.ok) {                  
+    //       return response.json();
+    //     }
+    //   })
+    //   .then((data) => {
+    //       console.log(data);
+    //       const placesArr = (data.features.map((place: {place_name_sv: string}) => place.place_name_sv))
+    //       setPlaces(placesArr);
+    //       console.log(places)
+    //     //   setLocation({
+    //     //   latitude: data[0].lat,
+    //     //   longitude: data[0].lon,
+    //     //   display_name: data[0].display_name,
+    //     // })
+    //   }).catch(() => console.log("Please Check your input"));
   }
 
   return (

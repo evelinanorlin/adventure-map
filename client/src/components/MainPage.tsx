@@ -4,12 +4,13 @@ import AdventureMap from "./AdvetureMap";
 import SearchFieldMap from "./SearchFieldMap";
 import WelcomePopup from "./WelcomePopup";
 import { setIsVisited } from "./functions/storage";
+import { getCityName } from "../services/mapServices";
 
 
 export function MainPage() {
   const [ location, setLocation ] = useState({
-    latitude: 0,
-    longitude:0,
+    latitude: 62,
+    longitude:16,
     display_name: "",
   });
 
@@ -19,27 +20,16 @@ export function MainPage() {
     );
   }, []);
 
-  useEffect(() => {
-    console.log(location)
-  }, [location]);
-
-  function getCurrentCityName(position : GeolocationPosition) {      
-   
-    const url = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat='
-    + position.coords.latitude + '&lon='  
-    + position.coords.longitude ;
-   
-    fetch(url, {
-      method: "GET",
-      mode: "cors",
-    })
-      .then((response) => response.json())
-      .then((data) => {     
-        setLocation({ latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-          display_name:`${ data.address.city }, ${ data.address.country }` })         
-      });
+  async function getCurrentCityName(position : GeolocationPosition) {    
+    const lat = position.coords.latitude;
+    const lon = position.coords.longitude;
+    const name = await getCityName(lat, lon);
+    if(name){
+      setLocation({ latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+        display_name: name })
     }
+  }
 
   const isVisited = localStorage.getItem("isVisited");
   setIsVisited()

@@ -3,10 +3,6 @@ import { Marker, Popup } from "react-leaflet";
 import "leaflet-control-geocoder/dist/Control.Geocoder.css";
 import "leaflet-control-geocoder/dist/Control.Geocoder.js";
 import osm from "../Leaflet/osm-providers";
-// shape of the props
-// {
-//  positionInfos: [{address: "some address"}]
-// }
 import { TileLayer , MapContainer  } from "react-leaflet"
 import "leaflet/dist/leaflet.css";
 
@@ -25,7 +21,7 @@ export default function Map( { location }: props) {
   const API_KEY = import.meta.env.VITE_MAPTILER_KEY;
  
   return (
-    <MapContainer center={[0,0]} zoom={ 2 } scrollWheelZoom={true}>
+    <MapContainer center={[62,11]} zoom={ 5 } scrollWheelZoom={true}>
 
     <TileLayer
       url={`https://api.maptiler.com/maps/outdoor-v2/256/{z}/{x}/{y}.png?key=${API_KEY}`} attribution={osm.maptiler.attribution}
