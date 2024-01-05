@@ -23,15 +23,15 @@ export default function Map( { location }: props) {
   return (
     <MapContainer center={[62,11]} zoom={ 5 } scrollWheelZoom={true}>
 
-    <TileLayer
-      url={`https://api.maptiler.com/maps/outdoor-v2/256/{z}/{x}/{y}.png?key=${API_KEY}`} attribution={osm.maptiler.attribution}
-    />
+      <TileLayer
+        url={`https://api.maptiler.com/maps/outdoor-v2/256/{z}/{x}/{y}.png?key=${API_KEY}`} attribution={osm.maptiler.attribution}
+      />
 
-    <Marker position={[ location.latitude, location.longitude ]}>
-        <Popup>
-          { currentCity.display_name }
-        </Popup>
-    </Marker> 
-</MapContainer>
-)
+      <Marker position={[ location.latitude, location.longitude ]}>
+          <Popup>
+            { currentCity.display_name }
+          </Popup>
+      </Marker> 
+    </MapContainer>
+  )
 }

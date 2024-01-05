@@ -8,18 +8,19 @@ import { getCityName } from "../services/mapServices";
 
 
 export function MainPage() {
+  // Start with a default location
   const [ location, setLocation ] = useState({
     latitude: 62,
     longitude:16,
     display_name: "",
   });
-
+  // get current location
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       getCurrentCityName,
     );
   }, []);
-
+  // get current city name
   async function getCurrentCityName(position : GeolocationPosition) {    
     const lat = position.coords.latitude;
     const lon = position.coords.longitude;
@@ -30,7 +31,7 @@ export function MainPage() {
         display_name: name })
     }
   }
-
+  // only show welcome popup once
   const isVisited = localStorage.getItem("isVisited");
   setIsVisited()
 
