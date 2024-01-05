@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { getLocationSearchResults } from "../services/mapServices";
+import searchBtn from "./icons/search.svg";
 
 export interface SearchLocationProps {
   setLocation: React.Dispatch<React.SetStateAction<{
@@ -46,17 +47,25 @@ export default function SearchLocation({setLocation}: SearchLocationProps) {
         zoom: 10,}
       )
       setPlaces([]);
+    } else {
+      alert("Platsen finns inte")
     }
 
   }
 
   return (
     <div className="search-location">
-        <input className="search-field" type="text" placeholder="Search for a city" value={searchValue} onChange={e => {handleChange(e.target.value);}} onKeyDown={e => e.key === 'Enter' ? changeLocation(searchValue):''}/>
-        <ul className="location-list bg-white p-l-z" id="locations">
-            {places.map((place, index) => (
-              <li key={index} onClick={() => clickedSuggestion(place)}>{place}</li>
-            ))}
+        <input className="search-field" type="text" placeholder="Sök plats" value={searchValue} onChange={e => {handleChange(e.target.value);}} onKeyDown={e => e.key === 'Enter' ? changeLocation(searchValue):''}/>
+        <button className="search-place-btn" aria-label="sök" onClick={() => changeLocation(searchValue)}><img src={searchBtn} alt="ett förstoringsglas"></img></button>
+        <ul className="location-list bg-white p-l-z" id="locations" style={{display: places.length > 0 ? 'block' : 'none'}}>
+        {places.map((place, index) => {
+          const [firstPart, secondPart] = place.split(", ");
+          return (
+            <li key={index} onClick={() => clickedSuggestion(place)}>
+              <span className="bold">{firstPart}</span>, {secondPart}
+            </li>
+          );
+        })}
         </ul>
     </div>
   );
