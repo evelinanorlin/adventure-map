@@ -1,3 +1,4 @@
+import FilterSearch from "./FilterSearch";
 import SearchLocation from "./SearchLocation";
 
 interface SearchFieldMapProps {
@@ -13,6 +14,7 @@ export default function SearchFieldMap({setLocation}: SearchFieldMapProps) {
   return (
     <div className="search-field-map">
       <SearchLocation setLocation={setLocation}/>
+      <FilterSearch />
     </div>
   );
 }

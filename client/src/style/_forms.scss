@@ -48,15 +48,27 @@ left: 30px;
         }
     }
   }
+
+  .search-category{
+    width: 250px;
+    height: 35px;
+    margin-top: 10px;
+  }
 }
 
-input{
+input, .select{
   filter: $drop-shadow;
   border-radius: 5px;
   border: 1px solid $color-grey;
   padding-left: 15px;
+  font-family: $font-main;
   &:focus{
     outline: none;
     border: 2px solid $color-blue;
   }
+}
+input::placeholder, select::placeholder{
+  color: $color-dark-grey;
+  font-family: $font-main;
+  font-size: 0.85rem;
 }

@@ -61,8 +61,8 @@ export default function SearchLocation({setLocation}: SearchLocationProps) {
         {places.map((place, index) => {
           const [firstPart, secondPart] = place.split(", ");
           return (
-            <li key={index} onClick={() => clickedSuggestion(place)}>
-              <span className="bold">{firstPart}</span>, {secondPart}
+            <li key={index} onClick={() => clickedSuggestion(place)} tabIndex={0} onKeyDown={e => e.key === 'Enter' ? clickedSuggestion(place):''}>
+              <button tabIndex={index+2}><span className="bold">{firstPart}</span>, {secondPart}</button>
             </li>
           );
         })}
