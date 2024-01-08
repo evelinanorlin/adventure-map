@@ -1,6 +1,8 @@
 import { SetStateAction, useState } from "react";
 import SearchLocation from "./SearchLocation";
 import TextEditor from "./TextEditor";
+import { categories } from "../data/categories";
+import { priceIntervals } from "../data/prices";
 
 export default function ExperienceForm() {
   const [location, setLocation] = useState<
@@ -11,7 +13,20 @@ export default function ExperienceForm() {
       zoom: number;
     }>
   >();
+  console.log(location);
   const [description, setDescription] = useState("");
+
+  const categoriesHtml = categories.map((category, index) => {
+    return(
+      <option value={category} key={index}>{category}</option>
+    )
+  });
+
+  const priceIntervalsHtml = priceIntervals.map((priceInterval, index) => {
+    return(
+      <option value={priceInterval} key={index}>{priceInterval}</option>
+    )
+  });
 
   return (
     <form>
@@ -48,19 +63,13 @@ export default function ExperienceForm() {
       <label>
         <p>Kostnad</p>
         <select id="price" name="price-intervals" required>
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="fiat">Fiat</option>
-          <option value="audi">Audi</option>
+        {priceIntervalsHtml}
         </select>
         </label>
         <label>
         <p>Kategori</p>
         <select id="price" name="price-intervals" required>
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="fiat">Fiat</option>
-          <option value="audi">Audi</option>
+          {categoriesHtml}
         </select>
         </label>
         </div>

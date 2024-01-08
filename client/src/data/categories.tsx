@@ -1,0 +1,1 @@
+export const categories = ["Vandra", "Klättra", "Campa", "Springa", "Cykla", "Vattensport", "Övrigt"];

@@ -1,8 +1,23 @@
 import { useEffect, useState } from "react";
+import { categories } from "../data/categories";
 
 export default function FilterSearch() {
   const [chosenCategories, setChosenCategories] = useState<string[]>([]);
   const [showCategories, setShowCategories] = useState<boolean>(false);
+  const categoriesHtml = categories.map((category, index) => {
+    return(
+      <li onClick={() => handleLiClick(category)} key={index} tabIndex={index + 1}>
+        <label>
+          <input
+            type="checkbox"
+            checked={chosenCategories.includes(category)}
+            onChange={() => updateChosenCategories(category)}
+          />
+          {category}
+          </label>
+      </li>
+    )
+  });
 
   useEffect(() => {
     const handler = (event: MouseEvent) => {
@@ -61,7 +76,8 @@ export default function FilterSearch() {
         className="category-list"
         style={{ display: showCategories ? "block" : "none" }}
       >
-        <li onClick={() => handleLiClick("Vandra")} tabIndex={1}>
+        {categoriesHtml}
+        {/* <li onClick={() => handleLiClick("Vandra")} tabIndex={1}>
           <label>
             <input
               type="checkbox"
@@ -80,7 +96,7 @@ export default function FilterSearch() {
             />
             Paddla
           </label>
-        </li>
+        </li> */}
       </ul>
     </div>
   );
