@@ -1,8 +1,7 @@
-export function togglePopup(isClosed: boolean){
+export function togglePopup(isClosed: boolean) {
   if (isClosed === false) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }

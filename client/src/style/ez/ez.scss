@@ -12,9 +12,8 @@ $spacing-xxxl: 120px; //7
 $spacing-z: 0px; //Z
 
 /* Figure heights, percentage based off of width*/
-$landscape-height: 69%; 
+$landscape-height: 69%;
 $portrait-height: 120%;
-
 
 /* INCLUDES IMPORTS */
 @import "mediaqueries";
@@ -24,4 +23,3 @@ $portrait-height: 120%;
 @import "containers";
 @import "spacing";
 @import "utilities";
-

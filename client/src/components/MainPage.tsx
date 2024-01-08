@@ -6,12 +6,11 @@ import WelcomePopup from "./WelcomePopup";
 import { setIsVisited } from "./functions/storage";
 //import { getCityName } from "../services/mapServices";
 
-
 export function MainPage() {
   // Start with a default location
-  const [ location, setLocation ] = useState({
+  const [location, setLocation] = useState({
     latitude: 62,
-    longitude:16,
+    longitude: 16,
     display_name: "",
     zoom: 7,
   });
@@ -22,7 +21,7 @@ export function MainPage() {
   //   );
   // }, []);
   // // get current city name
-  // async function getCurrentCityName(position : GeolocationPosition) {    
+  // async function getCurrentCityName(position : GeolocationPosition) {
   //   const lat = position.coords.latitude;
   //   const lon = position.coords.longitude;
   //   const name = await getCityName(lat, lon);
@@ -35,13 +34,13 @@ export function MainPage() {
   // }
   // only show welcome popup once
   const isVisited = localStorage.getItem("isVisited");
-  setIsVisited()
+  setIsVisited();
 
   return (
     <div className="main-page">
-      {!isVisited ?  <WelcomePopup /> : ""}
-      <SearchFieldMap setLocation={ setLocation }/>
-      <AdventureMap location = { location } />
+      {!isVisited ? <WelcomePopup /> : ""}
+      <SearchFieldMap setLocation={setLocation} />
+      <AdventureMap location={location} />
     </div>
   );
 }

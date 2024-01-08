@@ -1,39 +1,49 @@
-
-h1,h2, h3, p{
+h1,
+h2,
+h3,
+p {
   margin-top: 0;
 }
 
-h1, h2{
+h1,
+h2 {
   font-family: $font-heading;
   font-weight: 600;
 }
-h1{
+h1 {
   font-size: 2.5rem;
-
 }
-p, h3, h4, a, li, input, button, .btn{
+p,
+h3,
+h4,
+a,
+li,
+input,
+button,
+.btn {
   font-family: $font-main;
 }
 
-p{
+p {
   font-size: 0.9rem;
   font-weight: 400;
 }
 
-a{
+a {
   font-size: 0.9rem;
   text-decoration: none;
   color: $color-black;
-  &:hover, &:focus  {
+  &:hover,
+  &:focus {
     outline: none;
-    text-decoration: underline;   
+    text-decoration: underline;
   }
 }
 
-.small{
+.small {
   font-size: 0.8rem;
 }
 
-.bold{
+.bold {
   font-weight: 700;
 }

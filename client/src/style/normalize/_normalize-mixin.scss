@@ -12,8 +12,16 @@ $_normalize-exclude: () !default;
     $include: $section;
     // Sass doesn't have static variables, so the work-around is to stuff these
     // values into global variables so we can access them in future calls.
-    $_normalize-include: if(type-of($include) == 'list', $include, ($include)) !global;
-    $_normalize-exclude: if(type-of($exclude) == 'list', $exclude, ($exclude)) !global;
+    $_normalize-include: if(
+      type-of($include) == "list",
+      $include,
+      ($include)
+    ) !global;
+    $_normalize-exclude: if(
+      type-of($exclude) == "list",
+      $exclude,
+      ($exclude)
+    ) !global;
     @return true;
   }
 
@@ -22,27 +30,49 @@ $_normalize-exclude: () !default;
     @return true;
   }
   // If $include is set to (all), make sure $section is not in $exclude.
-  @else if not index($_normalize-exclude, $section) and index($_normalize-include, all) {
+  @else if not
+    index($_normalize-exclude, $section) and
+    index($_normalize-include, all)
+  {
     @return true;
   }
   @return false;
 }
 
-@mixin normalize($include: (all), $exclude: ()) {
+@mixin normalize(
+  $include: (
+    all,
+  ),
+  $exclude: ()
+) {
   // Initialize the helper function by passing it this mixin's parameters.
   $init: _normalize-include($include, $exclude);
 
   // If we've customized any font variables, we'll need extra properties.
-  @if $normalize-vertical-rhythm == null
-    and (
-      $base-line-height != 24px
-      or $base-unit != 'em'
-      or $h2-font-size != 1.5  * $base-font-size
-      or $h3-font-size != 1.17 * $base-font-size
-      or $h4-font-size != 1    * $base-font-size
-      or $h5-font-size != 0.83 * $base-font-size
-      or $h6-font-size != 0.67 * $base-font-size
-    ) {
+  @if $normalize-vertical-rhythm ==
+    null and
+    (
+      $base-line-height !=
+        24px or
+        $base-unit !=
+        "em" or
+        $h2-font-size !=
+        1.5 *
+        $base-font-size or
+        $h3-font-size !=
+        1.17 *
+        $base-font-size or
+        $h4-font-size !=
+        1 *
+        $base-font-size or
+        $h5-font-size !=
+        0.83 *
+        $base-font-size or
+        $h6-font-size !=
+        0.67 *
+        $base-font-size
+    )
+  {
     $normalize-vertical-rhythm: true !global;
   }
 
@@ -69,8 +99,7 @@ $_normalize-exclude: () !default;
       }
       @if $normalize-vertical-rhythm {
         line-height: math.div($base-line-height, $base-font-size) * 1em; /* 1 */
-      }
-      @else {
+      } @else {
         line-height: 1.15; /* 1 */
       }
       -webkit-text-size-adjust: 100%; /* 2 */
@@ -111,8 +140,7 @@ $_normalize-exclude: () !default;
       @if $normalize-vertical-rhythm {
         /* Set 1 unit of vertical rhythm on the top and bottom margins. */
         @include normalize-margin(1 0, $h1-font-size);
-      }
-      @else {
+      } @else {
         margin: 0.67em 0;
       }
     }
@@ -346,8 +374,7 @@ $_normalize-exclude: () !default;
       font-size: 100%; /* 1 */
       @if $normalize-vertical-rhythm {
         line-height: math.div($base-line-height, $base-font-size) * 1em; /* 1 */
-      }
-      @else {
+      } @else {
         line-height: 1.15; /* 1 */
       }
       margin: 0; /* 2 */
@@ -367,7 +394,8 @@ $_normalize-exclude: () !default;
      */
 
     button,
-    select { /* 1 */
+    select {
+      /* 1 */
       text-transform: none;
     }
 
@@ -386,7 +414,6 @@ $_normalize-exclude: () !default;
     [type="button"],
     [type="reset"],
     [type="submit"] {
-
       /**
        * Remove the inner border and padding in Firefox.
        */

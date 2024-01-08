@@ -1,20 +1,20 @@
-.popup{
+.popup {
   position: absolute;
   z-index: 2;
   background-color: $color-light-beige;
 
-  .close-btn{
+  .close-btn {
     position: absolute;
     top: 10px;
     right: 10px;
-    img{
+    img {
       height: 50px;
       width: 50px;
     }
   }
 }
 
-.welcome-popup{
+.welcome-popup {
   position: absolute;
   width: 90%;
   max-width: 1000px;
@@ -25,19 +25,19 @@
   transform: translate(-50%, -50%);
   border-radius: 5px;
   box-shadow: 1px 2px 5px #858585;
-  .row{
+  .row {
     height: 100%;
-    img{
+    img {
       width: 30%;
       height: 100%;
       object-fit: cover;
       border-top-left-radius: 5px;
       border-bottom-left-radius: 5px;
     }
-    .cont{
+    .cont {
       width: 60%;
       position: relative;
-      .text-content{
+      .text-content {
         position: absolute;
         bottom: 50px;
       }

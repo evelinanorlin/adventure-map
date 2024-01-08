@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getLocationSearchResults } from "../services/mapServices";
 import searchBtn from "./icons/search.svg";
 
@@ -14,6 +14,25 @@ export interface SearchLocationProps {
 export default function SearchLocation({setLocation}: SearchLocationProps) {
   const [ searchValue, setSearchValue ] = useState<string>("");
   const [places, setPlaces] = useState<string[]>([]);
+  const [showPlacesList, setShowPlacesList] = useState<boolean>(false);
+
+  useEffect(() => {
+    const handler = (event: MouseEvent) => {
+    if(event.target !== document.querySelector(".search-field") 
+    && event.target !== document.querySelector(".search-place-btn") 
+    && event.target !== document.querySelector(".location-list") 
+    && !document.querySelector(".location-list")?.contains(event.target as Node)){
+      setShowPlacesList(false);
+    }
+  }
+  document.addEventListener("click", handler);
+
+  // Cleanup the event listener when the component unmounts
+  return () => {
+          document.removeEventListener("click", handler);
+        };
+  }, []);
+  
   // search for location when user types
   const handleChange = (searchValue: string) => {
     setSearchValue(searchValue);
@@ -30,11 +49,15 @@ export default function SearchLocation({setLocation}: SearchLocationProps) {
     const placesFeatures = await getLocationSearchResults(searchValue);
     const placesList = placesFeatures.map((place: {place_name_sv: string}) => place.place_name_sv);
     setPlaces(placesList);
+    if (placesList.length > 0) {
+      setShowPlacesList(true);
+    }
   }
 
   function clickedSuggestion(place: string) {
     setSearchValue(place);
     changeLocation(place);
+    setShowPlacesList(false);
   }
 
   async function changeLocation(searchValue:string) {
@@ -57,7 +80,7 @@ export default function SearchLocation({setLocation}: SearchLocationProps) {
     <div className="search-location">
         <input className="search-field" type="text" placeholder="Sök plats" value={searchValue} onChange={e => {handleChange(e.target.value);}} onKeyDown={e => e.key === 'Enter' ? changeLocation(searchValue):''}/>
         <button className="search-place-btn" aria-label="sök" onClick={() => changeLocation(searchValue)}><img src={searchBtn} alt="ett förstoringsglas"></img></button>
-        <ul className="location-list bg-white p-l-z" id="locations" style={{display: places.length > 0 ? 'block' : 'none'}}>
+        <ul className="location-list bg-white p-l-z" id="locations" style={{display: showPlacesList ? 'block' : 'none'}}>
         {places.map((place, index) => {
           const [firstPart, secondPart] = place.split(", ");
           return (

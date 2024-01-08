@@ -1,3 +1,3 @@
 export function setIsVisited(): void {
-    localStorage.setItem('isVisited', 'true');
+  localStorage.setItem("isVisited", "true");
 }
