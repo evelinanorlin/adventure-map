@@ -2,6 +2,10 @@
   position: absolute;
   z-index: 2;
   background-color: $color-light-beige;
+  box-shadow: 1px 2px 5px #858585;
+  border-radius: 5px;
+  max-height: 90vh;
+  overflow-x: scroll;
 
   .close-btn {
     position: absolute;
@@ -23,8 +27,6 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 5px;
-  box-shadow: 1px 2px 5px #858585;
   .row {
     height: 100%;
     img {
@@ -43,4 +45,14 @@
       }
     }
   }
+}
+
+.popup-right {
+  right: 30px;
+  top: 70px;
+  width: 90%;
+  max-width: 700px;
+}
+
+.experience-form {
 }

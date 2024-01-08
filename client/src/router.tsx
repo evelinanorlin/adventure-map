@@ -1,7 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Layout } from "./Layout";
-import { MainPage } from "./components/MainPage";
 import About from "./components/About";
+import WelcomePopup from "./components/WelcomePopup";
+import AddExperience from "./components/AddExperience";
 
 export const router = createBrowserRouter([
   {
@@ -10,12 +11,16 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <MainPage />,
+        element: <WelcomePopup />,
         index: true,
       },
       {
-        path: "/about",
+        path: "/om-aventyrskartan",
         element: <About />,
+      },
+      {
+        path: "/lagg-till-upplevelse",
+        element: <AddExperience />,
       },
       //{
       //   path: "/contact",

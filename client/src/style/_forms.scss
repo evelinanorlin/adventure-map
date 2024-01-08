@@ -1,50 +1,38 @@
-.search-field-map {
-  position: relative;
-  z-index: 2;
-  top: 30px;
-  left: 30px;
-  .search-location {
-    .search-field {
-      width: 250px;
-      height: 35px;
-      padding-right: 30px;
-      &:focus {
-        outline: none;
-        border: 1px solid $color-grey;
-      }
+// general for all forms
+
+.search-location {
+  .search-field {
+    padding-right: 30px;
+    &:focus {
+      outline: none;
+      border: 2px solid $color-blue;
     }
-    .search-place-btn {
-      position: relative;
-      height: 35px;
-      width: 35px;
-      z-index: 3;
-      right: 30px;
-      top: 4px;
-      padding-left: 5px;
-      img {
-        height: 15px;
-      }
+  }
+  .search-place-btn {
+    position: relative;
+    z-index: 3;
+    img {
+      height: 15px;
     }
-    .location-list {
-      width: 250px;
-      border: 1px solid $color-grey;
-      filter: $drop-shadow;
-      list-style: none;
-      border-bottom-right-radius: 5px;
-      border-bottom-left-radius: 5px;
-      margin: 0;
-      position: relative;
-      z-index: 3;
-      bottom: 3px;
-      li {
-        cursor: pointer;
-        font-size: 0.85rem;
-        line-height: 1rem;
-        padding: 15px;
-        border-bottom: 1px solid $color-light-grey;
-        &:hover {
-          background-color: $color-light-grey;
-        }
+  }
+  .location-list {
+    border: 1px solid $color-grey;
+    filter: $drop-shadow;
+    list-style: none;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin: 0;
+    position: relative;
+    z-index: 3;
+    bottom: 3px;
+    li {
+      cursor: pointer;
+      font-size: 0.85rem;
+      line-height: 1rem;
+      padding: 15px;
+      border-bottom: 1px solid $color-light-grey;
+      &:hover {
+        background-color: $color-light-grey;
       }
     }
   }
@@ -60,9 +48,9 @@
   margin-top: 15px;
   &:focus {
     outline: none;
-    border: 2px solid $color-grey;
+    border: 2px solid $color-blue;
   }
-  &::after{
+  &::after {
     content: url('data:image/svg+xml,<svg width="15" height="9" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.5 8.1251L0.9375 1.2501L1.85625 0.287598L7.5 6.2001L13.1438 0.287598L14.0625 1.2501L7.5 8.1251Z" fill="black"/></svg>');
     position: absolute;
     left: 225px;
@@ -70,7 +58,7 @@
 }
 
 .dropdown-selector,
-input {
+input, select {
   filter: $drop-shadow;
   border-radius: 5px;
   border: 1px solid $color-grey;
@@ -87,9 +75,19 @@ input {
 }
 input::placeholder,
 select::placeholder {
-  color: $color-dark-grey;
+  color: $color-grey;
   font-family: $font-main;
   font-size: 0.85rem;
+}
+
+label {
+  p {
+    font-family: $font-main;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin: 20px 0 5px 0;
+    line-height: 1.2rem;
+  }
 }
 
 .category-list {
@@ -114,6 +112,102 @@ select::placeholder {
     &:hover,
     &:focus {
       background-color: $color-light-grey;
+    }
+  }
+}
+
+.tox-tinymce {
+  border: 1px solid $color-grey !important;
+  border-radius: 5px;
+  filter: $drop-shadow;
+  margin-top: 15px;
+}
+
+.img-input{
+  border: none;
+  filter: none;
+  padding-left: 0;
+
+  &::file-selector-button {
+    background-color: $color-blue;
+    color: $color-white;
+    font-weight: 600;
+    font-family: $font-main;
+    font-size: 0.9rem;
+    border: none;
+    padding: 0rem 1.2rem;
+    min-width: 150px;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease-in-out;
+    filter: $drop-shadow;
+    &:hover,
+    &:focus {
+      background-color: darken($color-blue, 10%);
+      outline: none;
+      text-decoration: none;
+    }
+  }
+}
+// Search field on main page
+.search-field-map {
+  position: relative;
+  z-index: 2;
+  top: 30px;
+  left: 30px;
+  .search-location {
+    .search-field {
+      width: 250px;
+      height: 35px;
+    }
+    .search-place-btn {
+      height: 35px;
+      width: 35px;
+      right: 30px;
+      top: 4px;
+      padding-left: 5px;
+    }
+    .location-list {
+      width: 250px;
+    }
+  }
+}
+
+// forms in popup
+
+.popup {
+  label {
+    margin-bottom: 30px;
+    span {
+      color: $color-grey;
+      font-size: 0.85rem;
+      font-weight: 400;
+    }
+  }
+  input {
+    width: 80%;
+    @include xl-phone {
+      width: 100%;
+    }
+  }
+  .row {
+    width: 80%;
+    @include xl-phone {
+      width: 100%;
+    }
+    .search-field {
+      width: 250px;
+    }
+    .search-place-btn {
+      right: 25px;
+      top: 3px;
+    }
+    .btn {
+      width: 30%;
+      text-align: left;
+    }
+    select{
+      width: 200px;
+      max-width: 100%;
     }
   }
 }

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import chevronDown from "./icons/chevronDown.svg";
 
 export default function FilterSearch() {
   const [chosenCategories, setChosenCategories] = useState<string[]>([]);
@@ -20,6 +19,7 @@ export default function FilterSearch() {
         setShowCategories(true);
       }
     };
+
     document.addEventListener("click", handler);
 
     // Cleanup the event listener when the component unmounts

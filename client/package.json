@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@maptiler/geocoding-control": "^1.2.0",
+    "@tinymce/tinymce-react": "^4.3.2",
     "axios": "^1.6.3",
     "leaflet": "^1.9.4",
     "leaflet-control-geocoder": "^2.4.0",
