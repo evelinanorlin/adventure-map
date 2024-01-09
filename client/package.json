@@ -13,6 +13,7 @@
     "@maptiler/geocoding-control": "^1.2.0",
     "@tinymce/tinymce-react": "^4.3.2",
     "axios": "^1.6.3",
+    "compressorjs": "^1.2.1",
     "leaflet": "^1.9.4",
     "leaflet-control-geocoder": "^2.4.0",
     "maplibre-gl": "^3.6.2",

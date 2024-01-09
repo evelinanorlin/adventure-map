@@ -1,15 +1,9 @@
 import FilterSearch from "./FilterSearch";
 import SearchLocation from "./SearchLocation";
+import { ILocation } from "./interfaces/ILocation";
 
 interface SearchFieldMapProps {
-  setLocation: React.Dispatch<
-    React.SetStateAction<{
-      latitude: number;
-      longitude: number;
-      display_name: string;
-      zoom: number;
-    }>
-  >;
+  setLocation: React.Dispatch<ILocation>;
 }
 
 export default function SearchFieldMap({ setLocation }: SearchFieldMapProps) {

@@ -118,6 +118,7 @@ label {
 
 .tox-tinymce {
   border: 1px solid $color-grey !important;
+  max-height: 350px;
   border-radius: 5px;
   filter: $drop-shadow;
   margin-top: 15px;
@@ -160,9 +161,9 @@ label {
 }
 // Search field on main page
 .search-field-map {
-  position: relative;
+  position: fixed;
   z-index: 2;
-  top: 30px;
+  top: 80px;
   left: 30px;
   .search-location {
     .search-field {

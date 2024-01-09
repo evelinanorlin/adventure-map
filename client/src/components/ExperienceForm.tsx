@@ -30,17 +30,8 @@ export default function ExperienceForm() {
   const [userNameValid, setUserNameValid] = useState<boolean>(true);
   const [userLink, setUserLink] = useState("");
   const [errorMessage, setErrorMessage] = useState(false);
-  const [experience, setExperience] = useState<IExperience>({
-    experienceName: experienceName,
-    location: location,
-    link: link,
-    price: price,
-    category: category,
-    description: description,
-    image: image,
-    userName: userName,
-    userLink: userLink,
-  });
+  const [selectedFile, setSelectedFile] = useState<File>();
+  const [preview, setPreview] = useState("");
 
   useEffect(() => {
     const isValid = validateTextInput(description);
@@ -53,6 +44,28 @@ export default function ExperienceForm() {
     setLocationValid(isValid);
   }, [location])
 
+  useEffect(() => {
+    if (!selectedFile) {
+        setPreview("")
+        return
+    }
+
+    const objectUrl = URL.createObjectURL(selectedFile)
+    setPreview(objectUrl)
+
+    // free memory when ever this component is unmounted
+    return () => URL.revokeObjectURL(objectUrl)
+  }, [selectedFile])
+
+  const onSelectFile = (e:  ChangeEvent<HTMLInputElement>)=> {
+      if (!e.target.files || e.target.files.length === 0) {
+          setSelectedFile(undefined)
+          return
+      }
+
+      // I've kept this example simple by using the first image instead of multiple
+      setSelectedFile(e.target.files[0])
+  }
   const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     const experienceData: IExperience = {
@@ -78,9 +91,9 @@ export default function ExperienceForm() {
 
       return;
     } else{
-      setExperience(experienceData);
-      console.log(experience)
+      console.log(experienceData)
       // HÄR SKICKAR VI TILL API SEN
+      //lägga till isReviewed: false??
     }
   };
 
@@ -100,13 +113,8 @@ export default function ExperienceForm() {
 
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if(e.target.files === null) return;
-
+    onSelectFile(e);
     const img = await handleImg(e.target.files);
-
-    // const img = await  {
-    //   preview: URL.createObjectURL(e.target.files[0]),
-    //   data: e.target.files[0],
-    // }
     setImage(img);
   };
 
@@ -115,7 +123,7 @@ export default function ExperienceForm() {
     {errorMessageHtml}
     <form onSubmit={handleSubmit}>
       <label>
-        <p>Vad? *</p>
+        <p>Vad?*</p>
         <input
           type="text"
           name="name"
@@ -130,7 +138,7 @@ export default function ExperienceForm() {
       <br />
       <label>
         <p>
-          Var? * <br />
+          Var?* <br />
           <span>Ange adress eller markera på karta</span>
         </p>
         {locationValid ? "" : <p className="error-message">Välj en plats</p>}
@@ -190,6 +198,7 @@ export default function ExperienceForm() {
       <label>
         <p>Bild</p>
         <input className="img-input" type="file" name="image" accept="image/png, image/gif, image/jpeg" onChange={handleFileChange}/>
+        {selectedFile &&  <img src={preview} className="thumbnail-img"/> }
       </label>
       <label>
         <p>Ditt namn* <br /> <span>Som det visas på sidan</span></p>
