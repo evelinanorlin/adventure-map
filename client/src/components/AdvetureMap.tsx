@@ -6,18 +6,16 @@ import osm from "../Leaflet/osm-providers";
 import { TileLayer, MapContainer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
-export interface LocationLatLong {
-  latitude: number;
-  longitude: number;
-  display_name: string;
-  zoom: number;
+interface AdventureMapProps {
+  location: {
+    latitude: number;
+    longitude: number;
+    display_name: string;
+    zoom: number;
+  };
 }
 
-interface props {
-  location: LocationLatLong;
-}
-
-export default function Map({ location }: props) {
+export default function Map({ location }: AdventureMapProps) {
   const API_KEY = import.meta.env.VITE_MAPTILER_KEY;
 
   return (

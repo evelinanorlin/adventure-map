@@ -1,16 +1,10 @@
 import { useEffect, useState } from "react";
 import { getLocationSearchResults } from "../services/mapServices";
 import searchBtn from "./icons/search.svg";
+import { ILocation } from "./interfaces/ILocation";
 
-export interface SearchLocationProps {
-  setLocation: React.Dispatch<
-    React.SetStateAction<{
-      latitude: number;
-      longitude: number;
-      display_name: string;
-      zoom: number;
-    }>
-  >;
+interface SearchLocationProps {
+  setLocation: React.Dispatch<ILocation>;
 }
 
 export default function SearchLocation({ setLocation }: SearchLocationProps) {
@@ -99,7 +93,7 @@ export default function SearchLocation({ setLocation }: SearchLocationProps) {
       <button
         className="search-place-btn"
         aria-label="sök"
-        onClick={() => changeLocation(searchValue)}
+        onClick={(e) => {e.preventDefault(); changeLocation(searchValue)}}
       >
         <img src={searchBtn} alt="ett förstoringsglas"></img>
       </button>
@@ -113,7 +107,7 @@ export default function SearchLocation({ setLocation }: SearchLocationProps) {
           return (
             <li
               key={index}
-              onClick={() => clickedSuggestion(place)}
+              onClick={(e) => {e.preventDefault(); clickedSuggestion(place)}}
               tabIndex={0}
               onKeyDown={(e) =>
                 e.key === "Enter" ? clickedSuggestion(place) : ""

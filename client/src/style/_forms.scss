@@ -148,6 +148,16 @@ label {
     }
   }
 }
+
+.unvalid{
+  background: $color-light-brown;
+  border: 2px solid $color-brown;
+
+  &:focus {
+    outline: none;
+    border: 2px solid $color-brown;
+  }
+}
 // Search field on main page
 .search-field-map {
   position: relative;
