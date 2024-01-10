@@ -8,7 +8,7 @@ import "leaflet/dist/leaflet.css";
 import { useContext } from "react";
 import { ExperienceContext } from "../contexts/ExperienceContext";
 import { IExperienceId } from "./interfaces/IExperience";
-import L, { PointExpression, icon } from "leaflet";
+import L, { PointExpression } from "leaflet";
 
 interface AdventureMapProps {
   location: {
@@ -24,8 +24,11 @@ export default function Map({ location }: AdventureMapProps) {
   const experiences = useContext(ExperienceContext);
   
   const getIcon = (category: string, _iconSize: PointExpression) => {
+    console.log(category)
+    const url = "/icons/" + category + ".svg";
+    console.log(url)
     return L.icon({
-      iconUrl: require("/icons/" + category + ".svg"),
+      iconUrl: url,
       iconSize: _iconSize,
     })
   };
@@ -37,6 +40,7 @@ export default function Map({ location }: AdventureMapProps) {
         <Marker
           key={experience._id}
           position={[experience.location.latitude, experience.location.longitude]}
+          icon={getIcon(experience.category, [30, 30])}
         ></Marker>
       );
     }

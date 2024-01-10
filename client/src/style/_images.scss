@@ -3,3 +3,7 @@
   height: auto;
   margin-top: 15px;
 }
+
+.leaflet-marker-icon {
+  filter: $drop-shadow;
+}
