@@ -2,14 +2,35 @@ import { Outlet } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { MainPage } from "./components/MainPage";
+import { getExperiences } from "./services/experinceServices";
+import { useEffect, useState } from "react";
+import { ExperienceContext } from "./contexts/ExperienceContext.ts";
+import { IExperienceId } from "./components/interfaces/IExperience";
 
 export const Layout = () => {
+
+  const [experiences, setExperiences] = useState<IExperienceId[]>([]);
+
+  useEffect(() => {
+    if (experiences.length === 0){
+      initialExperiences();
+    }
+  });
+  
+  const initialExperiences = async () => {
+    console.log('runs')
+    const experienceList = await getExperiences();
+    setExperiences(experienceList);
+  }
+  
   return (
     <>
       <Header />
       <main>
-        <MainPage />
-        <Outlet />
+        <ExperienceContext.Provider value={experiences}>
+          <MainPage />
+          <Outlet />
+        </ExperienceContext.Provider>
       </main>
       <Footer />
     </>

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Menu from "./Menu";
-import Logotype from "./icons/Logotype.svg";
+import Logotype from "/icons/Logotype.svg";
 
 export default function Header() {
   return (

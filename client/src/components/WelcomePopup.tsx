@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import close from "./icons/close.svg";
+import close from "/icons/close.svg";
 import { setIsVisited } from "../functions/storage";
 
 import adventurer from "/adventurer.webp";

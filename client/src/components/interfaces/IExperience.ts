@@ -15,4 +15,9 @@ export interface IExperience {
   image?: Image;
   userName: string;
   userLink?: string;
+  isReviewed: boolean;
+}
+
+export interface IExperienceId extends IExperience {
+  _id: string;
 }

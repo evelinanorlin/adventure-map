@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import close from "./icons/close.svg";
+import close from "/icons/close.svg";
 import ExperienceForm from "./ExperienceForm";
 
 export default function AddExperience() {

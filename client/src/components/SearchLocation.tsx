@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getLocationSearchResults } from "../services/mapServices";
-import searchBtn from "./icons/search.svg";
+import searchBtn from "/icons/search.svg";
 import { ILocation } from "./interfaces/ILocation";
 
 interface SearchLocationProps {

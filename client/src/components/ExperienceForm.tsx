@@ -7,6 +7,7 @@ import { IExperience, Image } from "./interfaces/IExperience";
 import { ILocation } from "./interfaces/ILocation";
 import { validateDropdown, validateForm, validateLocation, validateTextInput } from "../functions/validateForm";
 import { handleImg } from "../functions/handleImg";
+import { addExperience } from "../services/experinceServices";
 
 export default function ExperienceForm() {
   const [location, setLocation] = useState<ILocation>({
@@ -32,6 +33,7 @@ export default function ExperienceForm() {
   const [errorMessage, setErrorMessage] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File>();
   const [preview, setPreview] = useState("");
+  const [isReviewed, setIsReviewed] = useState(false);
 
   useEffect(() => {
     const isValid = validateTextInput(description);
@@ -78,6 +80,7 @@ export default function ExperienceForm() {
       image: image,
       userName: userName,
       userLink: userLink,
+      isReviewed: isReviewed
     }
     const isValid = validateForm(experienceData);
     if(!isValid) {
@@ -92,6 +95,8 @@ export default function ExperienceForm() {
       return;
     } else{
       console.log(experienceData)
+      const data = addExperience(experienceData);
+      console.log(data)
       // HÄR SKICKAR VI TILL API SEN
       //lägga till isReviewed: false??
     }
@@ -115,6 +120,7 @@ export default function ExperienceForm() {
     if(e.target.files === null) return;
     onSelectFile(e);
     const img = await handleImg(e.target.files);
+    if(!img) return;
     setImage(img);
   };
 
