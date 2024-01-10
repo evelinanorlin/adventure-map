@@ -27,7 +27,7 @@ export const Layout = () => {
     <>
       <Header />
       <main>
-        <ExperienceContext.Provider value={experiences}>
+        <ExperienceContext.Provider value={{experiences, setExperiences}}>
           <MainPage />
           <Outlet />
         </ExperienceContext.Provider>

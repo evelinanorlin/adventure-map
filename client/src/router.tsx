@@ -3,6 +3,7 @@ import { Layout } from "./Layout";
 import About from "./components/About";
 import WelcomePopup from "./components/WelcomePopup";
 import AddExperience from "./components/AddExperience";
+import Experience from "./components/Experience";
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +23,11 @@ export const router = createBrowserRouter([
         path: "/lagg-till-upplevelse",
         element: <AddExperience />,
       },
+      {
+        path: "/upplevelser/:id",
+        element: <Experience />,
+      }
+  
       //{
       //   path: "/contact",
       //   element: <Contact />,

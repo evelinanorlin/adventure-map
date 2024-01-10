@@ -33,7 +33,7 @@ export default function ExperienceForm() {
   const [errorMessage, setErrorMessage] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File>();
   const [preview, setPreview] = useState("");
-  const [isReviewed, setIsReviewed] = useState(false);
+  const isReviewed = false;  // Behöver ändras när vi klarar av att logga in
 
   useEffect(() => {
     const isValid = validateTextInput(description);

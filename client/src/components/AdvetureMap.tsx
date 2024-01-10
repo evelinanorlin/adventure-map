@@ -1,4 +1,3 @@
-// https://dineshigdd.medium.com/how-to-integrate-openstreetmap-with-react-typescript-861605b67ea3
 import { Marker } from "react-leaflet";
 import "leaflet-control-geocoder/dist/Control.Geocoder.css";
 import "leaflet-control-geocoder/dist/Control.Geocoder.js";
@@ -9,6 +8,7 @@ import { useContext } from "react";
 import { ExperienceContext } from "../contexts/ExperienceContext";
 import { IExperienceId } from "./interfaces/IExperience";
 import L, { PointExpression } from "leaflet";
+import { useNavigate } from "react-router-dom";
 
 interface AdventureMapProps {
   location: {
@@ -21,10 +21,12 @@ interface AdventureMapProps {
 
 export default function Map({ location }: AdventureMapProps) {
   const API_KEY = import.meta.env.VITE_MAPTILER_KEY;
-  const experiences = useContext(ExperienceContext);
+  const experiencesCont = useContext(ExperienceContext);
+  const experiences = experiencesCont.experiences;
+  console.log(experiences)
+  const navigate = useNavigate();
   
   const getIcon = (category: string, _iconSize: PointExpression) => {
-    console.log(category)
     const url = "/icons/" + category + ".svg";
     console.log(url)
     return L.icon({
@@ -33,15 +35,29 @@ export default function Map({ location }: AdventureMapProps) {
     })
   };
 
+  const openExperience = (id: string) => {
+    navigate(`/upplevelser/${id}`);
+  };
+
   const markers =
     experiences?.map((experience: IExperienceId) => {
     if (experience.location.latitude !== null && experience.location.longitude !== null) {
+
       return (
+        <>
         <Marker
           key={experience._id}
           position={[experience.location.latitude, experience.location.longitude]}
           icon={getIcon(experience.category, [30, 30])}
-        ></Marker>
+          eventHandlers={{click: () => {openExperience(experience._id)}}}
+        >
+          {/* <Popup>
+            <a href={"#"}>
+              {experience.experienceName}
+            </a>
+          </Popup> */}
+        </Marker>
+        </>
       );
     }
   });
