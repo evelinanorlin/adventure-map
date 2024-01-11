@@ -3,7 +3,8 @@ import { IExperienceId } from '../components/interfaces/IExperience';
 
 interface IExperienceContext {
   experiences: IExperienceId[],
-  setExperiences: React.Dispatch<React.SetStateAction<IExperienceId[]>>
+  visualExperiences: IExperienceId[],
+  setVisualExperiences: React.Dispatch<React.SetStateAction<IExperienceId[]>>,
 }
 
 export const ExperienceContext = createContext<IExperienceContext>({} as IExperienceContext);

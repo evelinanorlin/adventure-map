@@ -1,24 +1,26 @@
 import { useContext, useEffect, useState } from "react";
 import { categories } from "../data/categories";
 import { ExperienceContext } from "../contexts/ExperienceContext";
+import { IExperienceId } from "./interfaces/IExperience";
 
 export default function FilterSearch() {
   const [chosenCategories, setChosenCategories] = useState<string[]>([]);
   const [showCategories, setShowCategories] = useState<boolean>(false);
-  const experienteContextData = useContext(ExperienceContext);
+  const experienceContextData = useContext(ExperienceContext);
+  const visualExperiences = experienceContextData.visualExperiences;
+  const setVisualExperiences = experienceContextData.setVisualExperiences;
 
   const categoriesHtml = categories.map((category, index) => {
     if(category === "Välj kategori") return null;
 
     return(
-      <li onClick={() => handleLiClick(category)} key={index} tabIndex={index + 1}>
-        <label>
+      <li onClick={() => updateChosenCategories(category)} key={index} tabIndex={index + 1}>
+        <label onClick={() => updateChosenCategories(category)}>
           <input
             type="checkbox"
             checked={chosenCategories.includes(category)}
             onChange={() => updateChosenCategories(category)}
-          />
-          {category}
+          />{category}
           </label>
       </li>
     )
@@ -55,28 +57,24 @@ export default function FilterSearch() {
 
   const updateChosenCategories = (category: string) => {
     if (chosenCategories.includes(category)) {
-      setChosenCategories(chosenCategories.filter((item) => item !== category));
-      filterFunction(chosenCategories.filter((item) => item !== category));
+      const chosenCategoriesUpdated = chosenCategories.filter((item) => item !== category);
+      setChosenCategories(chosenCategoriesUpdated);
+      if(chosenCategoriesUpdated.length > 0) {
+        const visualExperiencesUpdated = visualExperiences.filter((experience) => experience.category !== category);
+        setVisualExperiences(visualExperiencesUpdated);
+      } else {
+        setVisualExperiences(experienceContextData.experiences);
+      }
     } else {
-      setChosenCategories([...chosenCategories, category]);
-      filterFunction([...chosenCategories, category])
+      const chosenCategoriesUpdated = [...chosenCategories, category]
+      setChosenCategories(chosenCategoriesUpdated);
+      let visualExperiencesUpdated: IExperienceId[] = [];
+      chosenCategoriesUpdated.map((category) => {
+        const chosenCategoryExperience = experienceContextData.experiences.filter((experience) => experience.category === category);
+        visualExperiencesUpdated=[...visualExperiencesUpdated, ...chosenCategoryExperience]
+      })
+      setVisualExperiences(visualExperiencesUpdated);
     }
-  };
-
-  const filterFunction = (categories: string[]) => {
-    console.log(categories)
-    // if(categories.length === 0) {
-    //   experienteContextData.setExperiences(experienteContextData.experiences);
-    //   return;
-    // }
-    // categories.map(category => {
-    //   const filteredExperiences = experienteContextData.experiences.filter(experience => experience.category === category);
-    //   experienteContextData.setExperiences(filteredExperiences);
-    // })
-  }
-
-  const handleLiClick = (category: string) => {
-    updateChosenCategories(category);
   };
 
   return (

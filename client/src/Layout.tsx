@@ -10,6 +10,7 @@ import { IExperienceId } from "./components/interfaces/IExperience";
 export const Layout = () => {
 
   const [experiences, setExperiences] = useState<IExperienceId[]>([]);
+  const [visualExperiences, setVisualExperiences] = useState<IExperienceId[]>([]);
 
   useEffect(() => {
     if (experiences.length === 0){
@@ -18,16 +19,16 @@ export const Layout = () => {
   });
   
   const initialExperiences = async () => {
-    console.log('runs')
     const experienceList = await getExperiences();
     setExperiences(experienceList);
+    setVisualExperiences(experienceList);
   }
   
   return (
     <>
       <Header />
       <main>
-        <ExperienceContext.Provider value={{experiences, setExperiences}}>
+        <ExperienceContext.Provider value={{experiences, visualExperiences, setVisualExperiences}}>
           <MainPage />
           <Outlet />
         </ExperienceContext.Provider>

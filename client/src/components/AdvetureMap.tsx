@@ -22,13 +22,12 @@ interface AdventureMapProps {
 export default function Map({ location }: AdventureMapProps) {
   const API_KEY = import.meta.env.VITE_MAPTILER_KEY;
   const experiencesCont = useContext(ExperienceContext);
-  const experiences = experiencesCont.experiences;
-  console.log(experiences)
+  const visualExperiences = experiencesCont.visualExperiences;
+
   const navigate = useNavigate();
   
   const getIcon = (category: string, _iconSize: PointExpression) => {
     const url = "/icons/" + category + ".svg";
-    console.log(url)
     return L.icon({
       iconUrl: url,
       iconSize: _iconSize,
@@ -40,24 +39,16 @@ export default function Map({ location }: AdventureMapProps) {
   };
 
   const markers =
-    experiences?.map((experience: IExperienceId) => {
+    visualExperiences.map((experience: IExperienceId) => {
     if (experience.location.latitude !== null && experience.location.longitude !== null) {
-
       return (
-        <>
         <Marker
           key={experience._id}
           position={[experience.location.latitude, experience.location.longitude]}
           icon={getIcon(experience.category, [30, 30])}
           eventHandlers={{click: () => {openExperience(experience._id)}}}
         >
-          {/* <Popup>
-            <a href={"#"}>
-              {experience.experienceName}
-            </a>
-          </Popup> */}
         </Marker>
-        </>
       );
     }
   });
@@ -70,6 +61,7 @@ export default function Map({ location }: AdventureMapProps) {
       scrollWheelZoom={true}
     >
       <TileLayer
+        key={`${location.latitude}-${location.longitude}`}
         url={`https://api.maptiler.com/maps/outdoor-v2/256/{z}/{x}/{y}.png?key=${API_KEY}`}
         attribution={osm.maptiler.attribution}
       />
