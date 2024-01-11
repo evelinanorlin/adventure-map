@@ -3,11 +3,12 @@ import SearchLocation from "./SearchLocation";
 import TextEditor from "./TextEditor";
 import { categories } from "../data/categories";
 import { priceIntervals } from "../data/prices";
-import { IExperience, Image } from "./interfaces/IExperience";
+import { IExperience } from "./interfaces/IExperience";
 import { ILocation } from "./interfaces/ILocation";
 import { validateDropdown, validateForm, validateLocation, validateTextInput } from "../functions/validateForm";
 import { handleImg } from "../functions/handleImg";
 import { addExperience } from "../services/experinceServices";
+import { uploadImage } from "../functions/imageUpload";
 
 export default function ExperienceForm() {
   const [location, setLocation] = useState<ILocation>({
@@ -26,7 +27,8 @@ export default function ExperienceForm() {
   const [categoryValid, setCategoryValid] = useState<boolean>(true);
   const [description, setDescription] = useState("");
   const [descriptionValid, setDescriptionValid] = useState<boolean>(true);
-  const [image, setImage] = useState<Image>({preview: "", data: undefined});
+  const [image, setImage] = useState<string>("");
+  const [imageUrl, setImageUrl] = useState<string>("");
   const [userName, setUserName] = useState("");
   const [userNameValid, setUserNameValid] = useState<boolean>(true);
   const [userLink, setUserLink] = useState("");
@@ -64,11 +66,21 @@ export default function ExperienceForm() {
           setSelectedFile(undefined)
           return
       }
-
-      // I've kept this example simple by using the first image instead of multiple
       setSelectedFile(e.target.files[0])
   }
-  const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
+
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    if(e.target.files === null) return;
+    onSelectFile(e);
+    try {
+      const img = await handleImg(e.target.files);
+      setImage(img);
+    } catch (error) {
+      console.error("Error in handleFileChange:", error);
+    }
+  };
+
+  const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     const experienceData: IExperience = {
       experienceName: experienceName,
@@ -77,7 +89,7 @@ export default function ExperienceForm() {
       price: price,
       category: category,
       description: description,
-      image: image,
+      imageURL: imageUrl,
       userName: userName,
       userLink: userLink,
       isReviewed: isReviewed
@@ -94,13 +106,32 @@ export default function ExperienceForm() {
 
       return;
     } else{
-      console.log(experienceData)
-      const data = addExperience(experienceData);
-      console.log(data)
+      if(image.length > 0){
+        const imgData = await uploadImage(image);
+        console.log(imgData.url);
+        setImageUrl(imgData.url);
+        addExperience({
+          experienceName: experienceName,
+          location: location,
+          link: link,
+          price: price,
+          category: category,
+          description: description,
+          imageURL: imgData.url,
+          userName: userName,
+          userLink: userLink,
+          isReviewed: isReviewed
+        });
+      } else {
+        addExperience(experienceData);
+      }
+
       // HÄR SKICKAR VI TILL API SEN
       //lägga till isReviewed: false??
     }
   };
+
+
 
   const categoriesHtml = categories.map((category, index) => {
     return(
@@ -115,14 +146,6 @@ export default function ExperienceForm() {
   });
 
   const errorMessageHtml = errorMessage ? <p className="error-message">Fyll i alla obligatoriska fält</p> : null;
-
-  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    if(e.target.files === null) return;
-    onSelectFile(e);
-    const img = await handleImg(e.target.files);
-    if(!img) return;
-    setImage(img);
-  };
 
   return (
     <>

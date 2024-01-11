@@ -12,7 +12,7 @@ export interface IExperience {
   price: string;
   category: string;
   description: string;
-  image?: Image;
+  imageURL: string;
   userName: string;
   userLink?: string;
   isReviewed: boolean;
