@@ -8,7 +8,6 @@ export default function Experience() {
   const experiencesCont = useContext(ExperienceContext);
   const experiences = experiencesCont.experiences;
   const experience = experiences?.find((experience) => experience._id === id);
-  console.log(experience?.description);
   
   if (experience) {
     const cleanDescription = { __html: DOMPurify.sanitize(experience.description) };

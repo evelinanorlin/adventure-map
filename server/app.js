@@ -9,9 +9,8 @@ const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient;
 const mongo_username = process.env.MONGO_USERNAME;
 const mongo_password = process.env.MONGO_PASSWORD;
-// const uri = `mongodb+srv://${mongo_username}:${mongo_password}@adventuremap.noo8vnu.mongodb.net/?retryWrites=true&w=majority`;
-console.log(mongo_password)
-const uri = `mongodb+srv://norlinevelina:Laxlada1@adventuremap.noo8vnu.mongodb.net/`;
+
+const uri = `mongodb+srv://${mongo_username}:${mongo_password}@adventuremap.noo8vnu.mongodb.net/`;
 const port = process.env.PORT || 3000;
 
 const init = async () => {
@@ -40,7 +39,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
-
 app.use('/experiences', experiencesRouter);
 app.use('/admin', adminRouter);
 
