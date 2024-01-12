@@ -132,6 +132,21 @@ export default function ExperienceForm() {
         });
       } else {
         addExperience(experienceData);
+        setExperienceName("");
+        setLocation({
+          latitude: 0,
+          longitude: 0,
+          display_name: "",
+          zoom: 0,
+        });
+        setLink("");
+        setPrice("");
+        setCategory("");
+        setDescription("");
+        setImage("");
+        setImageUrl("");
+        setUserName("");
+        setUserLink("");
       }
     }
   };
@@ -179,7 +194,7 @@ export default function ExperienceForm() {
           <p>Var?*</p>
           {chosenLocation ? (
             <div>
-              <p className="chosen-location">{chosenLocation.latitude}</p>
+              <p className="chosen-location">{chosenLocation.display_name ? chosenLocation.display_name : chosenLocation.longitude + ", " + chosenLocation.latitude}</p>
               <button className="btn btn-secondary" 
               type="button"
               onClick={choseLocation}>
@@ -293,7 +308,7 @@ export default function ExperienceForm() {
             onChange={(e) => setUserLink(e.target.value)}
           />
         </label>
-        <button className="btn btn-primary m-t-5" type="submit">
+        <button className="btn btn-primary m-t-5" type="submit" onClick={() => chosenLocation ? setLocation(chosenLocation) : setLocation(location)}>
           Tipsa om upplevelse
         </button>
       </form>

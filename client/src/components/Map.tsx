@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import "leaflet/dist/leaflet.css";
 import { ClickableMapContext } from "../contexts/ClickableMapContext";
 import { ChosenLocationContext } from "../contexts/ChosenLocationContext";
+import { getLocationName } from "../services/mapServices";
 
 interface IMapProps {
   location: ILocation;
@@ -21,16 +22,17 @@ export default function Map({ location, markers }: IMapProps) {
   const setClickableMap = useContext(ClickableMapContext).setClickable;
   const setChosenLocation = useContext(ChosenLocationContext).setChosenLocation;
 
-  const handleMapClick = (e: LeafletMouseEvent) => {
+  const handleMapClick = async (e: LeafletMouseEvent) => {
     if (clickableMap === false) return;
     const { lat, lng } = e.latlng;
     setShowMarker(true);
     setMarkerLocation([lat, lng]);
     setClickableMap(false);
+    const findLocation = await getLocationName(lng, lat);
     setChosenLocation({
       latitude: lat,
       longitude: lng,
-      display_name: "",
+      display_name: findLocation[0].place_name_sv,
       zoom: 13,
     });
   };
