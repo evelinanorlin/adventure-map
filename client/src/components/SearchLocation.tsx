@@ -93,7 +93,10 @@ export default function SearchLocation({ setLocation }: SearchLocationProps) {
       <button
         className="search-place-btn"
         aria-label="sök"
-        onClick={(e) => {e.preventDefault(); changeLocation(searchValue)}}
+        onClick={(e) => {
+          e.preventDefault();
+          changeLocation(searchValue);
+        }}
       >
         <img src={searchBtn} alt="ett förstoringsglas"></img>
       </button>
@@ -107,7 +110,10 @@ export default function SearchLocation({ setLocation }: SearchLocationProps) {
           return (
             <li
               key={index}
-              onClick={(e) => {e.preventDefault(); clickedSuggestion(place)}}
+              onClick={(e) => {
+                e.preventDefault();
+                clickedSuggestion(place);
+              }}
               tabIndex={0}
               onKeyDown={(e) =>
                 e.key === "Enter" ? clickedSuggestion(place) : ""

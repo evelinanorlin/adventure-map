@@ -11,19 +11,24 @@ export default function FilterSearch() {
   const setVisualExperiences = experienceContextData.setVisualExperiences;
 
   const categoriesHtml = categories.map((category, index) => {
-    if(category === "Välj kategori") return null;
+    if (category === "Välj kategori") return null;
 
-    return(
-      <li onClick={() => updateChosenCategories(category)} key={index} tabIndex={index + 1}>
+    return (
+      <li
+        onClick={() => updateChosenCategories(category)}
+        key={index}
+        tabIndex={index + 1}
+      >
         <label onClick={() => updateChosenCategories(category)}>
           <input
             type="checkbox"
             checked={chosenCategories.includes(category)}
             onChange={() => updateChosenCategories(category)}
-          />{category}
-          </label>
+          />
+          {category}
+        </label>
       </li>
-    )
+    );
   });
 
   // to close the dropdown when clicking outside of it
@@ -57,22 +62,32 @@ export default function FilterSearch() {
 
   const updateChosenCategories = (category: string) => {
     if (chosenCategories.includes(category)) {
-      const chosenCategoriesUpdated = chosenCategories.filter((item) => item !== category);
+      const chosenCategoriesUpdated = chosenCategories.filter(
+        (item) => item !== category,
+      );
       setChosenCategories(chosenCategoriesUpdated);
-      if(chosenCategoriesUpdated.length > 0) {
-        const visualExperiencesUpdated = visualExperiences.filter((experience) => experience.category !== category);
+      if (chosenCategoriesUpdated.length > 0) {
+        const visualExperiencesUpdated = visualExperiences.filter(
+          (experience) => experience.category !== category,
+        );
         setVisualExperiences(visualExperiencesUpdated);
       } else {
         setVisualExperiences(experienceContextData.experiences);
       }
     } else {
-      const chosenCategoriesUpdated = [...chosenCategories, category]
+      const chosenCategoriesUpdated = [...chosenCategories, category];
       setChosenCategories(chosenCategoriesUpdated);
       let visualExperiencesUpdated: IExperienceId[] = [];
       chosenCategoriesUpdated.map((category) => {
-        const chosenCategoryExperience = experienceContextData.experiences.filter((experience) => experience.category === category);
-        visualExperiencesUpdated=[...visualExperiencesUpdated, ...chosenCategoryExperience]
-      })
+        const chosenCategoryExperience =
+          experienceContextData.experiences.filter(
+            (experience) => experience.category === category,
+          );
+        visualExperiencesUpdated = [
+          ...visualExperiencesUpdated,
+          ...chosenCategoryExperience,
+        ];
+      });
       setVisualExperiences(visualExperiencesUpdated);
     }
   };

@@ -1,11 +1,22 @@
 import { Link } from "react-router-dom";
 import close from "/icons/close.svg";
 import ExperienceForm from "./ExperienceForm";
+import { useContext } from "react";
+import { ClickableMapContext } from "../contexts/ClickableMapContext";
 
 export default function AddExperience() {
+  const clickableCont = useContext(ClickableMapContext);
+  const clickableMap = clickableCont.clickable;
+
   return (
     <section>
-      <div className="popup popup-right experience-form p-5">
+      <div
+        className={
+          clickableMap
+            ? "popup popup-right experience-form p-5 slide"
+            : "popup popup-right experience-form p-5"
+        }
+      >
         <Link to="/" className="close-btn">
           <img src={close} alt="close" className="close" />
         </Link>

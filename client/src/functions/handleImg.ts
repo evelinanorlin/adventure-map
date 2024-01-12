@@ -10,22 +10,14 @@ export const handleImg = (files: FileList): Promise<string> => {
     const file = files[0];
 
     try {
-      Resizer.imageFileResizer(
-        file,
-        700,
-        700,
-        "WEBP",
-        100,
-        0,
-        (uri) => {
-          console.log(uri);
-          if (typeof uri === "string") {
-            resolve(uri);
-          } else {
-            reject("Unexpected type returned from Resizer");
-          }
-        },
-      );
+      Resizer.imageFileResizer(file, 700, 700, "WEBP", 100, 0, (uri) => {
+        console.log(uri);
+        if (typeof uri === "string") {
+          resolve(uri);
+        } else {
+          reject("Unexpected type returned from Resizer");
+        }
+      });
     } catch (err) {
       console.log(err);
       reject(err);

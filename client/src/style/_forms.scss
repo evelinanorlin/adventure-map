@@ -58,7 +58,8 @@
 }
 
 .dropdown-selector,
-input, select {
+input,
+select {
   filter: $drop-shadow;
   border-radius: 5px;
   border: 1px solid $color-grey;
@@ -124,7 +125,7 @@ label {
   margin-top: 15px;
 }
 
-.img-input{
+.img-input {
   border: none;
   filter: none;
   padding-left: 0;
@@ -150,7 +151,7 @@ label {
   }
 }
 
-.unvalid{
+.unvalid {
   background: $color-light-brown;
   border: 2px solid $color-brown;
 
@@ -216,7 +217,7 @@ label {
       width: 30%;
       text-align: left;
     }
-    select{
+    select {
       width: 200px;
       max-width: 100%;
     }

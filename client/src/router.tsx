@@ -26,8 +26,8 @@ export const router = createBrowserRouter([
       {
         path: "/upplevelser/:id",
         element: <Experience />,
-      }
-  
+      },
+
       //{
       //   path: "/contact",
       //   element: <Contact />,

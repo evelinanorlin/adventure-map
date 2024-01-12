@@ -13,18 +13,22 @@ export const validateTextInput = (experienceName: string) => {
 };
 
 export const validateDropdown = (value: string) => {
-  if (value === "Välj prisintervall" || value === "Välj Kategori" || value === "") {
+  if (
+    value === "Välj prisintervall" ||
+    value === "Välj Kategori" ||
+    value === ""
+  ) {
     return false;
   }
   return true;
-}
+};
 
 export const validateLocation = (location: ILocation) => {
-  if(location.latitude === 0 || location.longitude === 0){
+  if (location.latitude === 0 || location.longitude === 0) {
     return false;
   }
   return true;
-}
+};
 
 export const validateForm = (experience: IExperience) => {
   if (validateTextInput(experience.experienceName) === false) {
@@ -39,10 +43,10 @@ export const validateForm = (experience: IExperience) => {
   if (validateLocation(experience.location) === false) {
     return false;
   }
-  if(validateTextInput(experience.description) === false){
+  if (validateTextInput(experience.description) === false) {
     return false;
   }
-  if(validateTextInput(experience.userName) === false){
+  if (validateTextInput(experience.userName) === false) {
     return false;
   }
 

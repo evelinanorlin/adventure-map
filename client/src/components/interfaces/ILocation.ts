@@ -1,6 +1,6 @@
 export interface ILocation {
-  latitude: number | null;
-  longitude: number | null;
-  display_name: string | null;
-  zoom: number | null;
+  latitude: number;
+  longitude: number;
+  display_name: string;
+  zoom: number;
 }
