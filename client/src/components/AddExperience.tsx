@@ -3,11 +3,12 @@ import close from "/icons/close.svg";
 import ExperienceForm from "./ExperienceForm";
 import { useContext } from "react";
 import { ClickableMapContext } from "../contexts/ClickableMapContext";
+import { ShowMarkerContext } from "../contexts/ShowMarkerContext";
 
 export default function AddExperience() {
   const clickableCont = useContext(ClickableMapContext);
   const clickableMap = clickableCont.clickable;
-
+  const setShowMarker = useContext(ShowMarkerContext).setShowMarker;
   return (
     <section>
       <div
@@ -17,7 +18,7 @@ export default function AddExperience() {
             : "popup popup-right experience-form p-5"
         }
       >
-        <Link to="/" className="close-btn">
+        <Link to="/" className="close-btn" onClick={() =>setShowMarker(false)}>
           <img src={close} alt="close" className="close" />
         </Link>
         <h1>Tipsa om upplevelse</h1>

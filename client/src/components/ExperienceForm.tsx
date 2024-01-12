@@ -16,6 +16,7 @@ import { uploadImage } from "../functions/imageUpload";
 import "leaflet/dist/leaflet.css";
 import { ClickableMapContext } from "../contexts/ClickableMapContext";
 import { ChosenLocationContext } from "../contexts/ChosenLocationContext";
+import { ShowMarkerContext } from "../contexts/ShowMarkerContext";
 
 export default function ExperienceForm() {
   const [location, setLocation] = useState<ILocation>({
@@ -46,6 +47,7 @@ export default function ExperienceForm() {
   const clickableMap = useContext(ClickableMapContext).clickable;
   const setClickableMap = useContext(ClickableMapContext).setClickable;
   const chosenLocation = useContext(ChosenLocationContext).chosenLocation;
+  const setShowMarker = useContext(ShowMarkerContext).setShowMarker;
 
   useEffect(() => {
     const isValid = validateTextInput(description);
@@ -67,6 +69,7 @@ export default function ExperienceForm() {
 
   const choseLocation = () => {
     setClickableMap(!clickableMap);
+    setShowMarker(true);
   };
 
   const onSelectFile = (e: ChangeEvent<HTMLInputElement>) => {
@@ -147,6 +150,7 @@ export default function ExperienceForm() {
         setImageUrl("");
         setUserName("");
         setUserLink("");
+        setShowMarker(false);
       }
     }
   };
@@ -192,6 +196,11 @@ export default function ExperienceForm() {
         <br />
         <label>
           <p>Var?*</p>
+          {locationValid ? (
+            ""
+          ) : (
+            <p className="error-message">Välj en plats på kartan</p>
+          )}
           {chosenLocation ? (
             <div>
               <p className="chosen-location">{chosenLocation.display_name ? chosenLocation.display_name : chosenLocation.longitude + ", " + chosenLocation.latitude}</p>

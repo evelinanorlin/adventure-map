@@ -9,6 +9,7 @@ import { IExperienceId } from "./components/interfaces/IExperience";
 import { ClickableMapContext } from "./contexts/ClickableMapContext.ts";
 import { ChosenLocationContext } from "./contexts/ChosenLocationContext.ts";
 import { ILocation } from "./components/interfaces/ILocation.ts";
+import { ShowMarkerContext } from "./contexts/ShowMarkerContext.ts";
 
 export const Layout = () => {
   const [experiences, setExperiences] = useState<IExperienceId[]>([]);
@@ -17,6 +18,7 @@ export const Layout = () => {
   );
   const [clickable, setClickable] = useState<boolean>(false);
   const [chosenLocation, setChosenLocation] = useState<ILocation | null>(null);
+  const [showMarker, setShowMarker] = useState<boolean>(false);
 
   useEffect(() => {
     if (experiences.length === 0) {
@@ -41,8 +43,10 @@ export const Layout = () => {
             <ChosenLocationContext.Provider
               value={{ chosenLocation, setChosenLocation }}
             >
-              <MainPage />
-              <Outlet />
+              <ShowMarkerContext.Provider value={{ showMarker, setShowMarker }}>
+                <MainPage />
+                <Outlet />
+              </ShowMarkerContext.Provider>
             </ChosenLocationContext.Provider>
           </ClickableMapContext.Provider>
         </ExperienceContext.Provider>

@@ -3,11 +3,40 @@
   width: 100%;
   z-index: 3;
   filter: drop-shadow(1px 2px 5px #858585);
+  @include tablet {
+    background: transparent;
+    filter: none;
+  }
   .logotype {
     display: block;
     height: 100%;
     img {
       height: 30px;
+    }
+  }
+  nav{
+    @include tablet {
+      display: none;
+      background-color: $color-white;
+      filter: $drop-shadow;
+      width: 100%;
+    }
+  }
+  .burger{
+    display: none;
+    @include tablet {
+      display: block;
+    }
+    &:hover{
+      cursor: pointer;
+    }
+    span{
+      display: block;
+      width: 30px;
+      height: 2px;
+      border-radius: 3px;
+      background: $color-black;
+      margin: 5px 0;
     }
   }
 }
