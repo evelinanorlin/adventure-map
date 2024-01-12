@@ -30,7 +30,7 @@ export default function Menu() {
 console.log(getCurrentDimension());
   return (
     <>
-    <nav className="menu row direction-row align-items-center" style={showMenu ? {display: "block"} : {display: "none"}}>
+    <nav className="menu" style={showMenu ? {display: "flex"} : {display: "none"}}>
       <Link to="/">Utforska</Link>
       <Link to="/om-aventyrskartan">Om äventyrskartan</Link>
       <Link to="/contact">Kontakt</Link>

@@ -15,17 +15,32 @@
     }
   }
   nav{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
     @include tablet {
+      padding: 30px;
+      z-index: 2;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
       display: none;
       background-color: $color-white;
       filter: $drop-shadow;
-      width: 100%;
+      width: fit-content;
+      position: absolute;
+      height: fit-content;
+      top: 0px;
+      right: 0px;
     }
   }
   .burger{
     display: none;
     @include tablet {
       display: block;
+      position: relative;
+      z-index: 3;
     }
     &:hover{
       cursor: pointer;
