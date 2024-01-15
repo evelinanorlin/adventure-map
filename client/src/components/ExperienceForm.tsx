@@ -17,7 +17,6 @@ import "leaflet/dist/leaflet.css";
 import { ClickableMapContext } from "../contexts/ClickableMapContext";
 import { ChosenLocationContext } from "../contexts/ChosenLocationContext";
 import { ShowMarkerContext } from "../contexts/ShowMarkerContext";
-
 export default function ExperienceForm() {
   const [location, setLocation] = useState<ILocation>({
     latitude: 0,
@@ -104,6 +103,7 @@ export default function ExperienceForm() {
       userName: userName,
       userLink: userLink,
       isReviewed: isReviewed,
+      date: new Date(),
     };
     const isValid = validateForm(experienceData);
     if (!isValid) {
@@ -132,6 +132,7 @@ export default function ExperienceForm() {
           userName: userName,
           userLink: userLink,
           isReviewed: isReviewed,
+          date: new Date(),
         });
       } else {
         addExperience(experienceData);

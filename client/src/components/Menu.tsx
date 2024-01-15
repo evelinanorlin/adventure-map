@@ -1,10 +1,27 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import adminMenu from "/icons/adminMenu.svg";
+import { ExperienceContext } from "../contexts/ExperienceContext";
+import { IExperienceId } from "./interfaces/IExperience";
 
 export default function Menu() {
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
-  
+  const [showAdminMenu, setShowAdminMenu] = useState<boolean>(false);
+  const admin = localStorage.getItem("admin");
+  const experiences = useContext(ExperienceContext).experiences;
+  const [unreviewedExperiences, setUnreviewedExperiences] = useState<IExperienceId[]>([]);
+  console.log(experiences)
+
+  useEffect(() => {
+    if(experiences.length > 0){
+      const unreviewed = experiences.filter((experience) => {
+        return experience.isReviewed === false;
+      })
+      setUnreviewedExperiences(unreviewed);
+    }
+  }, [experiences])
+
   useEffect(() => {
     const updateDimension = () => {
       setScreenSize(getCurrentDimension())
@@ -27,6 +44,13 @@ export default function Menu() {
       height: window.innerHeight
     }
 }
+
+  const logOut = () => {
+    localStorage.removeItem("admin");
+    setShowAdminMenu(false);
+    window.location.reload();
+  }
+
   return (
     <>
     <nav className="menu" style={showMenu ? {display: "flex"} : {display: "none"}}>
@@ -36,7 +60,19 @@ export default function Menu() {
       <Link to="/lagg-till-upplevelse" className="btn btn-primary">
         Tipsa om äventyr
       </Link>
+      {admin ?
+      <div className="admin-menu-container">
+        <button>
+          <img src={adminMenu} alt="admin menu" className="admin-menu" onClick={() => setShowAdminMenu(!showAdminMenu)} />
+        </button> 
+        <div className="admin-alerts" style={unreviewedExperiences.length > 0 ? {display: "block"} : {display: "none"}}><p>{unreviewedExperiences.length}</p></div>
+      </div> 
+      : null}
     </nav>
+    <div className="admin-menu-container p-4 bg-beige" style={showAdminMenu ? {display: "flex"} : {display: "none"}}>
+      <Link to="/upplevelser-lista" onClick={() => setShowAdminMenu(false)}>Alla upplevelser</Link>
+      <Link to="/"><button className="btn btn-secondary" onClick={logOut}>Logga ut</button></Link>
+    </div>
     <div className="burger" onClick={() => setShowMenu(!showMenu)}>
       <span></span>
       <span></span>

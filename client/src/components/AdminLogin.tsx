@@ -8,7 +8,7 @@ export default function AdminLogin() {
   const [password, setPassword] = useState("");
   const [usernameError, setUsernameError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const loggedIn = localStorage.getItem("admin");
 
   const login = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,7 +22,7 @@ export default function AdminLogin() {
     } else if(response == "Success"){
       console.log("logged in!")
       localStorage.setItem("admin", "true");
-      setLoggedIn(true);
+      window.location.reload();
     }
   }
 

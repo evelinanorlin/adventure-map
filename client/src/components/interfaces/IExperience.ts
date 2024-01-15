@@ -16,6 +16,7 @@ export interface IExperience {
   userName: string;
   userLink?: string;
   isReviewed: boolean;
+  date?: Date;
 }
 
 export interface IExperienceId extends IExperience {

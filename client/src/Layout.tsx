@@ -34,23 +34,23 @@ export const Layout = () => {
 
   return (
     <>
-      <Header />
-      <main>
-        <ExperienceContext.Provider
-          value={{ experiences, visualExperiences, setVisualExperiences }}
-        >
-          <ClickableMapContext.Provider value={{ clickable, setClickable }}>
-            <ChosenLocationContext.Provider
-              value={{ chosenLocation, setChosenLocation }}
-            >
-              <ShowMarkerContext.Provider value={{ showMarker, setShowMarker }}>
-                <MainPage />
-                <Outlet />
-              </ShowMarkerContext.Provider>
-            </ChosenLocationContext.Provider>
-          </ClickableMapContext.Provider>
-        </ExperienceContext.Provider>
-      </main>
+      <ExperienceContext.Provider
+        value={{ experiences, visualExperiences, setVisualExperiences }}
+      >
+        <Header />
+        <main>
+            <ClickableMapContext.Provider value={{ clickable, setClickable }}>
+              <ChosenLocationContext.Provider
+                value={{ chosenLocation, setChosenLocation }}
+              >
+                <ShowMarkerContext.Provider value={{ showMarker, setShowMarker }}>
+                  <MainPage />
+                  <Outlet />
+                </ShowMarkerContext.Provider>
+              </ChosenLocationContext.Provider>
+            </ClickableMapContext.Provider>
+        </main>
+      </ExperienceContext.Provider>
       <Footer />
     </>
   );

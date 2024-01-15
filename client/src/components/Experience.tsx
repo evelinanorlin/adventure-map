@@ -9,6 +9,7 @@ export default function Experience() {
   const experiencesCont = useContext(ExperienceContext);
   const experiences = experiencesCont.experiences;
   const experience = experiences?.find((experience) => experience._id === id);
+  const isAdmin = localStorage.getItem("admin");
 
   if (experience) {
     const cleanDescription = {
@@ -54,9 +55,15 @@ export default function Experience() {
               experience.userName
             )}
           </p>
+        {isAdmin ? 
+        <div>
+          {experience.isReviewed ? "": <button className="btn btn-primary">Publicera</button> }
+          <button className="m-l-5 btn">Ta bort</button>
+        </div> : ""}
         </div>
       </section>
     );
+
   } else {
     return <h1>Experience not found</h1>;
   }

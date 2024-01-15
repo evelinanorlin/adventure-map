@@ -37,6 +37,7 @@ export default function AdventureMap({ location }: AdventureMapProps) {
 
   const markers: React.ReactNode[] = visualExperiences.map(
     (experience: IExperienceId) => {
+      if(experience.isReviewed === false) return null;
       return (
         <Marker
           key={experience._id}
