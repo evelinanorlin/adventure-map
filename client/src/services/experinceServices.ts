@@ -22,3 +22,14 @@ export const addExperience = async (experience: IExperience) => {
     console.log(error);
   }
 };
+
+export const updateReviewed = async (update: {_id: string, isReviewed: boolean}) => {
+  const BASE_URL = import.meta.env.VITE_APP_URL;
+  const url = `${BASE_URL}experiences/update`;
+  try {
+    const response = await axios.put(url, update);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}

@@ -10,6 +10,13 @@ export default function AdminList() {
   const navigate = useNavigate();
 
   const listHtml = experiences.map((experience) => {
+    // console.log(experience.date)
+    // if(!experience.date) return
+    // const day = String(experience.date.getUTCDate()).padStart(2, '0');
+    // const month = String(experience.date.getUTCMonth() + 1).padStart(2, '0'); // Months are zero-based
+    // const year = experience.date.getUTCFullYear();
+    // const formattedDate = `${day}-${month}-${year}`;
+
     return (
         <div className="p-t-5 p-b-5 admin-list-item" key={experience._id}>
           <div className="row direction-row row-gap-z justify-between">
@@ -19,7 +26,7 @@ export default function AdminList() {
               <p className="m-b-z">{experience.isReviewed ? "Publicerad" : "Ej granskad"}</p>
             </div>
           </div>
-          <p><span className="bold">Inkommen:</span> {experience.date ? experience.date.toDateString() : "inget datum"}</p>
+          {/* <p><span className="bold">Inkommen:</span> {formattedDate ? formattedDate : "inget datum"}</p> */}
           <p><span className="bold">Kategori:</span> {experience.category}</p>
           <p><span className="bold">Kommentarer:</span> Inga</p>
           <button className="btn btn-secondary" onClick={() => {navigate(`/upplevelser/${experience._id}`)}}>Granska / redigera</button>

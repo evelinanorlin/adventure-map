@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { ExperienceContext } from "../contexts/ExperienceContext";
 import DOMPurify from "dompurify";
 import close from "/icons/close.svg";
+import { updateReviewed } from "../services/experinceServices";
 
 export default function Experience() {
   const { id } = useParams();
@@ -15,6 +16,18 @@ export default function Experience() {
     const cleanDescription = {
       __html: DOMPurify.sanitize(experience.description),
     };
+
+    const publish = async () => {
+      console.log("publish")
+      if(!id) return
+      const test = await updateReviewed({
+        _id: id,
+        isReviewed: true
+      })
+      console.log(test)
+      window.location.reload()
+    }
+
     return (
       <section className="popup popup-right p-t-5">
         <div className="content-standard">
@@ -57,7 +70,7 @@ export default function Experience() {
           </p>
         {isAdmin ? 
         <div>
-          {experience.isReviewed ? "": <button className="btn btn-primary">Publicera</button> }
+          {experience.isReviewed ? "": <button className="btn btn-primary" onClick={publish}>Publicera</button> }
           <button className="m-l-5 btn">Ta bort</button>
         </div> : ""}
         </div>
