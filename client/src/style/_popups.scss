@@ -17,15 +17,22 @@
   }
 }
 
-.welcome-popup {
+.login-popup, .welcome-popup{
   position: absolute;
-  width: 90%;
-  max-width: 1000px;
-  height: 600px;
   margin: 0 auto;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.login-popup{
+  width: fit-content;
+}
+
+.welcome-popup {
+  width: 90%;
+  max-width: 1000px;
+  height: 600px;
   .row {
     height: 100%;
     img {

@@ -2,7 +2,8 @@ import axios from "axios";
 import { IExperience } from "../components/interfaces/IExperience";
 
 export const getExperiences = async () => {
-  const url = "http://localhost:3000/experiences";
+  const BASE_URL = import.meta.env.VITE_APP_URL;
+  const url = `${BASE_URL}experiences`;
   try {
     const response = await axios.get(url);
     return response.data;
@@ -12,7 +13,8 @@ export const getExperiences = async () => {
 };
 
 export const addExperience = async (experience: IExperience) => {
-  const url = "http://localhost:3000/experiences/add";
+  const BASE_URL = import.meta.env.VITE_APP_URL;
+  const url = `${BASE_URL}experiences/add`;
   try {
     const response = await axios.post(url, experience);
     return response.data;

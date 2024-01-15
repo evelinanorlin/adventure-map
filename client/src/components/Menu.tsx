@@ -27,7 +27,6 @@ export default function Menu() {
       height: window.innerHeight
     }
 }
-console.log(getCurrentDimension());
   return (
     <>
     <nav className="menu" style={showMenu ? {display: "flex"} : {display: "none"}}>

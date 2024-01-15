@@ -5,12 +5,13 @@ const bcrypt = require('bcrypt');
 
 // LOG IN
 router.post('/', async function(req, res, next) {
+  // To make sure there is no whitespace in the username
   const username = req.body.username.trim();
-  console.log(username)
   const user = await req.app.locals.db.collection('users').findOne({username: username})
   console.log(user)
   if(user == null){
-    return res.status(400).send('Cannot find user')
+    res.send('No user')
+    // return res.status(400).send('Cannot find user')
   }
   try{
     if (await bcrypt.compare(req.body.password, user.password)){

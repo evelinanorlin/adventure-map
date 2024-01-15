@@ -4,6 +4,7 @@ import About from "./components/About";
 import WelcomePopup from "./components/WelcomePopup";
 import AddExperience from "./components/AddExperience";
 import Experience from "./components/Experience";
+import AdminLogin from "./components/AdminLogin";
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ export const router = createBrowserRouter([
       {
         path: "/upplevelser/:id",
         element: <Experience />,
+      },
+      {
+        path: "/logga-in",
+        element: <AdminLogin />,
       },
 
       //{
