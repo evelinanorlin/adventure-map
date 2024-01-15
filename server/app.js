@@ -31,7 +31,7 @@ const init = async () => {
 init();
   
 var experiencesRouter = require('./routes/experiences');
-var adminRouter = require('./routes/admin');
+var loginRouter = require('./routes/login');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -40,6 +40,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 app.use('/experiences', experiencesRouter);
-app.use('/admin', adminRouter);
+app.use('/login', loginRouter);
 
 module.exports = app;

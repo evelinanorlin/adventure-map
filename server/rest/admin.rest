@@ -1,6 +1,21 @@
-POST http://localhost:3000/admin/add
-Content-Type: application/json
+
+GET http://localhost:3000/login/users
+
+###
+POST http://localhost:3000/login/users
+Content-type: application/json
 
 {
-  "experienceName": "test"
+    "username": "evelina",
+    "password": "test"
+}
+
+###
+
+POST http://localhost:3000/login/
+Content-type: application/json
+
+{
+    "username": "evelina",
+    "password": "test"
 }
