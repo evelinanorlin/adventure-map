@@ -24,7 +24,8 @@ export default function AdventureMap({ location }: AdventureMapProps) {
   const navigate = useNavigate();
 
   const getIcon = (category: string, _iconSize: PointExpression) => {
-    const url = "/icons/" + category + ".svg";
+    const categoryLowerCase = category.toLowerCase();
+    const url = "/icons/" + categoryLowerCase + ".svg";
     return L.icon({
       iconUrl: url,
       iconSize: _iconSize,

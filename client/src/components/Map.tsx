@@ -26,7 +26,6 @@ export default function Map({ location, markers }: IMapProps) {
   const handleMapClick = async (e: LeafletMouseEvent) => {
     if (clickableMap === false) return;
     const { lat, lng } = e.latlng;
-    // setShowMarker(true);
     setMarkerLocation([lat, lng]);
     setClickableMap(false);
     const findLocation = await getLocationName(lng, lat);
@@ -39,6 +38,7 @@ export default function Map({ location, markers }: IMapProps) {
   };
 
   return (
+    <>
     <MapContainer
       key={`${location.latitude}-${location.longitude}`}
       center={[location.latitude, location.longitude]}
@@ -48,12 +48,16 @@ export default function Map({ location, markers }: IMapProps) {
       <TileLayer
         key={`${location.latitude}-${location.longitude}`}
         url={`https://api.maptiler.com/maps/outdoor-v2/256/{z}/{x}/{y}.png?key=${API_KEY}`}
-        attribution="Kommer snart"
       />
       <MapEventsHandler handleMapClick={handleMapClick} />
       {markers}
       {showMarker ? <Marker position={markerLocation}></Marker> : null}
     </MapContainer>
+    <div className="attribution">
+    <a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> 
+    <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>
+    </div>
+    </>
   );
 }
 interface MapEventsHandlerProps {
