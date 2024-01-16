@@ -1,9 +1,10 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ExperienceContext } from "../contexts/ExperienceContext";
 import DOMPurify from "dompurify";
 import close from "/icons/close.svg";
 import { updateReviewed } from "../services/experinceServices";
+import ConfirmationPopup from "./ConfirmationPopup";
 
 export default function Experience() {
   const { id } = useParams();
@@ -11,22 +12,38 @@ export default function Experience() {
   const experiences = experiencesCont.experiences;
   const experience = experiences?.find((experience) => experience._id === id);
   const isAdmin = localStorage.getItem("admin");
+  const [showConfirmation, setShowConfirmation] = useState<boolean>(false);
+  const [confirmed, setConfirmed] = useState<boolean | null>(false);
+  const [action, setAction] = useState<string>("");
+  
+  useEffect(() => {
+    if(confirmed){
+      if(action === "publicera"){
+        publish();
+        } 
+        else if(action === "ta bort"){
+          remove();
+        }
+      }
+    }, [confirmed]);
+
+    const publish = async () => {
+      if(!id) return
+      await updateReviewed({
+        _id: id,
+        isReviewed: true
+      })
+      window.location.reload()
+    }
+
+    const remove = async () => {
+      console.log("remove")
+    }
 
   if (experience) {
     const cleanDescription = {
       __html: DOMPurify.sanitize(experience.description),
     };
-
-    const publish = async () => {
-      console.log("publish")
-      if(!id) return
-      const test = await updateReviewed({
-        _id: id,
-        isReviewed: true
-      })
-      console.log(test)
-      window.location.reload()
-    }
 
     return (
       <section className="popup popup-right p-t-5">
@@ -70,10 +87,11 @@ export default function Experience() {
           </p>
         {isAdmin ? 
         <div>
-          {experience.isReviewed ? "": <button className="btn btn-primary" onClick={publish}>Publicera</button> }
-          <button className="m-l-5 btn">Ta bort</button>
+          {experience.isReviewed ? "": <button className="btn btn-primary" onClick={() => {setAction("publicera"); setShowConfirmation(true)}}>Publicera</button> }
+          <button className="m-l-5 btn" onClick={() => {setAction("ta bort"); setShowConfirmation(true)}}>Ta bort</button>
         </div> : ""}
         </div>
+        {showConfirmation ? <ConfirmationPopup experience={experience.experienceName} action={action} setConfirmed={setConfirmed} setShowConfirmation={setShowConfirmation} /> : ""}
       </section>
     );
 

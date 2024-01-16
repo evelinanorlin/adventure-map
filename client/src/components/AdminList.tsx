@@ -10,13 +10,6 @@ export default function AdminList() {
   const navigate = useNavigate();
 
   const listHtml = experiences.map((experience) => {
-    // console.log(experience.date)
-    // if(!experience.date) return
-    // const day = String(experience.date.getUTCDate()).padStart(2, '0');
-    // const month = String(experience.date.getUTCMonth() + 1).padStart(2, '0'); // Months are zero-based
-    // const year = experience.date.getUTCFullYear();
-    // const formattedDate = `${day}-${month}-${year}`;
-
     return (
         <div className="p-t-5 p-b-5 admin-list-item" key={experience._id}>
           <div className="row direction-row row-gap-z justify-between">

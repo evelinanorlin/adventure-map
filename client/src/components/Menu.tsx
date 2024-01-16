@@ -11,7 +11,6 @@ export default function Menu() {
   const admin = localStorage.getItem("admin");
   const experiences = useContext(ExperienceContext).experiences;
   const [unreviewedExperiences, setUnreviewedExperiences] = useState<IExperienceId[]>([]);
-  console.log(experiences)
 
   useEffect(() => {
     if(experiences.length > 0){
