@@ -10,17 +10,6 @@ router.get('/', function(req, res, next) {
   })
 });
 
-// router.get('/newexperience', function(req, res){
-//   res.send('new experiencesss')
-// })
-
-// router.get('/:id', function(req, res, next) {
-//   let experience = req.params.id;
-//   console.log(req.params.id)
-//   res.send(`respond with a resource ${experience}`);
-//   res.status(201).json(experience);
-// });
-
 router.post('/add', async function(req, res, next) {
   console.log(req.body)
   req.app.locals.db.collection('experiences').insertOne(req.body)
@@ -53,7 +42,6 @@ router.delete('/delete', async function(req, res, next) {
 router.put('/update', async function(req, res, next) {
   const experienceId = req.body._id;
   try {
-    // Ensure _id is a valid ObjectId
     const objectId = new ObjectId(experienceId);
 
     // Construct the update object based on req.body
