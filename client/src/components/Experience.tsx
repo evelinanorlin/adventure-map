@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { ExperienceContext } from "../contexts/ExperienceContext";
 import DOMPurify from "dompurify";
 import close from "/icons/close.svg";
-import { updateReviewed } from "../services/experinceServices";
+import { deleteExperience, updateReviewed } from "../services/experinceServices";
 import ConfirmationPopup from "./ConfirmationPopup";
 
 export default function Experience() {
@@ -15,30 +15,42 @@ export default function Experience() {
   const [showConfirmation, setShowConfirmation] = useState<boolean>(false);
   const [confirmed, setConfirmed] = useState<boolean | null>(false);
   const [action, setAction] = useState<string>("");
-  
+  const navigate = useNavigate();
+
   useEffect(() => {
-    if(confirmed){
-      if(action === "publicera"){
+    if (confirmed) {
+      if (action === "publicera") {
         publish();
-        } 
-        else if(action === "ta bort"){
-          remove();
-        }
+      } else if (action === "ta bort") {
+        remove();
       }
-    }, [confirmed]);
-
-    const publish = async () => {
-      if(!id) return
-      await updateReviewed({
-        _id: id,
-        isReviewed: true
-      })
-      window.location.reload()
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [confirmed]);
 
-    const remove = async () => {
-      console.log("remove")
-    }
+  const publish = async () => {
+    if (!id) return;
+    await updateReviewed({
+      _id: id,
+      isReviewed: true,
+    });
+    window.location.reload();
+  };
+
+  const remove = async () => {
+    if(!experience) return;
+    await deleteExperience({_id: experience._id});
+
+    experiences.map(experience => {
+      if(experience._id === id) {
+        const index = experiences.indexOf(experience);
+        experiences.splice(index, 1);
+      }
+      return experience;
+    })
+    console.log(experiences)
+    navigate("/upplevelser-lista");
+  };
 
   if (experience) {
     const cleanDescription = {
@@ -85,16 +97,47 @@ export default function Experience() {
               experience.userName
             )}
           </p>
-        {isAdmin ? 
-        <div>
-          {experience.isReviewed ? "": <button className="btn btn-primary" onClick={() => {setAction("publicera"); setShowConfirmation(true)}}>Publicera</button> }
-          <button className="m-l-5 btn" onClick={() => {setAction("ta bort"); setShowConfirmation(true)}}>Ta bort</button>
-        </div> : ""}
+          {isAdmin ? (
+            <div>
+              {experience.isReviewed ? (
+                ""
+              ) : (
+                <button
+                  className="btn btn-primary"
+                  onClick={() => {
+                    setAction("publicera");
+                    setShowConfirmation(true);
+                  }}
+                >
+                  Publicera
+                </button>
+              )}
+              <button
+                className="m-l-5 btn"
+                onClick={() => {
+                  setAction("ta bort");
+                  setShowConfirmation(true);
+                }}
+              >
+                Ta bort
+              </button>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
-        {showConfirmation ? <ConfirmationPopup experience={experience.experienceName} action={action} setConfirmed={setConfirmed} setShowConfirmation={setShowConfirmation} /> : ""}
+        {showConfirmation ? (
+          <ConfirmationPopup
+            experience={experience.experienceName}
+            action={action}
+            setConfirmed={setConfirmed}
+            setShowConfirmation={setShowConfirmation}
+          />
+        ) : (
+          ""
+        )}
       </section>
     );
-
   } else {
     return <h1>Experience not found</h1>;
   }

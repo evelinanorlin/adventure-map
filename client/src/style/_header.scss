@@ -14,7 +14,7 @@
       height: 30px;
     }
   }
-  nav{
+  nav {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -34,15 +34,15 @@
       top: 0px;
       right: 0px;
     }
-    .admin-menu-container{
+    .admin-menu-container {
       position: relative;
       top: 0px;
       left: 5px;
-      .admin-menu{
+      .admin-menu {
         height: 25px;
         width: auto;
       }
-      .admin-alerts{
+      .admin-alerts {
         background: $color-blue;
         border-radius: 50%;
         height: 20px;
@@ -50,29 +50,29 @@
         position: absolute;
         top: -5px;
         right: -10px;
-        p{
+        p {
           font-family: $font-main;
           color: $color-white;
           font-size: 0.8rem;
           margin: 0;
-          text-align:center;
+          text-align: center;
           position: relative;
           bottom: 2px;
         }
       }
     }
   }
-  .burger{
+  .burger {
     display: none;
     @include tablet {
       display: block;
       position: relative;
       z-index: 3;
     }
-    &:hover{
+    &:hover {
       cursor: pointer;
     }
-    span{
+    span {
       display: block;
       width: 30px;
       height: 2px;
@@ -81,7 +81,7 @@
       margin: 5px 0;
     }
   }
-  .admin-menu-container{
+  .admin-menu-container {
     flex-direction: column;
     position: absolute;
     height: fit-content;

@@ -18,7 +18,7 @@ export default function AddExperience() {
             : "popup popup-right experience-form p-5"
         }
       >
-        <Link to="/" className="close-btn" onClick={() =>setShowMarker(false)}>
+        <Link to="/" className="close-btn" onClick={() => setShowMarker(false)}>
           <img src={close} alt="close" className="close" />
         </Link>
         <h1>Tipsa om upplevelse</h1>

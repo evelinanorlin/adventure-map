@@ -31,5 +31,4 @@ export const getLocationName = async (lng: number, lat: number) => {
   } catch (error) {
     console.log(error);
   }
-}
-;
+};

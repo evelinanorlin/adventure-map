@@ -1,8 +1,9 @@
 import axios from "axios";
 import { IExperience } from "../components/interfaces/IExperience";
 
+const BASE_URL = import.meta.env.VITE_APP_URL;
+
 export const getExperiences = async () => {
-  const BASE_URL = import.meta.env.VITE_APP_URL;
   const url = `${BASE_URL}experiences`;
   try {
     const response = await axios.get(url);
@@ -13,7 +14,6 @@ export const getExperiences = async () => {
 };
 
 export const addExperience = async (experience: IExperience) => {
-  const BASE_URL = import.meta.env.VITE_APP_URL;
   const url = `${BASE_URL}experiences/add`;
   try {
     const response = await axios.post(url, experience);
@@ -23,7 +23,10 @@ export const addExperience = async (experience: IExperience) => {
   }
 };
 
-export const updateReviewed = async (update: {_id: string, isReviewed: boolean}) => {
+export const updateReviewed = async (update: {
+  _id: string;
+  isReviewed: boolean;
+}) => {
   const BASE_URL = import.meta.env.VITE_APP_URL;
   const url = `${BASE_URL}experiences/update`;
   try {
@@ -32,4 +35,16 @@ export const updateReviewed = async (update: {_id: string, isReviewed: boolean})
   } catch (error) {
     console.log(error);
   }
-}
+};
+
+export const deleteExperience = async (_id: { _id: string }) => {
+  const url = `${BASE_URL}experiences/delete`;
+  try {
+    const response = await axios.delete(url, {
+      data: _id,
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
