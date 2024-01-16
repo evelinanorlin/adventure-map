@@ -30,6 +30,25 @@ router.post('/add', async function(req, res, next) {
   })
 });
 
+router.delete('/delete', async function(req, res, next) {
+  const experienceId = req.body._id;
+  try{
+    const objectId = new ObjectId(experienceId);
+    const result = await req.app.locals.db.collection('experiences').deleteOne({_id: objectId});
+    console.log(result)
+    if (result.deletedCount === 1) {
+      console.log('Delete successful');
+      res.status(200).json({ success: true });
+    } else {
+      console.log('No document found with the provided _id');
+      res.status(404).json({ success: false, error: 'Document not found' });
+    }
+  } catch (error) {
+    console.error('Error deleting document:', error);
+    res.status(500).json({ success: false, error: 'Internal Server Error' });
+  }
+});
+
 
 router.put('/update', async function(req, res, next) {
   const experienceId = req.body._id;
