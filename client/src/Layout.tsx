@@ -10,6 +10,7 @@ import { ClickableMapContext } from "./contexts/ClickableMapContext.ts";
 import { ChosenLocationContext } from "./contexts/ChosenLocationContext.ts";
 import { ILocation } from "./components/interfaces/ILocation.ts";
 import { ShowMarkerContext } from "./contexts/ShowMarkerContext.ts";
+import { UnreviewedExperiencesContext } from "./contexts/ReviewedExperiences.ts";
 
 export const Layout = () => {
   const [experiences, setExperiences] = useState<IExperienceId[]>([]);
@@ -19,6 +20,7 @@ export const Layout = () => {
   const [clickable, setClickable] = useState<boolean>(false);
   const [chosenLocation, setChosenLocation] = useState<ILocation | null>(null);
   const [showMarker, setShowMarker] = useState<boolean>(false);
+  const [unreviewedExperiences, setUnreviewedExperiences] = useState<IExperienceId[]>([]);
 
   useEffect(() => {
     if (experiences.length === 0) {
@@ -37,6 +39,7 @@ export const Layout = () => {
       <ExperienceContext.Provider
         value={{ experiences, visualExperiences, setVisualExperiences }}
       >
+        <UnreviewedExperiencesContext.Provider value={{ unreviewedExperiences, setUnreviewedExperiences}}>
         <Header />
         <main>
           <ClickableMapContext.Provider value={{ clickable, setClickable }}>
@@ -50,6 +53,7 @@ export const Layout = () => {
             </ChosenLocationContext.Provider>
           </ClickableMapContext.Provider>
         </main>
+        </UnreviewedExperiencesContext.Provider>
       </ExperienceContext.Provider>
       <Footer />
     </>

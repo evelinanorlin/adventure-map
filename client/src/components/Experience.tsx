@@ -3,52 +3,57 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { ExperienceContext } from "../contexts/ExperienceContext";
 import DOMPurify from "dompurify";
 import close from "/icons/close.svg";
-import { deleteExperience, updateReviewed } from "../services/experinceServices";
 import ConfirmationPopup from "./ConfirmationPopup";
+import { UnreviewedExperiencesContext } from "../contexts/ReviewedExperiences";
+import { newUnreviewedArr, publish, remove } from "../functions/handleExperiences";
 
 export default function Experience() {
   const { id } = useParams();
-  const experiencesCont = useContext(ExperienceContext);
-  const experiences = experiencesCont.experiences;
+  const experiences = useContext(ExperienceContext).experiences;
   const experience = experiences?.find((experience) => experience._id === id);
   const isAdmin = localStorage.getItem("admin");
   const [showConfirmation, setShowConfirmation] = useState<boolean>(false);
   const [confirmed, setConfirmed] = useState<boolean | null>(false);
   const [action, setAction] = useState<string>("");
   const navigate = useNavigate();
+  const unreviewedExperiences = useContext(UnreviewedExperiencesContext).unreviewedExperiences;
+  const setUnreviewedExperiences = useContext(UnreviewedExperiencesContext).setUnreviewedExperiences;
 
   useEffect(() => {
+    const publishExp = async () => {
+      const response = await publish(id, experiences);
+      console.log(response);
+      if(response === "success") {
+      updateUnreviewed(id, "remove");
+      setShowConfirmation(false); 
+      navigate("/upplevelser-lista");
+      } else{
+        console.log("error");
+      }
+    }
     if (confirmed) {
       if (action === "publicera") {
-        publish();
+        publishExp()
       } else if (action === "ta bort") {
-        remove();
+        removeExp();
       }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [confirmed]);
 
-  const publish = async () => {
-    if (!id) return;
-    await updateReviewed({
-      _id: id,
-      isReviewed: true,
-    });
-    window.location.reload();
+  const updateUnreviewed = (id: string | undefined, action: string) => {
+    if(!id) return;
+    const unreviewed = newUnreviewedArr(id, action, unreviewedExperiences, experiences);
+    if(!unreviewed) return;
+    setUnreviewedExperiences(unreviewed);
   };
 
-  const remove = async () => {
+  const removeExp = async () => {
     if(!experience) return;
-    await deleteExperience({_id: experience._id});
-
-    experiences.map(experience => {
-      if(experience._id === id) {
-        const index = experiences.indexOf(experience);
-        experiences.splice(index, 1);
-      }
-      return experience;
-    })
-    console.log(experiences)
+    await remove(id, experience, experiences);
+    if (!experience.isReviewed) {
+      updateUnreviewed(id, "remove");
+    }
     navigate("/upplevelser-lista");
   };
 

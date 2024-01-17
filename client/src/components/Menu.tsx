@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import adminMenu from "/icons/adminMenu.svg";
 import { ExperienceContext } from "../contexts/ExperienceContext";
-import { IExperienceId } from "./interfaces/IExperience";
+import { UnreviewedExperiencesContext } from "../contexts/ReviewedExperiences";
 
 export default function Menu() {
   const [showMenu, setShowMenu] = useState<boolean>(false);
@@ -10,9 +10,8 @@ export default function Menu() {
   const [showAdminMenu, setShowAdminMenu] = useState<boolean>(false);
   const admin = localStorage.getItem("admin");
   const experiences = useContext(ExperienceContext).experiences;
-  const [unreviewedExperiences, setUnreviewedExperiences] = useState<
-    IExperienceId[]
-  >([]);
+  const unreviewedExperiences = useContext(UnreviewedExperiencesContext).unreviewedExperiences;
+  const setUnreviewedExperiences = useContext(UnreviewedExperiencesContext).setUnreviewedExperiences;
 
   useEffect(() => {
     if (experiences.length > 0) {
