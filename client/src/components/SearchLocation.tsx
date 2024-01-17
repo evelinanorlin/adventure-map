@@ -16,7 +16,7 @@ export default function SearchLocation({ setLocation }: SearchLocationProps) {
     const handler = (event: MouseEvent) => {
       if (
         event.target !== document.querySelector(".search-field") &&
-        event.target !== document.querySelector(".search-place-btn") &&
+        event.target !== document.querySelector(".search-btn") &&
         event.target !== document.querySelector(".location-list") &&
         !document
           .querySelector(".location-list")
@@ -91,7 +91,7 @@ export default function SearchLocation({ setLocation }: SearchLocationProps) {
         }
       />
       <button
-        className="search-place-btn"
+        className="search-btn"
         aria-label="sök"
         onClick={(e) => {
           e.preventDefault();

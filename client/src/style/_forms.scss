@@ -1,20 +1,22 @@
 // general for all forms
 
+.search-field {
+  padding-right: 30px;
+  &:focus {
+    outline: none;
+    border: 2px solid $color-blue;
+  }
+}
+.search-btn {
+  position: relative;
+  z-index: 3;
+  right: 30px;
+  top: 4px;
+  img {
+    height: 15px;
+  }
+}
 .search-location {
-  .search-field {
-    padding-right: 30px;
-    &:focus {
-      outline: none;
-      border: 2px solid $color-blue;
-    }
-  }
-  .search-place-btn {
-    position: relative;
-    z-index: 3;
-    img {
-      height: 15px;
-    }
-  }
   .location-list {
     border: 1px solid $color-grey;
     filter: $drop-shadow;
@@ -171,11 +173,9 @@ label {
       width: 250px;
       height: 35px;
     }
-    .search-place-btn {
+    .search-btn {
       height: 35px;
       width: 35px;
-      right: 30px;
-      top: 4px;
       padding-left: 5px;
     }
     .location-list {
@@ -209,7 +209,7 @@ label {
     .search-field {
       width: 250px;
     }
-    .search-place-btn {
+    .search-btn {
       right: 25px;
       top: 3px;
     }

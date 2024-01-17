@@ -5,6 +5,7 @@ import check from "/icons/check.svg";
 import close from "/icons/close.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { IExperienceId } from "./interfaces/IExperience";
+import search from "/icons/search.svg";
 
 export default function AdminList() {
   const experiences = useContext(ExperienceContext).experiences;
@@ -70,7 +71,8 @@ export default function AdminList() {
         <h1>Upplevelser</h1>
         <label>
           <p className="bold">Sök upplevelse</p>
-          <input type="text" />
+          <input type="text" className="search-field"/>
+          <button className="search-btn"><img src={search} alt="search" className="search-icon"/></button>
         </label><br></br>
         <label className="row direction-row align-items-center m-t-3">
           <p className="strong m-z">Visa bara ogranskade upplevelser</p>
