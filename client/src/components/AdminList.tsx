@@ -1,17 +1,34 @@
-import { useContext } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { ExperienceContext } from "../contexts/ExperienceContext";
 import alert from "/icons/alert.svg";
 import check from "/icons/check.svg";
 import close from "/icons/close.svg";
 import { Link, useNavigate } from "react-router-dom";
+import { IExperienceId } from "./interfaces/IExperience";
 
 export default function AdminList() {
   const experiences = useContext(ExperienceContext).experiences;
-  const experiencesReverse = experiences.slice().reverse();
-
+  const [visibleExperiences, setVisibleExperiences] = useState<IExperienceId[]>(experiences);
   const navigate = useNavigate();
 
-  const listHtml = experiencesReverse.map((experience) => {
+  useEffect(() => {
+    setVisibleExperiences(experiences);
+  }, [experiences]);
+
+  const filterExperiences = (e: ChangeEvent<HTMLInputElement>) => {
+    if(e.target.checked) {
+      const unreviewed = experiences.filter((experience) => {
+        return experience.isReviewed === false;
+      });
+      console.log(unreviewed)
+      setVisibleExperiences(unreviewed);
+    } else {
+      setVisibleExperiences(experiences.slice().reverse());
+    }
+
+  };
+
+  const listHtml =  visibleExperiences.map((experience) => {
     return (
       <div className="p-t-5 p-b-5 admin-list-item" key={experience._id}>
         <div className="row direction-row row-gap-z justify-between">
@@ -26,7 +43,6 @@ export default function AdminList() {
             </p>
           </div>
         </div>
-        {/* <p><span className="bold">Inkommen:</span> {formattedDate ? formattedDate : "inget datum"}</p> */}
         <p>
           <span className="bold">Kategori:</span> {experience.category}
         </p>
@@ -52,6 +68,14 @@ export default function AdminList() {
           <img src={close} alt="close" className="close" />
         </Link>
         <h1>Upplevelser</h1>
+        <label>
+          <p className="bold">Sök upplevelse</p>
+          <input type="text" />
+        </label><br></br>
+        <label className="row direction-row align-items-center m-t-3">
+          <p className="strong m-z">Visa bara ogranskade upplevelser</p>
+          <input type="checkbox" style={{width: "15px"}} onChange={filterExperiences}/>
+        </label>
         {listHtml}
       </div>
     </section>

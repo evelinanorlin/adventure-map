@@ -137,21 +137,20 @@ export default function ExperienceForm() {
       addExperience({ ...experienceData, imageURL: imgData.url });
     } else {
       addExperience(experienceData);
-
-      // Reset form fields
-      setExperienceName("");
-      setLocation({ latitude: 0, longitude: 0, display_name: "", zoom: 0 });
-      setLink("");
-      setPrice("");
-      setCategory("");
-      setDescription("");
-      setImage("");
-      setImageUrl("");
-      setUserName("");
-      setUserLink("");
-      setShowMarker(false);
-      setChosenLocation(null);
     }
+    // Reset form fields
+    setExperienceName("");
+    setLocation({ latitude: 0, longitude: 0, display_name: "", zoom: 0 });
+    setLink("");
+    setPrice("");
+    setCategory("");
+    setDescription("");
+    setImage("");
+    setImageUrl("");
+    setUserName("");
+    setUserLink("");
+    setShowMarker(false);
+    setChosenLocation(null);
   };
 
   const handleButtonClick = () => {

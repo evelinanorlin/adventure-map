@@ -20,6 +20,7 @@ export default function Menu() {
       });
       setUnreviewedExperiences(unreviewed);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [experiences]);
 
   useEffect(() => {
