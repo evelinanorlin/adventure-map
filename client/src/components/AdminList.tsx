@@ -7,9 +7,11 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function AdminList() {
   const experiences = useContext(ExperienceContext).experiences;
+  const experiencesReverse = experiences.slice().reverse();
+
   const navigate = useNavigate();
 
-  const listHtml = experiences.map((experience) => {
+  const listHtml = experiencesReverse.map((experience) => {
     return (
       <div className="p-t-5 p-b-5 admin-list-item" key={experience._id}>
         <div className="row direction-row row-gap-z justify-between">
@@ -42,6 +44,7 @@ export default function AdminList() {
       </div>
     );
   });
+
   return (
     <section className="admin-list">
       <div className="popup popup-right p-5">
