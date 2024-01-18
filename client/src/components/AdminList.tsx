@@ -10,24 +10,46 @@ import search from "/icons/search.svg";
 export default function AdminList() {
   const experiences = useContext(ExperienceContext).experiences;
   const [visibleExperiences, setVisibleExperiences] = useState<IExperienceId[]>(experiences);
+  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [searchText, setSearchText] = useState<string>("");
   const navigate = useNavigate();
 
   useEffect(() => {
     setVisibleExperiences(experiences);
   }, [experiences]);
 
-  const filterExperiences = (e: ChangeEvent<HTMLInputElement>) => {
-    if(e.target.checked) {
-      const unreviewed = experiences.filter((experience) => {
-        return experience.isReviewed === false;
-      });
-      console.log(unreviewed)
-      setVisibleExperiences(unreviewed);
-    } else {
-      setVisibleExperiences(experiences.slice().reverse());
-    }
+  const filterOnReview = (e: ChangeEvent<HTMLInputElement>) => {
+    const checked = e.target.checked;
+      setIsChecked(checked);
 
+      const filtered = experiences.filter((experience) => {
+        return checked ? !experience.isReviewed : true;
+      }).filter((experience) => {
+        return experience.experienceName.toLowerCase().includes(searchText.toLowerCase());
+      });
+
+      setVisibleExperiences(filtered);
   };
+
+  const filterOnText = (e: ChangeEvent<HTMLInputElement>) => {
+    const searchText = e.target.value;
+    setSearchText(searchText);
+    //console.log(isChecked)
+    const searchHits = experiences.filter((experience) => {
+        return experience.experienceName.toLowerCase().includes(e.target.value.toLowerCase());
+      }).filter((experience) => {
+        return isChecked ? !experience.isReviewed : true;
+      })
+      // if (isChecked){
+      //   const filtered = searchHits.filter((experience) => {
+      //     return experience.isReviewed === !isChecked;
+      //   });
+      //   setVisibleExperiences(filtered);
+      //   return;
+      // }
+      setVisibleExperiences(searchHits);
+  }
+
 
   const listHtml =  visibleExperiences.map((experience) => {
     return (
@@ -71,12 +93,12 @@ export default function AdminList() {
         <h1>Upplevelser</h1>
         <label>
           <p className="bold">Sök upplevelse</p>
-          <input type="text" className="search-field"/>
+          <input type="text" className="search-field" onChange={filterOnText}/>
           <button className="search-btn"><img src={search} alt="search" className="search-icon"/></button>
         </label><br></br>
         <label className="row direction-row align-items-center m-t-3">
           <p className="strong m-z">Visa bara ogranskade upplevelser</p>
-          <input type="checkbox" style={{width: "15px"}} onChange={filterExperiences}/>
+          <input type="checkbox" style={{width: "15px"}} onChange={filterOnReview}/>
         </label>
         {listHtml}
       </div>
