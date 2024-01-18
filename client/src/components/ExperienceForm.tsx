@@ -48,11 +48,11 @@ export default function ExperienceForm() {
   const isReviewed = false;
 
   // Context variables
-  const clickableMap = useContext(ClickableMapContext).clickable;
-  const setClickableMap = useContext(ClickableMapContext).setClickable;
-  const chosenLocation = useContext(ChosenLocationContext).chosenLocation;
-  const setChosenLocation = useContext(ChosenLocationContext).setChosenLocation;
-  const setShowMarker = useContext(ShowMarkerContext).setShowMarker;
+  const { clickable, setClickable } = useContext(ClickableMapContext);
+  const { chosenLocation, setChosenLocation } = useContext(
+    ChosenLocationContext,
+  );
+  const { setShowMarker } = useContext(ShowMarkerContext);
 
   // Confirmation variables
   const confirmationAction = "lägga till";
@@ -63,10 +63,6 @@ export default function ExperienceForm() {
     useState<boolean>(false);
 
   // useEffects
-  useEffect(() => {
-    const isValid = validateTextInput(description);
-    setDescriptionValid(isValid);
-  }, [description]);
 
   useEffect(() => {
     if (!selectedFile) {
@@ -87,12 +83,12 @@ export default function ExperienceForm() {
       handleSubmit();
       setShowConfirmationMessage(true);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [confirmed]);
 
   // Event Handlers
   const choseLocation = () => {
-    setClickableMap(!clickableMap);
+    setClickable(!clickable);
     setShowMarker(true);
   };
 
@@ -117,27 +113,22 @@ export default function ExperienceForm() {
 
   // Form Submission
   const handleSubmit = async () => {
-    const experienceData: IExperience = {
-      experienceName: experienceName,
-      location: location,
-      link: link,
-      price: price,
-      category: category,
-      description: description,
-      imageURL: imageUrl,
-      userName: userName,
-      userLink: userLink,
-      isReviewed: isReviewed,
+    const imgData = image.length > 0 ? await uploadImage(image) : null;
+  
+    addExperience({
+      experienceName,
+      location,
+      link,
+      price,
+      category,
+      description,
+      imageURL: imgData?.url || imageUrl,
+      userName,
+      userLink,
+      isReviewed,
       date: new Date(),
-    };
-
-    if (image.length > 0) {
-      const imgData = await uploadImage(image);
-      setImageUrl(imgData.url);
-      addExperience({ ...experienceData, imageURL: imgData.url });
-    } else {
-      addExperience(experienceData);
-    }
+    });
+  
     // Reset form fields
     setExperienceName("");
     setLocation({ latitude: 0, longitude: 0, display_name: "", zoom: 0 });
@@ -167,8 +158,11 @@ export default function ExperienceForm() {
       isReviewed: isReviewed,
       date: new Date(),
     };
+
     const isValid = validateForm(experienceData);
+    
     if (!isValid) {
+      window.scrollTo(0,0);
       setErrorMessage(true);
       setExperienceNameValid(validateTextInput(experienceName));
       setLocationValid(validateLocation(location));
@@ -182,33 +176,17 @@ export default function ExperienceForm() {
     }
   };
 
-  // HTML Elements
-  const categoriesHtml = categories.map((category, index) => (
-    <option value={category} key={index}>
-      {category}
-    </option>
-  ));
-
-  const priceIntervalsHtml = priceIntervals.map((priceInterval, index) => (
-    <option value={priceInterval} key={index}>
-      {priceInterval}
-    </option>
-  ));
-
-  const errorMessageHtml = errorMessage ? (
-    <p className="error-message">Fyll i alla obligatoriska fält</p>
-  ) : null;
-
   if (!showConfirmationMessage) {
     return (
       <>
-        {errorMessageHtml}
+        {errorMessage ? (
+          <p className="error-message">Fyll i alla obligatoriska fält</p>
+        ) : null}
         <form onSubmit={handleSubmit}>
           <label>
             <p>Vad?*</p>
             <input
               type="text"
-              name="name"
               placeholder="ex paddla på Vänern"
               onChange={(e) => {
                 setExperienceName(e.target.value);
@@ -255,7 +233,6 @@ export default function ExperienceForm() {
             <p>Länk till mer information</p>
             <input
               type="url"
-              name="link"
               placeholder="ex https://www.vandringsleden.se"
               onChange={(e) => setLink(e.target.value)}
             />
@@ -265,8 +242,6 @@ export default function ExperienceForm() {
             <label>
               <p>Kostnad*</p>
               <select
-                id="price"
-                name="price-intervals"
                 onChange={(e) => {
                   setPrice(e.target.value);
                   const isValid = validateDropdown(e.target.value);
@@ -274,14 +249,16 @@ export default function ExperienceForm() {
                 }}
                 className={priceValid ? "" : "unvalid"}
               >
-                {priceIntervalsHtml}
+                {priceIntervals.map((priceInterval, index) => (
+                  <option value={priceInterval} key={index}>
+                    {priceInterval}
+                  </option>
+                ))}
               </select>
             </label>
             <label>
               <p>Kategori*</p>
               <select
-                id="price"
-                name="price-intervals"
                 onChange={(e) => {
                   setCategory(e.target.value);
                   const isValid = validateDropdown(e.target.value);
@@ -289,7 +266,11 @@ export default function ExperienceForm() {
                 }}
                 className={categoryValid ? "" : "unvalid"}
               >
-                {categoriesHtml}
+                {categories.map((category, index) => (
+                  <option value={category} key={index}>
+                    {category}
+                  </option>
+                ))}
               </select>
             </label>
           </div>
@@ -314,7 +295,6 @@ export default function ExperienceForm() {
             <input
               className="img-input"
               type="file"
-              name="image"
               accept="image/png, image/gif, image/jpeg"
               onChange={handleFileChange}
             />

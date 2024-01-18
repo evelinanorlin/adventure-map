@@ -11,7 +11,6 @@ export const handleImg = (files: FileList): Promise<string> => {
 
     try {
       Resizer.imageFileResizer(file, 700, 700, "WEBP", 100, 0, (uri) => {
-        console.log(uri);
         if (typeof uri === "string") {
           resolve(uri);
         } else {

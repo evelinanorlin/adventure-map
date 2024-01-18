@@ -20,7 +20,9 @@ export const Layout = () => {
   const [clickable, setClickable] = useState<boolean>(false);
   const [chosenLocation, setChosenLocation] = useState<ILocation | null>(null);
   const [showMarker, setShowMarker] = useState<boolean>(false);
-  const [unreviewedExperiences, setUnreviewedExperiences] = useState<IExperienceId[]>([]);
+  const [unreviewedExperiences, setUnreviewedExperiences] = useState<
+    IExperienceId[]
+  >([]);
 
   useEffect(() => {
     if (experiences.length === 0) {
@@ -39,20 +41,24 @@ export const Layout = () => {
       <ExperienceContext.Provider
         value={{ experiences, visualExperiences, setVisualExperiences }}
       >
-        <UnreviewedExperiencesContext.Provider value={{ unreviewedExperiences, setUnreviewedExperiences}}>
-        <Header />
-        <main>
-          <ClickableMapContext.Provider value={{ clickable, setClickable }}>
-            <ChosenLocationContext.Provider
-              value={{ chosenLocation, setChosenLocation }}
-            >
-              <ShowMarkerContext.Provider value={{ showMarker, setShowMarker }}>
-                <MainPage />
-                <Outlet />
-              </ShowMarkerContext.Provider>
-            </ChosenLocationContext.Provider>
-          </ClickableMapContext.Provider>
-        </main>
+        <UnreviewedExperiencesContext.Provider
+          value={{ unreviewedExperiences, setUnreviewedExperiences }}
+        >
+          <Header />
+          <main>
+            <ClickableMapContext.Provider value={{ clickable, setClickable }}>
+              <ChosenLocationContext.Provider
+                value={{ chosenLocation, setChosenLocation }}
+              >
+                <ShowMarkerContext.Provider
+                  value={{ showMarker, setShowMarker }}
+                >
+                  <MainPage />
+                  <Outlet />
+                </ShowMarkerContext.Provider>
+              </ChosenLocationContext.Provider>
+            </ClickableMapContext.Provider>
+          </main>
         </UnreviewedExperiencesContext.Provider>
       </ExperienceContext.Provider>
       <Footer />

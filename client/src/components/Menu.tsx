@@ -10,8 +10,12 @@ export default function Menu() {
   const [showAdminMenu, setShowAdminMenu] = useState<boolean>(false);
   const admin = localStorage.getItem("admin");
   const experiences = useContext(ExperienceContext).experiences;
-  const unreviewedExperiences = useContext(UnreviewedExperiencesContext).unreviewedExperiences;
-  const setUnreviewedExperiences = useContext(UnreviewedExperiencesContext).setUnreviewedExperiences;
+  const unreviewedExperiences = useContext(
+    UnreviewedExperiencesContext,
+  ).unreviewedExperiences;
+  const setUnreviewedExperiences = useContext(
+    UnreviewedExperiencesContext,
+  ).setUnreviewedExperiences;
 
   useEffect(() => {
     if (experiences.length > 0) {
@@ -20,7 +24,7 @@ export default function Menu() {
       });
       setUnreviewedExperiences(unreviewed);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [experiences]);
 
   useEffect(() => {
@@ -59,10 +63,10 @@ export default function Menu() {
         style={showMenu ? { display: "flex" } : { display: "none" }}
       >
         <Link to="/">Utforska</Link>
-        <Link to="/om-aventyrskartan">Om äventyrskartan</Link>
+        <Link to="/om-aventyrskartan">Om upplevelseskartan</Link>
         <Link to="/contact">Kontakt</Link>
         <Link to="/lagg-till-upplevelse" className="btn btn-primary">
-          Tipsa om äventyr
+          Tipsa om upplevelse
         </Link>
         {admin ? (
           <div className="admin-menu-container">

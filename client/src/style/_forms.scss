@@ -16,6 +16,9 @@
     height: 15px;
   }
 }
+.search-field-admin-list {
+  max-width: 90%;
+}
 .search-location {
   .location-list {
     border: 1px solid $color-grey;
@@ -71,6 +74,7 @@ select {
 
 input {
   padding-left: 15px;
+  background: $color-white;
   &:focus {
     outline: none;
     border: 2px solid $color-blue;
@@ -128,6 +132,7 @@ label {
 }
 
 .img-input {
+  background: $color-light-beige;
   border: none;
   filter: none;
   padding-left: 0;

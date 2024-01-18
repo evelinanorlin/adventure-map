@@ -1,25 +1,22 @@
-import { useContext, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { categories } from "../data/categories";
 import { ExperienceContext } from "../contexts/ExperienceContext";
-import { IExperienceId } from "./interfaces/IExperience";
+import { filterVisualExperiences } from "../functions/filterFunction";
 
 export default function FilterSearch() {
   const [chosenCategories, setChosenCategories] = useState<string[]>([]);
   const [showCategories, setShowCategories] = useState<boolean>(false);
+  const [priceInputChecked, setPriceInputChecked] = useState<boolean>(false);
   const experienceContextData = useContext(ExperienceContext);
-  const visualExperiences = experienceContextData.visualExperiences;
+  const experiences = experienceContextData.experiences;
   const setVisualExperiences = experienceContextData.setVisualExperiences;
 
   const categoriesHtml = categories.map((category, index) => {
     if (category === "Välj kategori") return null;
 
     return (
-      <li
-        onClick={() => updateChosenCategories(category)}
-        key={index}
-        tabIndex={index + 1}
-      >
-        <label onClick={() => updateChosenCategories(category)}>
+      <li key={index} tabIndex={index + 1}>
+        <label>
           <input
             type="checkbox"
             checked={chosenCategories.includes(category)}
@@ -61,56 +58,57 @@ export default function FilterSearch() {
   };
 
   const updateChosenCategories = (category: string) => {
-    if (chosenCategories.includes(category)) {
-      const chosenCategoriesUpdated = chosenCategories.filter(
-        (item) => item !== category,
-      );
-      setChosenCategories(chosenCategoriesUpdated);
-      if (chosenCategoriesUpdated.length > 0) {
-        const visualExperiencesUpdated = visualExperiences.filter(
-          (experience) => experience.category !== category,
-        );
-        setVisualExperiences(visualExperiencesUpdated);
-      } else {
-        setVisualExperiences(experienceContextData.experiences);
-      }
-    } else {
-      const chosenCategoriesUpdated = [...chosenCategories, category];
-      setChosenCategories(chosenCategoriesUpdated);
-      let visualExperiencesUpdated: IExperienceId[] = [];
-      chosenCategoriesUpdated.map((category) => {
-        const chosenCategoryExperience =
-          experienceContextData.experiences.filter(
-            (experience) => experience.category === category,
-          );
-        visualExperiencesUpdated = [
-          ...visualExperiencesUpdated,
-          ...chosenCategoryExperience,
-        ];
-      });
-      setVisualExperiences(visualExperiencesUpdated);
-    }
+    const chosenCategoriesUpdated = chosenCategories.includes(category)
+      ? chosenCategories.filter((item) => item !== category)
+      : [...chosenCategories, category];
+
+    setChosenCategories(chosenCategoriesUpdated);
+    const updatedvisualExperiences = filterVisualExperiences(
+      chosenCategoriesUpdated,
+      priceInputChecked,
+      experiences,
+    );
+    setVisualExperiences(updatedvisualExperiences);
+  };
+
+  const filterOnPrice = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.checked);
+    setPriceInputChecked(e.target.checked);
+    const visualExperiences = filterVisualExperiences(
+      chosenCategories,
+      e.target.checked,
+      experiences,
+    );
+    setVisualExperiences(visualExperiences);
   };
 
   return (
-    <div className="select-category">
-      <div>
-        <button
-          className="dropdown-selector"
-          onClick={toggleCategories}
-          tabIndex={0}
+    <>
+      <div className="select-category">
+        <div>
+          <button
+            className="dropdown-selector"
+            onClick={toggleCategories}
+            tabIndex={0}
+          >
+            {chosenCategories.length > 0
+              ? chosenCategories.join(", ")
+              : "Välj kategori"}
+          </button>
+        </div>
+        <ul
+          className="category-list"
+          style={{ display: showCategories ? "block" : "none" }}
         >
-          {chosenCategories.length > 0
-            ? chosenCategories.join(", ")
-            : "Välj kategori"}
-        </button>
+          {categoriesHtml}
+        </ul>
       </div>
-      <ul
-        className="category-list"
-        style={{ display: showCategories ? "block" : "none" }}
-      >
-        {categoriesHtml}
-      </ul>
-    </div>
+      <label className="row direction-row row-gap-10 m-t-3">
+        <input type="checkbox" onChange={filterOnPrice} />
+        <p className="strong" style={{ margin: 0 }}>
+          Visa bara gratis upplevelser
+        </p>
+      </label>
+    </>
   );
 }

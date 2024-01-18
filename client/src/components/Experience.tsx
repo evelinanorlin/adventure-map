@@ -5,7 +5,11 @@ import DOMPurify from "dompurify";
 import close from "/icons/close.svg";
 import ConfirmationPopup from "./ConfirmationPopup";
 import { UnreviewedExperiencesContext } from "../contexts/ReviewedExperiences";
-import { newUnreviewedArr, publish, remove } from "../functions/handleExperiences";
+import {
+  newUnreviewedArr,
+  publish,
+  remove,
+} from "../functions/handleExperiences";
 
 export default function Experience() {
   const { id } = useParams();
@@ -16,40 +20,49 @@ export default function Experience() {
   const [confirmed, setConfirmed] = useState<boolean | null>(false);
   const [action, setAction] = useState<string>("");
   const navigate = useNavigate();
-  const unreviewedExperiences = useContext(UnreviewedExperiencesContext).unreviewedExperiences;
-  const setUnreviewedExperiences = useContext(UnreviewedExperiencesContext).setUnreviewedExperiences;
+  const unreviewedExperiences = useContext(
+    UnreviewedExperiencesContext,
+  ).unreviewedExperiences;
+  const setUnreviewedExperiences = useContext(
+    UnreviewedExperiencesContext,
+  ).setUnreviewedExperiences;
 
   useEffect(() => {
     const publishExp = async () => {
       const response = await publish(id, experiences);
       console.log(response);
-      if(response === "success") {
-      updateUnreviewed(id, "remove");
-      setShowConfirmation(false); 
-      navigate("/upplevelser-lista");
-      } else{
+      if (response === "success") {
+        updateUnreviewed(id, "remove");
+        setShowConfirmation(false);
+        navigate("/upplevelser-lista");
+      } else {
         console.log("error");
       }
-    }
+    };
     if (confirmed) {
       if (action === "publicera") {
-        publishExp()
+        publishExp();
       } else if (action === "ta bort") {
         removeExp();
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [confirmed]);
 
   const updateUnreviewed = (id: string | undefined, action: string) => {
-    if(!id) return;
-    const unreviewed = newUnreviewedArr(id, action, unreviewedExperiences, experiences);
-    if(!unreviewed) return;
+    if (!id) return;
+    const unreviewed = newUnreviewedArr(
+      id,
+      action,
+      unreviewedExperiences,
+      experiences,
+    );
+    if (!unreviewed) return;
     setUnreviewedExperiences(unreviewed);
   };
 
   const removeExp = async () => {
-    if(!experience) return;
+    if (!experience) return;
     await remove(id, experience, experiences);
     if (!experience.isReviewed) {
       updateUnreviewed(id, "remove");
@@ -68,7 +81,7 @@ export default function Experience() {
           <Link to="/" className="close-btn">
             <img src={close} alt="close" className="close" />
           </Link>
-          <h1 className="align-center">{experience.experienceName}</h1>
+          <h1>{experience.experienceName}</h1>
           {experience.imageURL && experience.imageURL.length > 0 ? (
             <img
               src={experience?.imageURL}
