@@ -15,6 +15,8 @@ export default function AdminList() {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [searchText, setSearchText] = useState<string>("");
   const navigate = useNavigate();
+  const isAdmin = localStorage.getItem("admin");
+  console.log(isAdmin)
 
   useEffect(() => {
     setVisibleExperiences(experiences.reverse());
@@ -73,6 +75,8 @@ export default function AdminList() {
         <Link to="/" className="close-btn">
           <img src={close} alt="close" className="close" />
         </Link>
+        {isAdmin ?
+        <>
         <h1>Upplevelser</h1>
         <label>
           <p className="bold">Sök upplevelse</p>
@@ -95,6 +99,7 @@ export default function AdminList() {
           />
         </label>
         {listHtml}
+        </> : <h1>Du har inte behörighet att visa denna sida</h1>}
       </div>
     </section>
   );
