@@ -16,7 +16,6 @@ export default function AdminList() {
   const [searchText, setSearchText] = useState<string>("");
   const navigate = useNavigate();
   const isAdmin = localStorage.getItem("admin");
-  console.log(isAdmin)
 
   useEffect(() => {
     setVisibleExperiences(experiences.reverse());
