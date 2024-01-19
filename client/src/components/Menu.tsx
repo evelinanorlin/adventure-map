@@ -1,13 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import adminMenu from "/icons/adminMenu.svg";
 import { ExperienceContext } from "../contexts/ExperienceContext";
 import { UnreviewedExperiencesContext } from "../contexts/ReviewedExperiences";
+import AdminMenu from "./AdminMenu";
 
 export default function Menu() {
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
   const [showAdminMenu, setShowAdminMenu] = useState<boolean>(false);
+  const [hideOnClick, setHideOnClick] = useState<boolean>(false);   
   const admin = localStorage.getItem("admin");
   const experiences = useContext(ExperienceContext).experiences;
   const unreviewedExperiences = useContext(
@@ -50,6 +51,13 @@ export default function Menu() {
     };
   }
 
+  function closeMenu() {
+    if (screenSize.width < 992) {
+      setShowMenu(false);
+      setHideOnClick(false);
+    }
+  }
+
   const logOut = () => {
     localStorage.removeItem("admin");
     setShowAdminMenu(false);
@@ -58,39 +66,20 @@ export default function Menu() {
 
   return (
     <>
+      <div className="hide-on-click" onClick={() => {setShowAdminMenu(false); setHideOnClick(false); closeMenu}} style={hideOnClick ? {display: "block"} : {display: "none"}}></div>
       <nav
         className="menu"
         style={showMenu ? { display: "flex" } : { display: "none" }}
       >
-        <Link to="/">Utforska</Link>
-        <Link to="/om-aventyrskartan">Om upplevelseskartan</Link>
-        <Link to="/contact">Kontakt</Link>
-        <Link to="/lagg-till-upplevelse" className="btn btn-primary">
+        <Link to="/" onClick={closeMenu}>Utforska</Link>
+        <Link to="/om-aventyrskartan" onClick={closeMenu}>Om upplevelseskartan</Link>
+        <Link to="/contact" onClick={closeMenu}>Kontakt</Link>
+        <Link to="/lagg-till-upplevelse" className="btn btn-primary" onClick={closeMenu}>
           Tipsa om upplevelse
         </Link>
-        {admin ? (
-          <div className="admin-menu-container">
-            <button>
-              <img
-                src={adminMenu}
-                alt="admin menu"
-                className="admin-menu"
-                onClick={() => setShowAdminMenu(!showAdminMenu)}
-              />
-            </button>
-            <div
-              className="admin-alerts"
-              style={
-                unreviewedExperiences.length > 0
-                  ? { display: "block" }
-                  : { display: "none" }
-              }
-            >
-              <p>{unreviewedExperiences.length}</p>
-            </div>
-          </div>
-        ) : null}
+        {admin ? <AdminMenu setShowAdminMenu={setShowAdminMenu} showAdminMenu={showAdminMenu} unreviewedExperiences={unreviewedExperiences} setHideOnClick={setHideOnClick}/>: null}
       </nav>
+      {admin ? <AdminMenu setShowAdminMenu={setShowAdminMenu} showAdminMenu={showAdminMenu} unreviewedExperiences={unreviewedExperiences} className={"admin-tablet"} setHideOnClick={setHideOnClick}/> : null}
       <div
         className="admin-menu-container p-4 bg-beige"
         style={showAdminMenu ? { display: "flex" } : { display: "none" }}
@@ -104,7 +93,7 @@ export default function Menu() {
           </button>
         </Link>
       </div>
-      <div className="burger" onClick={() => setShowMenu(!showMenu)}>
+      <div className="burger" onClick={() => {setShowMenu(!showMenu); setHideOnClick(!hideOnClick)}}>
         <span></span>
         <span></span>
         <span></span>

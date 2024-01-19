@@ -298,8 +298,8 @@ export default function ExperienceForm() {
               accept="image/png, image/gif, image/jpeg"
               onChange={handleFileChange}
             />
-            {selectedFile && <img src={preview} className="thumbnail-img" />}
           </label>
+            {selectedFile && <img src={preview} className="thumbnail-img" />}
           <label>
             <p>
               Ditt namn* <br /> <span>Som det visas på sidan</span>

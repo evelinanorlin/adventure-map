@@ -14,6 +14,14 @@
       height: 40px;
     }
   }
+  .hide-on-click{
+    height: 100vh;
+    width: 100vw;
+    background: transparent;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
   nav {
     display: flex;
     flex-direction: row;
@@ -26,7 +34,7 @@
       align-items: flex-start;
       justify-content: center;
       display: none;
-      background-color: $color-white;
+      background-color: $color-light-beige;
       filter: $drop-shadow;
       width: fit-content;
       position: absolute;
@@ -38,9 +46,13 @@
       position: relative;
       top: 0px;
       left: 5px;
+      @include tablet {
+        display: none;
+      }
       .admin-menu {
         height: 25px;
         width: auto;
+        margin-bottom: 5px;
       }
       .admin-alerts {
         background: $color-blue;
@@ -60,6 +72,16 @@
           bottom: 2px;
         }
       }
+    }
+  }
+
+  .admin-tablet{
+    display: none;
+    @include tablet {
+      display: block;
+      position: absolute!important;
+      top: 5px!important;
+      right: 90px!important;
     }
   }
   .burger {
@@ -86,7 +108,7 @@
     position: absolute;
     height: fit-content;
     width: fit-content;
-    top: 45px;
+    top: 55px;
     right: 5px;
   }
   .admin-menu-container > * {
