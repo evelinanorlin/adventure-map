@@ -76,8 +76,8 @@ export default function Experience() {
     };
 
     return (
-      <section className="popup popup-right p-t-5">
-        <div className="content-standard">
+      <section className="popup popup-right p-t-4">
+        <div>
           <Link to="/" className="close-btn">
             <img src={close} alt="close" className="close" />
           </Link>

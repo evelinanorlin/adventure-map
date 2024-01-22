@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Layout } from "./Layout";
-import About from "./components/About";
 import WelcomePopup from "./components/WelcomePopup";
 import AddExperience from "./components/AddExperience";
 import Experience from "./components/Experience";
 import AdminLogin from "./components/AdminLogin";
 import AdminList from "./components/AdminList";
+import About from "./components/About";
 
 export const router = createBrowserRouter([
   {
