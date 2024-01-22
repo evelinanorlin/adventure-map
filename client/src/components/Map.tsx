@@ -7,6 +7,7 @@ import { ClickableMapContext } from "../contexts/ClickableMapContext";
 import { ChosenLocationContext } from "../contexts/ChosenLocationContext";
 import { getLocationName } from "../services/mapServices";
 import { ShowMarkerContext } from "../contexts/ShowMarkerContext";
+import { getIcon } from "../functions/markerFunction";
 
 interface IMapProps {
   location: ILocation;
@@ -51,7 +52,7 @@ export default function Map({ location, markers }: IMapProps) {
         />
         <MapEventsHandler handleMapClick={handleMapClick} />
         {markers}
-        {showMarker ? <Marker position={markerLocation}></Marker> : null}
+        {showMarker ? <Marker position={markerLocation} icon={getIcon("pin", [40, 40])}></Marker> : null}
       </MapContainer>
       <div className="attribution">
         <a href="https://www.maptiler.com/copyright/" target="_blank">
