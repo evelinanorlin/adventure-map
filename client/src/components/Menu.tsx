@@ -5,7 +5,7 @@ import { UnreviewedExperiencesContext } from "../contexts/ReviewedExperiences";
 import AdminMenu from "./AdminMenu";
 
 export default function Menu() {
-  const [showMenu, setShowMenu] = useState<boolean>(false);
+  const [showMenu, setShowMenu] = useState<boolean>(true);
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
   const [showAdminMenu, setShowAdminMenu] = useState<boolean>(false);
   const [hideOnClick, setHideOnClick] = useState<boolean>(false);   
