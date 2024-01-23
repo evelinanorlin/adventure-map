@@ -9,7 +9,7 @@ export function MainPage() {
     latitude: 62,
     longitude: 16,
     display_name: "",
-    zoom: 7,
+    zoom: 5,
   });
 
   return (

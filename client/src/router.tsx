@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Layout } from "./Layout";
-import WelcomePopup from "./components/WelcomePopup";
 import AddExperience from "./components/AddExperience";
 import Experience from "./components/Experience";
 import AdminLogin from "./components/AdminLogin";
@@ -12,11 +11,6 @@ export const router = createBrowserRouter([
     path: "/",
     element: <Layout></Layout>,
     children: [
-      {
-        path: "/",
-        element: <WelcomePopup />,
-        index: true,
-      },
       {
         path: "/om-aventyrskartan",
         element: <About />,
@@ -37,11 +31,6 @@ export const router = createBrowserRouter([
         path: "/upplevelser-lista",
         element: <AdminList />,
       },
-
-      //{
-      //   path: "/contact",
-      //   element: <Contact />,
-      // },
     ],
   },
 ]);
