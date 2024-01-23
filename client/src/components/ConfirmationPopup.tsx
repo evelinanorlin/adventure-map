@@ -18,6 +18,7 @@ export default function ConfirmationPopup({
   const goBack = () => {
     setShowConfirmation(false);
   };
+  console.log(action)
   return (
     <>
       <div className="dark-bg" onClick={goBack}></div>
@@ -26,7 +27,7 @@ export default function ConfirmationPopup({
           Är du säker på att du vill {action} {experience}?
         </p>
         <button className="btn btn-primary m-r-4" onClick={confirm}>
-          Ja, {action}{" "}
+          {action === "lägga till" ? "Ja, lägg till" : `Ja, ${action}`}
         </button>
         <button className="btn" onClick={goBack}>
           Nej, gå tillbaka
