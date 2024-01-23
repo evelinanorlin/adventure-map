@@ -1,0 +1,234 @@
+/* ADD THIS LINE UNDER IN ALL FILES YOU WANT TO REACH VARIABLES AND MIXINS EASY */
+/// <reference path="ez.scss" />
+
+body {
+  * {
+    box-sizing: border-box;
+  }
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+
+  &-gap-10 {
+    gap: 10px;
+  }
+  &-gap-z {
+    gap: 0px;
+  }
+  * {
+    box-sizing: border-box;
+  }
+}
+
+@mixin cols {
+  &-1 {
+    width: calc((100% / 24) * 1);
+  }
+
+  &-2 {
+    width: calc((100% / 24) * 2);
+  }
+
+  &-3 {
+    width: calc((100% / 24) * 3);
+  }
+
+  &-4 {
+    width: calc((100% / 24) * 4);
+  }
+
+  &-5 {
+    width: calc((100% / 24) * 5);
+  }
+
+  &-6 {
+    width: calc((100% / 24) * 6);
+  }
+
+  &-7 {
+    width: calc((100% / 24) * 7);
+  }
+
+  &-8 {
+    width: calc((100% / 24) * 8);
+  }
+
+  &-9 {
+    width: calc((100% / 24) * 9);
+  }
+
+  &-10 {
+    width: calc((100% / 24) * 10);
+  }
+
+  &-11 {
+    width: calc((100% / 24) * 11);
+  }
+
+  &-12 {
+    width: calc((100% / 24) * 12);
+  }
+
+  &-13 {
+    width: calc((100% / 24) * 13);
+  }
+
+  &-14 {
+    width: calc((100% / 24) * 14);
+  }
+
+  &-15 {
+    width: calc((100% / 24) * 15);
+  }
+
+  &-16 {
+    width: calc((100% / 24) * 16);
+  }
+
+  &-17 {
+    width: calc((100% / 24) * 17);
+  }
+
+  &-18 {
+    width: calc((100% / 24) * 18);
+  }
+
+  &-19 {
+    width: calc((100% / 24) * 19);
+  }
+
+  &-20 {
+    width: calc((100% / 24) * 20);
+  }
+
+  &-21 {
+    width: calc((100% / 24) * 21);
+  }
+
+  &-22 {
+    width: calc((100% / 24) * 22);
+  }
+
+  &-23 {
+    width: calc((100% / 24) * 23);
+  }
+
+  &-24 {
+    width: 100%;
+  }
+}
+
+.col {
+  flex: 1;
+
+  @include cols;
+}
+
+@include xl {
+  .col {
+    &-xl {
+      @include cols;
+    }
+  }
+}
+
+@include lg {
+  .col {
+    &-lg {
+      @include cols;
+    }
+  }
+}
+
+@include md {
+  .col {
+    &-md {
+      @include cols;
+    }
+  }
+}
+
+@include sm {
+  .col {
+    &-sm {
+      @include cols;
+    }
+  }
+}
+
+@include tablet {
+  .col {
+    &-tablet {
+      @include cols;
+    }
+  }
+}
+
+@include md-tablet {
+  .col {
+    &-mdtablet {
+      @include cols;
+    }
+  }
+}
+
+@include sm-tablet {
+  .col {
+    &-smtablet {
+      @include cols;
+    }
+  }
+}
+
+@include xl-phone {
+  .col {
+    &-xlphone {
+      @include cols;
+    }
+  }
+}
+
+@include lg-phone {
+  .col {
+    &-lgphone {
+      @include cols;
+    }
+  }
+}
+
+@include md-phone {
+  .col {
+    &-mdphone {
+      @include cols;
+    }
+  }
+}
+
+@include sm-phone {
+  .col {
+    &-smphone {
+      @include cols;
+    }
+  }
+}
+
+@include mini-phone {
+  .col {
+    &-miniphone {
+      @include cols;
+    }
+  }
+}
+
+.grid {
+  display: grid;
+  &-2 {
+    grid-template-columns: repeat(2, 1fr);
+    @include tablet {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+}

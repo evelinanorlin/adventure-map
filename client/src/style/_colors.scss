@@ -1,0 +1,26 @@
+.bg {
+  &-beige {
+    background-color: $color-light-beige;
+  }
+  &-white {
+    background-color: $color-white;
+  }
+}
+
+.color {
+  &-black {
+    color: $color-black;
+  }
+  &-white {
+    color: $color-white;
+  }
+  &-orange {
+    color: $color-orange;
+  }
+  &-blue {
+    color: $color-blue;
+  }
+  &-brown {
+    color: $color-brown;
+  }
+}
