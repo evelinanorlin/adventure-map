@@ -23,6 +23,7 @@ export const Layout = () => {
   const [unreviewedExperiences, setUnreviewedExperiences] = useState<
     IExperienceId[]
   >([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     if (experiences.length === 0) {
@@ -35,6 +36,7 @@ export const Layout = () => {
     const experienceList = await getExperiences();
     setExperiences(experienceList);
     setVisualExperiences(experienceList);
+    setIsLoading(false);
   };
 
   return (
@@ -54,7 +56,7 @@ export const Layout = () => {
                 <ShowMarkerContext.Provider
                   value={{ showMarker, setShowMarker }}
                 >
-                  <MainPage />
+                  <MainPage isLoading={isLoading}/>
                   <Outlet />
                 </ShowMarkerContext.Provider>
               </ChosenLocationContext.Provider>

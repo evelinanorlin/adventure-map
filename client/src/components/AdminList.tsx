@@ -18,7 +18,10 @@ export default function AdminList() {
   const isAdmin = localStorage.getItem("admin");
 
   useEffect(() => {
-    setVisibleExperiences(experiences.reverse());
+    const sortedExperiences = [...experiences];
+    sortedExperiences.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+    setVisibleExperiences(sortedExperiences);
   }, [experiences]);
 
   const filterOnReview = (e: ChangeEvent<HTMLInputElement>) => {
