@@ -33,7 +33,7 @@ export const remove = async (
   experiences: IExperienceId[],
 ) => {
   if (!experience) return;
-  const response = await deleteExperience({ _id: experience._id });
+  const response = await deleteExperience(experience);
   if (response) {
     experiences.map((experience) => {
       if (experience._id === id) {

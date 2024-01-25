@@ -73,7 +73,6 @@ export default function Menu() {
       >
         <Link to="/" onClick={closeMenu}>Utforska</Link>
         <Link to="/om-aventyrskartan" onClick={closeMenu}>Om upplevelseskartan</Link>
-        <Link to="/contact" onClick={closeMenu}>Kontakt</Link>
         <Link to="/lagg-till-upplevelse" className="btn btn-primary" onClick={closeMenu}>
           Tipsa om upplevelse
         </Link>

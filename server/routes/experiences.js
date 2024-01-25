@@ -1,6 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const { ObjectId } = require('mongodb');
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 /* GET experiences listing. */
 router.get('/', function(req, res, next) {
@@ -21,6 +28,19 @@ router.post('/add', async function(req, res, next) {
 
 router.delete('/delete', async function(req, res, next) {
   const experienceId = req.body._id;
+  const publicId = req.body.publicId;
+  const deleteImage = async (publicId) => {
+    cloudinary.uploader.destroy(publicId, function(error,result) {
+      console.log(result, error) })
+      .then(resp => console.log(resp))
+      .catch(_err=> console.log("Something went wrong, please try again later."));
+  }
+
+  if(publicId){
+    const deleteImg = await deleteImage(publicId);
+    console.log(deleteImg)
+  }
+
   try{
     const objectId = new ObjectId(experienceId);
     const result = await req.app.locals.db.collection('experiences').deleteOne({_id: objectId});
@@ -72,5 +92,6 @@ router.put('/update', async function(req, res, next) {
     res.status(500).json({ success: false, error: 'Internal Server Error' });
   }
 });
+
 
 module.exports = router;

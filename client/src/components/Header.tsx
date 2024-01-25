@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Menu from "./Menu";
-import Logotype from "/icons/Logotype.svg";
+import logotype from "/icons/logotype.svg";
 
 export default function Header() {
   return (
@@ -8,7 +8,7 @@ export default function Header() {
       <div className="content-wide">
         <div className="row direction-row justify-between align-items-center">
           <Link to="/" className="logotype p-t-1">
-            <img src={Logotype} />
+            <img src={logotype} />
           </Link>
           <Menu />
         </div>

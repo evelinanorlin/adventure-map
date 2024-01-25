@@ -16,8 +16,8 @@ export const uploadImage = async (img: string) => {
       },
     );
     const res = await response.json();
-    return res;
     console.log(res);
+    return res;
   } catch (error) {
     console.log(error);
   }

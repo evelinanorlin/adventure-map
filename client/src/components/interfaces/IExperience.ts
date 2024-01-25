@@ -13,10 +13,11 @@ export interface IExperience {
   category: string;
   description: string;
   imageURL: string;
+  publicId: string;
   userName: string;
   userLink?: string;
   isReviewed: boolean;
-  date?: Date;
+  date: Date;
 }
 
 export interface IExperienceId extends IExperience {

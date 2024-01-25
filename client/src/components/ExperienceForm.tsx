@@ -123,6 +123,7 @@ export default function ExperienceForm() {
       category,
       description,
       imageURL: imgData?.url || imageUrl,
+      publicId: imgData?.public_id || "",
       userName,
       userLink,
       isReviewed,
@@ -153,6 +154,7 @@ export default function ExperienceForm() {
       category: category,
       description: description,
       imageURL: imageUrl,
+      publicId: "",
       userName: userName,
       userLink: userLink,
       isReviewed: isReviewed,
@@ -165,7 +167,7 @@ export default function ExperienceForm() {
       window.scrollTo(0,0);
       setErrorMessage(true);
       setExperienceNameValid(validateTextInput(experienceName));
-      setLocationValid(validateLocation(location));
+      setLocationValid(validateLocation(chosenLocation ? chosenLocation : location));
       setPriceValid(validateDropdown(price));
       setCategoryValid(validateDropdown(category));
       setDescriptionValid(validateTextInput(description));
@@ -205,7 +207,7 @@ export default function ExperienceForm() {
               <p className="error-message">Välj en plats på kartan</p>
             )}
             {chosenLocation ? (
-              <div>
+              <>
                 <p className="chosen-location">
                   {chosenLocation.display_name
                     ? chosenLocation.display_name
@@ -218,7 +220,7 @@ export default function ExperienceForm() {
                 >
                   Ändra plats
                 </button>
-              </div>
+              </>
             ) : (
               <button
                 className="btn btn-secondary"
@@ -350,3 +352,4 @@ export default function ExperienceForm() {
     return <p>Tack för ditt bidrag!</p>;
   }
 }
+
