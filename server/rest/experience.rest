@@ -1,0 +1,45 @@
+GET http://localhost:3000/experiences
+
+###
+
+PUT http://localhost:3000/experiences/update
+Content-Type: application/json
+
+{ 
+  "_id": "659fedc66cb1f466ce590fb9",
+  "isReviewed": true
+}
+
+###
+
+DELETE http://localhost:3000/experiences/delete
+Content-Type: application/json
+
+{ 
+  "_id": "659fedc66cb1f466ce590fb9"
+}
+
+###
+
+POST http://localhost:3000/experiences/add
+Content-Type: application/json
+
+{
+    "experienceName": "sdjfb",
+  "location": {
+    "latitude": 61.81466389468394,
+    "longitude": 15.512695312500002,
+    "display_name": "Ljusdals kommun, Sverige",
+    "zoom": 13
+  },
+  "link": "",
+  "price": "500 - 1000 kr",
+  "category": "Campa",
+  "description": "<p>asdkjfha</p>",
+  "imageURL": "",
+  "publicId": "",
+  "userName": "asdf",
+  "userLink": "",
+  "isReviewed": false,
+  "date": "2024-01-26T09:59:02.229Z"
+}
