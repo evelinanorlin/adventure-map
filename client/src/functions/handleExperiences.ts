@@ -2,11 +2,11 @@ import {
   deleteExperience,
   updateReviewed,
 } from "../services/experinceServices";
-import { IExperienceId } from "../components/interfaces/IExperience";
+import { IExperience } from "../components/interfaces/IExperience";
 
 export const publish = async (
   id: string | undefined,
-  experiences: IExperienceId[],
+  experiences: IExperience[],
 ) => {
   if (!id) return;
   const response = await updateReviewed({
@@ -29,8 +29,8 @@ export const publish = async (
 
 export const remove = async (
   id: string | undefined,
-  experience: IExperienceId,
-  experiences: IExperienceId[],
+  experience: IExperience,
+  experiences: IExperience[],
 ) => {
   if (!experience) return;
   const response = await deleteExperience(experience);
@@ -51,7 +51,7 @@ export const remove = async (
 export const newExperienceArr = (
   id: string,
   action: string,
-  experiences: IExperienceId[],
+  experiences: IExperience[],
 ) => {
   console.log(experiences)
   if (action === "remove") {

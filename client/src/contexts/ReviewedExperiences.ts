@@ -1,10 +1,10 @@
 // import { createContext } from "react";
-// import { IExperienceId } from "../components/interfaces/IExperience";
+// import { IExperience } from "../components/interfaces/IExperience";
 
 // interface IUnreviewedExperiencesContext {
-//   unreviewedExperiences: IExperienceId[];
+//   unreviewedExperiences: IExperience[];
 //   setUnreviewedExperiences: React.Dispatch<
-//     React.SetStateAction<IExperienceId[]>
+//     React.SetStateAction<IExperience[]>
 //   >;
 // }
 

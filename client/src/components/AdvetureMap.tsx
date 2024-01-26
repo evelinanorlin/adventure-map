@@ -4,7 +4,7 @@ import "leaflet-control-geocoder/dist/Control.Geocoder.js";
 import "leaflet/dist/leaflet.css";
 import { useContext } from "react";
 import { ExperienceContext } from "../contexts/ExperienceContext";
-import { IExperienceId } from "./interfaces/IExperience";
+import { IExperience } from "./interfaces/IExperience";
 import { useNavigate } from "react-router-dom";
 import Map from "./Map";
 import { getIcon } from "../functions/markerFunction";
@@ -27,7 +27,7 @@ export default function AdventureMap({ location }: AdventureMapProps) {
   };
 
   const markers: React.ReactNode[] = visualExperiences.map(
-    (experience: IExperienceId) => {
+    (experience: IExperience) => {
       if (experience.isReviewed === false) return null;
       return (
         <Marker

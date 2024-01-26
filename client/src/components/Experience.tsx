@@ -34,7 +34,10 @@ export default function Experience() {
     if (!experience) return;
     const response = await remove(id, experience, experiences);
     if(response !== "error") {
-      response ? setExperiences(response) :  console.log("rwong");
+      console.log(response)
+      if (response){
+        setExperiences(response);
+      }
     }
     navigate("/upplevelser-lista");
   };
@@ -43,7 +46,7 @@ export default function Experience() {
     const response = await publish(id, experiences);
     console.log(response);
     if (response !== "error") {
-      response ? setExperiences(response) : console.log("rwong");
+      response ? setExperiences(response) : console.log("something went wrong");
       setShowConfirmation(false);
       navigate("/upplevelser-lista");
     } else {

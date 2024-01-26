@@ -10,17 +10,18 @@ export default function Menu() {
   const [showAdminMenu, setShowAdminMenu] = useState<boolean>(false);
   const [hideOnClick, setHideOnClick] = useState<boolean>(false);   
   const admin = localStorage.getItem("admin");
-  const {experiences} = useContext(ExperienceContext);
+  const {experiences, setExperiences} = useContext(ExperienceContext);
   const  [unreviewed, setUnreviewed] = useState(experiences.filter((experience) => {
     return experience.isReviewed === false;
   }));
 
   useEffect(() => {
+    console.log("runs")
     console.log(experiences)
     setUnreviewed (experiences.filter((experience) => {
       return experience.isReviewed === false;
     }));
-  }, [experiences]);
+  }, [experiences, setExperiences]);
 
 
   useEffect(() => {

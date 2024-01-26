@@ -1,11 +1,10 @@
-import { useEffect } from "react";
-import { IExperienceId } from "./interfaces/IExperience";
+import { IExperience } from "./interfaces/IExperience";
 import adminMenu from "/icons/adminMenu.svg";
 
 interface IAdminMenuProps {
   setShowAdminMenu: React.Dispatch<React.SetStateAction<boolean>>;
   showAdminMenu: boolean;
-  unreviewedExperiences: IExperienceId[];
+  unreviewedExperiences: IExperience[];
   className?: string;
   setHideOnClick: React.Dispatch<React.SetStateAction<boolean>>;
 }

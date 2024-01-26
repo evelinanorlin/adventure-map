@@ -4,14 +4,14 @@ import alert from "/icons/alert.svg";
 import check from "/icons/check.svg";
 import close from "/icons/close.svg";
 import { Link, useNavigate } from "react-router-dom";
-import { IExperienceId } from "./interfaces/IExperience";
+import { IExperience } from "./interfaces/IExperience";
 import search from "/icons/search.svg";
 import { filterList } from "../functions/filterFunction";
 
 export default function AdminList() {
   const experiences = useContext(ExperienceContext).experiences;
   const [visibleExperiences, setVisibleExperiences] =
-    useState<IExperienceId[]>(experiences);
+    useState<IExperience[]>(experiences);
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [searchText, setSearchText] = useState<string>("");
   const navigate = useNavigate();
