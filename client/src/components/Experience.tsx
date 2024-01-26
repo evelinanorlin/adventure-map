@@ -45,9 +45,8 @@ export default function Experience() {
       if (response === undefined) return;
 
       const newExperienceArr: IExperience[] = response;
-      console.log(newExperienceArr)
 
-      setExperiences(prevExperiences => [...prevExperiences, ...newExperienceArr]);
+      setExperiences([ ...newExperienceArr]);
 
      navigate("/upplevelser-lista");
   }
@@ -57,8 +56,13 @@ export default function Experience() {
     const response = await publish(id, experiences);
     console.log(response);
     if (response !== "error") {
-      response ? setExperiences(response) : console.log("something went wrong");
-      setShowConfirmation(false);
+      if (response === undefined) return;
+
+      const newExperienceArr: IExperience[] = response;
+      
+      setExperiences([ ...newExperienceArr]);
+
+      //setExperiences(prevExperiences => [...prevExperiences, ...newExperienceArr]);
       navigate("/upplevelser-lista");
     } else {
       console.log("error");
