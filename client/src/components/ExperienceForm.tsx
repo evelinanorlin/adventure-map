@@ -133,10 +133,8 @@ export default function ExperienceForm() {
     }
     // send to database
     const id = await addExperience(experience);
-    console.log(id)
 
     const experienceId = {...experience, _id: id._id }
-    console.log(experienceId)
 
     // Update state
     const experienceList = [...experiences, experienceId ]

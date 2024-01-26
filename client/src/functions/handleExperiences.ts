@@ -28,7 +28,7 @@ export const publish = async (
 };
 
 export const remove = async (
-  id: string | undefined,
+  id: string,
   experience: IExperience,
   experiences: IExperience[],
 ) => {

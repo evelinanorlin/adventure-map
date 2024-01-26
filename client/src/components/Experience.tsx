@@ -8,6 +8,7 @@ import {
   publish,
   remove,
 } from "../functions/handleExperiences";
+import { IExperience } from "./interfaces/IExperience";
 
 export default function Experience() {
   const { id } = useParams();
@@ -18,6 +19,10 @@ export default function Experience() {
   const [confirmed, setConfirmed] = useState<boolean | null>(false);
   const [action, setAction] = useState<string>("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log('Experience component rendered');
+  }, [experiences]);
 
   useEffect(() => {
     if (confirmed) {
@@ -31,16 +36,22 @@ export default function Experience() {
   }, [confirmed]);
 
   const removeExp = async () => {
-    if (!experience) return;
+    if (!experience || id === undefined) return;
+
     const response = await remove(id, experience, experiences);
+
     if(response !== "error") {
-      console.log(response)
-      if (response){
-        setExperiences(response);
-      }
-    }
-    navigate("/upplevelser-lista");
-  };
+
+      if (response === undefined) return;
+
+      const newExperienceArr: IExperience[] = response;
+      console.log(newExperienceArr)
+
+      setExperiences(prevExperiences => [...prevExperiences, ...newExperienceArr]);
+
+     navigate("/upplevelser-lista");
+  }
+}
 
   const publishExp = async () => {
     const response = await publish(id, experiences);

@@ -37,11 +37,11 @@ export const updateReviewed = async (update: {
   }
 };
 
-export const deleteExperience = async (_id: { _id: string }) => {
+export const deleteExperience = async (experience: IExperience) => {
   const url = `${BASE_URL}experiences/delete`;
   try {
     const response = await axios.delete(url, {
-      data: _id,
+      data: experience,
     });
     return response.data;
   } catch (error) {
