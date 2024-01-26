@@ -4,15 +4,12 @@ import { ExperienceContext } from "../contexts/ExperienceContext";
 import DOMPurify from "dompurify";
 import close from "/icons/close.svg";
 import ConfirmationPopup from "./ConfirmationPopup";
-import {
-  publish,
-  remove,
-} from "../functions/handleExperiences";
+import { publish, remove } from "../functions/handleExperiences";
 import { IExperience } from "./interfaces/IExperience";
 
 export default function Experience() {
   const { id } = useParams();
-  const {experiences, setExperiences} = useContext(ExperienceContext);
+  const { experiences, setExperiences } = useContext(ExperienceContext);
   const experience = experiences?.find((experience) => experience._id === id);
   const isAdmin = localStorage.getItem("admin");
   const [showConfirmation, setShowConfirmation] = useState<boolean>(false);
@@ -21,7 +18,7 @@ export default function Experience() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('Experience component rendered');
+    console.log("Experience component rendered");
   }, [experiences]);
 
   useEffect(() => {
@@ -40,17 +37,16 @@ export default function Experience() {
 
     const response = await remove(id, experience, experiences);
 
-    if(response !== "error") {
-
+    if (response !== "error") {
       if (response === undefined) return;
 
       const newExperienceArr: IExperience[] = response;
 
-      setExperiences([ ...newExperienceArr]);
+      setExperiences([...newExperienceArr]);
 
-     navigate("/upplevelser-lista");
-  }
-}
+      navigate("/upplevelser-lista");
+    }
+  };
 
   const publishExp = async () => {
     const response = await publish(id, experiences);
@@ -59,10 +55,7 @@ export default function Experience() {
       if (response === undefined) return;
 
       const newExperienceArr: IExperience[] = response;
-      
-      setExperiences([ ...newExperienceArr]);
-
-      //setExperiences(prevExperiences => [...prevExperiences, ...newExperienceArr]);
+      setExperiences([...newExperienceArr]);
       navigate("/upplevelser-lista");
     } else {
       console.log("error");
@@ -120,7 +113,7 @@ export default function Experience() {
                 ""
               ) : (
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-primary m-r-5 "
                   onClick={() => {
                     setAction("publicera");
                     setShowConfirmation(true);
@@ -130,7 +123,7 @@ export default function Experience() {
                 </button>
               )}
               <button
-                className="m-l-5 btn"
+                className="btn btn-tertiary btn-remove"
                 onClick={() => {
                   setAction("ta bort");
                   setShowConfirmation(true);
@@ -159,4 +152,3 @@ export default function Experience() {
     return <h1>Experience not found</h1>;
   }
 }
-

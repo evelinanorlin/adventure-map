@@ -115,7 +115,7 @@ export default function ExperienceForm() {
 
   // Form Submission
   const handleSubmit = async () => {
-    console.log("handle Submit")
+    console.log("handle Submit");
     const imgData = image.length > 0 ? await uploadImage(image) : null;
     const experience = {
       experienceName,
@@ -130,17 +130,16 @@ export default function ExperienceForm() {
       userLink,
       isReviewed,
       date: new Date(),
-    }
+    };
     // send to database
     const id = await addExperience(experience);
 
-    const experienceId = {...experience, _id: id._id }
+    const experienceId = { ...experience, _id: id._id };
 
     // Update state
-    const experienceList = [...experiences, experienceId ]
-    setExperiences(experienceList)
+    const experienceList = [...experiences, experienceId];
+    setExperiences(experienceList);
 
- 
     // Reset form fields
     setExperienceName("");
     setLocation({ latitude: 0, longitude: 0, display_name: "", zoom: 0 });
@@ -173,12 +172,14 @@ export default function ExperienceForm() {
     };
 
     const isValid = validateForm(experienceData);
-    
+
     if (!isValid) {
-      window.scrollTo(0,0);
+      window.scrollTo(0, 0);
       setErrorMessage(true);
       setExperienceNameValid(validateTextInput(experienceName));
-      setLocationValid(validateLocation(chosenLocation ? chosenLocation : location));
+      setLocationValid(
+        validateLocation(chosenLocation ? chosenLocation : location),
+      );
       setPriceValid(validateDropdown(price));
       setCategoryValid(validateDropdown(category));
       setDescriptionValid(validateTextInput(description));
@@ -312,7 +313,7 @@ export default function ExperienceForm() {
               onChange={handleFileChange}
             />
           </label>
-            {selectedFile && <img src={preview} className="thumbnail-img" />}
+          {selectedFile && <img src={preview} className="thumbnail-img" />}
           <label>
             <p>
               Ditt namn* <br /> <span>Som det visas på sidan</span>
@@ -363,4 +364,3 @@ export default function ExperienceForm() {
     return <p>Tack för ditt bidrag!</p>;
   }
 }
-

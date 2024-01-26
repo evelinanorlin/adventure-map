@@ -19,7 +19,9 @@ export default function AdminList() {
 
   useEffect(() => {
     const sortedExperiences = [...experiences];
-    sortedExperiences.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    sortedExperiences.sort(
+      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+    );
 
     setVisibleExperiences(sortedExperiences);
   }, [experiences]);
@@ -77,31 +79,34 @@ export default function AdminList() {
         <Link to="/" className="close-btn">
           <img src={close} alt="close" className="close" />
         </Link>
-        {isAdmin ?
-        <>
-        <h1>Upplevelser</h1>
-        <label>
-          <p className="bold">Sök upplevelse</p>
-          <input
-            type="text"
-            className="search-field search-field-admin-list"
-            onChange={filterOnText}
-          />
-          <button className="search-btn">
-            <img src={search} alt="search" className="search-icon" />
-          </button>
-        </label>
-        <br></br>
-        <label className="row direction-row align-items-center m-t-3">
-          <p className="strong m-z">Visa bara ogranskade upplevelser</p>
-          <input
-            type="checkbox"
-            style={{ width: "15px" }}
-            onChange={filterOnReview}
-          />
-        </label>
-        {listHtml}
-        </> : <h1>Du har inte behörighet att visa denna sida</h1>}
+        {isAdmin ? (
+          <>
+            <h1>Upplevelser</h1>
+            <label>
+              <p className="bold">Sök upplevelse</p>
+              <input
+                type="text"
+                className="search-field search-field-admin-list"
+                onChange={filterOnText}
+              />
+              <button className="search-btn">
+                <img src={search} alt="search" className="search-icon" />
+              </button>
+            </label>
+            <br></br>
+            <label className="row direction-row align-items-center m-t-3">
+              <p className="strong m-z">Visa bara ogranskade upplevelser</p>
+              <input
+                type="checkbox"
+                style={{ width: "15px" }}
+                onChange={filterOnReview}
+              />
+            </label>
+            {listHtml}
+          </>
+        ) : (
+          <h1>Du har inte behörighet att visa denna sida</h1>
+        )}
       </div>
     </section>
   );

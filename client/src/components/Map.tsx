@@ -40,13 +40,11 @@ export default function Map({ location, markers }: IMapProps) {
     });
   };
 
-  useEffect(() => {
-
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <>
-    {/* <div className="loader-container" style={isLoading ? {display: "block"} : {display: "none"}}>
+      {/* <div className="loader-container" style={isLoading ? {display: "block"} : {display: "none"}}>
       <div className="loader">
         <img src={loader} alt="map is loading"></img>
         <p className="bold">Kartan laddas...</p>
@@ -64,7 +62,12 @@ export default function Map({ location, markers }: IMapProps) {
         />
         <MapEventsHandler handleMapClick={handleMapClick} />
         {markers}
-        {showMarker ? <Marker position={markerLocation} icon={getIcon("pin", [40, 40])}></Marker> : null}
+        {showMarker ? (
+          <Marker
+            position={markerLocation}
+            icon={getIcon("pin", [40, 40])}
+          ></Marker>
+        ) : null}
       </MapContainer>
       <div className="attribution">
         <a href="https://www.maptiler.com/copyright/" target="_blank">
@@ -91,4 +94,3 @@ const MapEventsHandler: React.FC<MapEventsHandlerProps> = ({
 // function componentDidMount() {
 //   throw new Error("Function not implemented.");
 // }
-

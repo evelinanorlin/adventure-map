@@ -24,7 +24,7 @@ export const validateDropdown = (value: string) => {
 };
 
 export const validateLocation = (location: ILocation) => {
-  console.log(location)
+  console.log(location);
   if (location.latitude === 0 || location.longitude === 0) {
     return false;
   }

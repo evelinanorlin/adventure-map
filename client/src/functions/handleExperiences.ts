@@ -53,13 +53,13 @@ export const newExperienceArr = (
   action: string,
   experiences: IExperience[],
 ) => {
-  console.log(experiences)
+  console.log(experiences);
   if (action === "remove") {
     experiences = experiences.filter((experience) => {
       return experience._id !== id;
     });
   } else if (action === "add") {
-    console.log("tillagd")
+    console.log("tillagd");
   }
   return experiences;
 };
