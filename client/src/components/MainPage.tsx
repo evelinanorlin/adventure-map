@@ -17,8 +17,6 @@ export function MainPage({isLoading}: IMainPageProps) {
     zoom: 5,
   });
 
-  console.log(isLoading)
-
   return (
     <>
     <div className="loader-container" style={isLoading ? {display: "block"} : {display: "none"}}>

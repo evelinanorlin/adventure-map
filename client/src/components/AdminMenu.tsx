@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { IExperienceId } from "./interfaces/IExperience";
 import adminMenu from "/icons/adminMenu.svg";
 
@@ -10,6 +11,7 @@ interface IAdminMenuProps {
 }
 
 export default function AdminMenu({setShowAdminMenu, showAdminMenu, unreviewedExperiences, className, setHideOnClick}: IAdminMenuProps) {
+
   return(
     <div className={"admin-menu-container" + " " + className}>
     <button>
@@ -32,5 +34,4 @@ export default function AdminMenu({setShowAdminMenu, showAdminMenu, unreviewedEx
     </div>
   </div>
   )
-
 }

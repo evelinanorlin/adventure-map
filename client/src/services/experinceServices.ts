@@ -14,7 +14,6 @@ export const getExperiences = async () => {
 };
 
 export const addExperience = async (experience: IExperience) => {
-  console.log(experience)
   const url = `${BASE_URL}experiences/add`;
   try {
     const response = await axios.post(url, experience);

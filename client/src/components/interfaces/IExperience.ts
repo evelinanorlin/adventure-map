@@ -21,5 +21,5 @@ export interface IExperience {
 }
 
 export interface IExperienceId extends IExperience {
-  _id: string;
+  _id?: string;
 }

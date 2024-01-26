@@ -21,7 +21,7 @@ export const publish = async (
       }
       return experience;
     });
-    return "success";
+    return experiences;
   } else {
     return "error";
   }
@@ -48,22 +48,18 @@ export const remove = async (
   }
 };
 
-export const newUnreviewedArr = (
+export const newExperienceArr = (
   id: string,
   action: string,
-  unreviewedExperiences: IExperienceId[],
   experiences: IExperienceId[],
 ) => {
-  let unreviewed: IExperienceId[] = unreviewedExperiences;
+  console.log(experiences)
   if (action === "remove") {
-    unreviewed = unreviewedExperiences.filter((experience) => {
+    experiences = experiences.filter((experience) => {
       return experience._id !== id;
     });
   } else if (action === "add") {
-    const experience = experiences.find((experience) => experience._id === id);
-    if (!experience) return;
-    unreviewed = [...unreviewedExperiences, experience];
+    console.log("tillagd")
   }
-
-  return unreviewed;
+  return experiences;
 };

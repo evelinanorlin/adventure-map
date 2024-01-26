@@ -18,7 +18,6 @@ export default function ConfirmationPopup({
   const goBack = () => {
     setShowConfirmation(false);
   };
-  console.log(action)
   return (
     <>
       <div className="dark-bg" onClick={goBack}></div>

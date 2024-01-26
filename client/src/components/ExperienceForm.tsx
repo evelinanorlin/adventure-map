@@ -18,6 +18,7 @@ import "leaflet/dist/leaflet.css";
 import { ClickableMapContext } from "../contexts/ClickableMapContext";
 import { ChosenLocationContext } from "../contexts/ChosenLocationContext";
 import { ShowMarkerContext } from "../contexts/ShowMarkerContext";
+import { ExperienceContext } from "../contexts/ExperienceContext";
 
 export default function ExperienceForm() {
   // State variables
@@ -53,6 +54,7 @@ export default function ExperienceForm() {
     ChosenLocationContext,
   );
   const { setShowMarker } = useContext(ShowMarkerContext);
+  const { experiences, setExperiences } = useContext(ExperienceContext);
 
   // Confirmation variables
   const confirmationAction = "lägga till";
@@ -113,9 +115,9 @@ export default function ExperienceForm() {
 
   // Form Submission
   const handleSubmit = async () => {
+    console.log("handle Submit")
     const imgData = image.length > 0 ? await uploadImage(image) : null;
-  
-    addExperience({
+    const experience = {
       experienceName,
       location,
       link,
@@ -128,8 +130,15 @@ export default function ExperienceForm() {
       userLink,
       isReviewed,
       date: new Date(),
-    });
-  
+    }
+    // send to database
+    addExperience(experience);
+
+    // Update state
+    const experienceList = [...experiences, experience ]
+    setExperiences(experienceList)
+
+ 
     // Reset form fields
     setExperienceName("");
     setLocation({ latitude: 0, longitude: 0, display_name: "", zoom: 0 });
