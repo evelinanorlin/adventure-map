@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useEffect, useState } from "react";
+import React, { ChangeEvent, useContext, useEffect, useState } from "react";
 import TextEditor from "./TextEditor";
 import ConfirmationPopup from "./ConfirmationPopup";
 import { categories } from "../data/categories";
@@ -20,7 +20,12 @@ import { ChosenLocationContext } from "../contexts/ChosenLocationContext";
 import { ShowMarkerContext } from "../contexts/ShowMarkerContext";
 import { ExperienceContext } from "../contexts/ExperienceContext";
 
-export default function ExperienceForm() {
+interface IExperienceFormProps {
+  showMessage: boolean;
+  setShowMessage: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function ExperienceForm({showMessage, setShowMessage}: IExperienceFormProps) {
   // State variables
   const [location, setLocation] = useState<ILocation>({
     latitude: 0,
@@ -61,9 +66,6 @@ export default function ExperienceForm() {
   const confirmationExperience = "upplevelsen";
   const [confirmed, setConfirmed] = useState<boolean | null>(null);
   const [showConfirmation, setShowConfirmation] = useState<boolean>(false);
-  const [showConfirmationMessage, setShowConfirmationMessage] =
-    useState<boolean>(false);
-
   // useEffects
 
   useEffect(() => {
@@ -83,7 +85,7 @@ export default function ExperienceForm() {
     if (confirmed) {
       setShowConfirmation(false);
       handleSubmit();
-      setShowConfirmationMessage(true);
+      setShowMessage(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [confirmed]);
@@ -191,7 +193,7 @@ export default function ExperienceForm() {
     }
   };
 
-  if (!showConfirmationMessage) {
+  if (!showMessage) {
     return (
       <>
         {errorMessage ? (
@@ -362,6 +364,6 @@ export default function ExperienceForm() {
       </>
     );
   } else {
-    return <p>Tack för ditt bidrag!</p>;
+    return <> </>;
   }
 }

@@ -38,6 +38,9 @@
 
 .login-popup {
   width: fit-content;
+  @include xl-phone {
+    top: 60px;
+  }
 }
 
 .about-popup {

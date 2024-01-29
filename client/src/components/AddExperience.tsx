@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import close from "/icons/close.svg";
 import ExperienceForm from "./ExperienceForm";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ClickableMapContext } from "../contexts/ClickableMapContext";
 import { ShowMarkerContext } from "../contexts/ShowMarkerContext";
 
@@ -9,6 +9,7 @@ export default function AddExperience() {
   const clickableCont = useContext(ClickableMapContext);
   const clickableMap = clickableCont.clickable;
   const setShowMarker = useContext(ShowMarkerContext).setShowMarker;
+  const [showMessage, setShowMessage] = useState(false);
   return (
     <section>
       <div
@@ -22,14 +23,15 @@ export default function AddExperience() {
           <img src={close} alt="close" className="close" />
         </Link>
         <h1>Tipsa om upplevelse</h1>
-        <p>
-          Hipster ipsum tattooed brunch I'm baby. Intelligentsia vaporware
-          pour-over bushwick kickstarter post-ironic taiyaki affogato. Mood
-          polaroid poutine keytar adaptogen they. Cornhole trust authentic green
-          chambray flannel beer small fashion artisan. Live-edge irony cardigan
-          tilde slow-carb yolo heard cleanse.
-        </p>
-        <ExperienceForm />
+        { showMessage ? <p className="success-message">Tack för ditt tips! 🙏 Vi tittar på det och går det igenom vår kvalitetssäkring visas det på kartan inom kort.  </p> :
+        <>
+          <p>
+            Har du tips på en upplevelse som du vill dela med dig av? Vi på Äventyrskartan är alltid glada över av att få tips på nya upplevelser. 🤸‍♂️ <br />Skicka in ditt tips så tar vi en titt på det och lägger sedan in det på kartan.
+          </p>
+          <p>PS... Om du vill dela med dig av inspiration genom dina sociala medier, är du välkommen att lämna en länk till dem. På så sätt kan våra besökare ta del av dina äventyr och upplevelser också!</p>
+          <ExperienceForm showMessage={showMessage} setShowMessage={setShowMessage}/>
+          </>
+        }
       </div>
     </section>
   );
