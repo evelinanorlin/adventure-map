@@ -17,7 +17,6 @@ export default function Menu() {
   );
 
   useEffect(() => {
-    console.log("runs");
     setUnreviewed(
       experiences.filter((experience) => {
         return experience.isReviewed === false;
