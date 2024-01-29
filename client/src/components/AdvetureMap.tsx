@@ -39,6 +39,7 @@ export default function AdventureMap({ location }: AdventureMapProps) {
           icon={getIcon(experience.category, [30, 30])}
           eventHandlers={{
             click: () => {
+              if(!experience._id) return;
               openExperience(experience._id);
             },
           }}
