@@ -92,6 +92,7 @@ export default function ExperienceForm() {
   const choseLocation = () => {
     setClickable(!clickable);
     setShowMarker(true);
+    window.scrollTo(0, 0);
   };
 
   const onSelectFile = (e: ChangeEvent<HTMLInputElement>) => {
