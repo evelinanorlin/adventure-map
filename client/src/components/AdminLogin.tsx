@@ -30,7 +30,6 @@ export default function AdminLogin() {
     return (
       <>
         <div className="dark-bg"></div>
-        <section>
           <div className="popup login-popup p-5">
             <Link to="/" className="close-btn">
               <img src={close} alt="close" className="close" />
@@ -72,7 +71,6 @@ export default function AdminLogin() {
               </label>
             </form>
           </div>
-        </section>
       </>
     );
   } else {

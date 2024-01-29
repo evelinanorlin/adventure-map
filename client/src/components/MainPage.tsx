@@ -1,5 +1,5 @@
 //import { useState } from "react";
-import {  useState } from "react";
+import { useState } from "react";
 import AdventureMap from "./AdvetureMap";
 import SearchFieldMap from "./SearchFieldMap";
 import loader from "/icons/loader.gif";
@@ -8,7 +8,7 @@ interface IMainPageProps {
   isLoading: boolean;
 }
 
-export function MainPage({isLoading}: IMainPageProps) {
+export function MainPage({ isLoading }: IMainPageProps) {
   // Start with a default location
   const [location, setLocation] = useState({
     latitude: 62,
@@ -17,20 +17,21 @@ export function MainPage({isLoading}: IMainPageProps) {
     zoom: 5,
   });
 
-  console.log(isLoading)
-
   return (
     <>
-    <div className="loader-container" style={isLoading ? {display: "block"} : {display: "none"}}>
-      <div className="loader">
-        <img src={loader} alt="map is loading"></img>
-        <p className="bold">Kartan laddas...</p>
+      <div
+        className="loader-container"
+        style={isLoading ? { display: "block" } : { display: "none" }}
+      >
+        <div className="loader">
+          <img src={loader} alt="map is loading"></img>
+          <p className="bold">Kartan laddas...</p>
+        </div>
       </div>
-    </div>
-    <div className="main-page">
-      <SearchFieldMap setLocation={setLocation} />
-      <AdventureMap location={location} />
-    </div>
+      <div className="main-page">
+        <SearchFieldMap setLocation={setLocation} />
+        <AdventureMap location={location} />
+      </div>
     </>
   );
 }

@@ -4,74 +4,62 @@ import { ExperienceContext } from "../contexts/ExperienceContext";
 import DOMPurify from "dompurify";
 import close from "/icons/close.svg";
 import ConfirmationPopup from "./ConfirmationPopup";
-import { UnreviewedExperiencesContext } from "../contexts/ReviewedExperiences";
-import {
-  newUnreviewedArr,
-  publish,
-  remove,
-} from "../functions/handleExperiences";
+import { publish, remove } from "../functions/handleExperiences";
+import { IExperience } from "./interfaces/IExperience";
 
 export default function Experience() {
   const { id } = useParams();
-  const experiences = useContext(ExperienceContext).experiences;
+  const { experiences, setExperiences } = useContext(ExperienceContext);
   const experience = experiences?.find((experience) => experience._id === id);
   const isAdmin = localStorage.getItem("admin");
   const [showConfirmation, setShowConfirmation] = useState<boolean>(false);
   const [confirmed, setConfirmed] = useState<boolean | null>(false);
   const [action, setAction] = useState<string>("");
   const navigate = useNavigate();
-  const unreviewedExperiences = useContext(
-    UnreviewedExperiencesContext,
-  ).unreviewedExperiences;
-  const setUnreviewedExperiences = useContext(
-    UnreviewedExperiencesContext,
-  ).setUnreviewedExperiences;
 
   useEffect(() => {
-    const publishExp = async () => {
-      const response = await publish(id, experiences);
-      console.log(response);
-      if (response === "success") {
-        updateUnreviewed(id, "remove");
-        setShowConfirmation(false);
-        navigate("/upplevelser-lista");
-      } else {
-        console.log("error");
-      }
-    };
+    console.log("Experience component rendered");
+  }, [experiences]);
+
+  useEffect(() => {
     if (confirmed) {
       if (action === "publicera") {
         publishExp();
       } else if (action === "ta bort") {
-        if(experience?.imageURL){
-         //const response = removeImg(experience.imageURL);
-         //console.log(response);
-        }
         removeExp();
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [confirmed]);
 
-  const updateUnreviewed = (id: string | undefined, action: string) => {
-    if (!id) return;
-    const unreviewed = newUnreviewedArr(
-      id,
-      action,
-      unreviewedExperiences,
-      experiences,
-    );
-    if (!unreviewed) return;
-    setUnreviewedExperiences(unreviewed);
+  const removeExp = async () => {
+    if (!experience || id === undefined) return;
+
+    const response = await remove(id, experience, experiences);
+
+    if (response !== "error") {
+      if (response === undefined) return;
+
+      const newExperienceArr: IExperience[] = response;
+
+      setExperiences([...newExperienceArr]);
+
+      navigate("/upplevelser-lista");
+    }
   };
 
-  const removeExp = async () => {
-    if (!experience) return;
-    await remove(id, experience, experiences);
-    if (!experience.isReviewed) {
-      updateUnreviewed(id, "remove");
+  const publishExp = async () => {
+    const response = await publish(id, experiences);
+    console.log(response);
+    if (response !== "error") {
+      if (response === undefined) return;
+
+      const newExperienceArr: IExperience[] = response;
+      setExperiences([...newExperienceArr]);
+      navigate("/upplevelser-lista");
+    } else {
+      console.log("error");
     }
-    navigate("/upplevelser-lista");
   };
 
   if (experience) {
@@ -125,7 +113,7 @@ export default function Experience() {
                 ""
               ) : (
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-primary m-r-5 "
                   onClick={() => {
                     setAction("publicera");
                     setShowConfirmation(true);
@@ -135,7 +123,7 @@ export default function Experience() {
                 </button>
               )}
               <button
-                className="m-l-5 btn"
+                className="btn btn-tertiary btn-remove"
                 onClick={() => {
                   setAction("ta bort");
                   setShowConfirmation(true);

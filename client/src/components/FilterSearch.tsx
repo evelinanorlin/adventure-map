@@ -15,14 +15,15 @@ export default function FilterSearch() {
     if (category === "Välj kategori") return null;
 
     return (
-      <li key={index} tabIndex={index + 1} style={{cursor: "default"}}>
-        <label style={{cursor: "pointer"}}>
+      <li key={index} tabIndex={index + 1} style={{ cursor: "default" }}>
+        <label style={{ cursor: "pointer" }}>
           <input
             type="checkbox"
             checked={chosenCategories.includes(category)}
             onChange={() => updateChosenCategories(category)}
-            className="m-r-3" 
-          />{category}
+            className="m-r-3"
+          />
+          {category}
         </label>
       </li>
     );
@@ -33,11 +34,11 @@ export default function FilterSearch() {
     const handler = (event: MouseEvent) => {
       const dropdownSelector = document.querySelector(".dropdown-selector");
       const categoryList = document.querySelector(".category-list");
-  
+
       if (
         (event.target !== dropdownSelector &&
-        event.target !== categoryList &&
-        !categoryList?.contains(event.target as Node)) ||
+          event.target !== categoryList &&
+          !categoryList?.contains(event.target as Node)) ||
         event.target === dropdownSelector
       ) {
         setShowCategories(false);
@@ -45,9 +46,9 @@ export default function FilterSearch() {
         setShowCategories(true);
       }
     };
-  
+
     document.addEventListener("click", handler);
-  
+
     // Cleanup the event listener when the component unmounts
     return () => {
       document.removeEventListener("click", handler);
@@ -60,7 +61,7 @@ export default function FilterSearch() {
   };
 
   const updateChosenCategories = (category: string) => {
-    console.log('Updating chosen categories:', category);
+    console.log("Updating chosen categories:", category);
     const chosenCategoriesUpdated = chosenCategories.includes(category)
       ? chosenCategories.filter((item) => item !== category)
       : [...chosenCategories, category];

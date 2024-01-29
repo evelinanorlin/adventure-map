@@ -22,7 +22,7 @@ router.post('/add', async function(req, res, next) {
   req.app.locals.db.collection('experiences').insertOne(req.body)
   .then(result => {
     console.log(result)
-    res.send(result)
+    res.send({ _id:result.insertedId})
   })
 });
 

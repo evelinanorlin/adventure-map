@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useEffect, useState } from "react";
+import React, { ChangeEvent, useContext, useEffect, useState } from "react";
 import TextEditor from "./TextEditor";
 import ConfirmationPopup from "./ConfirmationPopup";
 import { categories } from "../data/categories";
@@ -18,8 +18,14 @@ import "leaflet/dist/leaflet.css";
 import { ClickableMapContext } from "../contexts/ClickableMapContext";
 import { ChosenLocationContext } from "../contexts/ChosenLocationContext";
 import { ShowMarkerContext } from "../contexts/ShowMarkerContext";
+import { ExperienceContext } from "../contexts/ExperienceContext";
 
-export default function ExperienceForm() {
+interface IExperienceFormProps {
+  showMessage: boolean;
+  setShowMessage: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function ExperienceForm({showMessage, setShowMessage}: IExperienceFormProps) {
   // State variables
   const [location, setLocation] = useState<ILocation>({
     latitude: 0,
@@ -53,15 +59,13 @@ export default function ExperienceForm() {
     ChosenLocationContext,
   );
   const { setShowMarker } = useContext(ShowMarkerContext);
+  const { experiences, setExperiences } = useContext(ExperienceContext);
 
   // Confirmation variables
   const confirmationAction = "lägga till";
   const confirmationExperience = "upplevelsen";
   const [confirmed, setConfirmed] = useState<boolean | null>(null);
   const [showConfirmation, setShowConfirmation] = useState<boolean>(false);
-  const [showConfirmationMessage, setShowConfirmationMessage] =
-    useState<boolean>(false);
-
   // useEffects
 
   useEffect(() => {
@@ -81,7 +85,7 @@ export default function ExperienceForm() {
     if (confirmed) {
       setShowConfirmation(false);
       handleSubmit();
-      setShowConfirmationMessage(true);
+      setShowMessage(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [confirmed]);
@@ -90,6 +94,7 @@ export default function ExperienceForm() {
   const choseLocation = () => {
     setClickable(!clickable);
     setShowMarker(true);
+    window.scrollTo(0, 0);
   };
 
   const onSelectFile = (e: ChangeEvent<HTMLInputElement>) => {
@@ -113,9 +118,9 @@ export default function ExperienceForm() {
 
   // Form Submission
   const handleSubmit = async () => {
+    console.log("handle Submit");
     const imgData = image.length > 0 ? await uploadImage(image) : null;
-  
-    addExperience({
+    const experience = {
       experienceName,
       location,
       link,
@@ -128,8 +133,16 @@ export default function ExperienceForm() {
       userLink,
       isReviewed,
       date: new Date(),
-    });
-  
+    };
+    // send to database
+    const id = await addExperience(experience);
+
+    const experienceId = { ...experience, _id: id._id };
+
+    // Update state
+    const experienceList = [...experiences, experienceId];
+    setExperiences(experienceList);
+
     // Reset form fields
     setExperienceName("");
     setLocation({ latitude: 0, longitude: 0, display_name: "", zoom: 0 });
@@ -162,12 +175,14 @@ export default function ExperienceForm() {
     };
 
     const isValid = validateForm(experienceData);
-    
+
     if (!isValid) {
-      window.scrollTo(0,0);
+      window.scrollTo(0, 0);
       setErrorMessage(true);
       setExperienceNameValid(validateTextInput(experienceName));
-      setLocationValid(validateLocation(chosenLocation ? chosenLocation : location));
+      setLocationValid(
+        validateLocation(chosenLocation ? chosenLocation : location),
+      );
       setPriceValid(validateDropdown(price));
       setCategoryValid(validateDropdown(category));
       setDescriptionValid(validateTextInput(description));
@@ -178,7 +193,7 @@ export default function ExperienceForm() {
     }
   };
 
-  if (!showConfirmationMessage) {
+  if (!showMessage) {
     return (
       <>
         {errorMessage ? (
@@ -301,7 +316,7 @@ export default function ExperienceForm() {
               onChange={handleFileChange}
             />
           </label>
-            {selectedFile && <img src={preview} className="thumbnail-img" />}
+          {selectedFile && <img src={preview} className="thumbnail-img" />}
           <label>
             <p>
               Ditt namn* <br /> <span>Som det visas på sidan</span>
@@ -349,7 +364,6 @@ export default function ExperienceForm() {
       </>
     );
   } else {
-    return <p>Tack för ditt bidrag!</p>;
+    return <> </>;
   }
 }
-

@@ -1,8 +1,8 @@
-import { IExperienceId } from "../components/interfaces/IExperience";
+import { IExperience } from "../components/interfaces/IExperience";
 
 // Filter list of experiences based on search text and checkbox
 export const filterList = (
-  experiences: IExperienceId[],
+  experiences: IExperience[],
   text: string,
   checked: boolean,
 ) => {
@@ -21,7 +21,7 @@ export const filterList = (
 export const filterVisualExperiences = (
   categories: string[],
   priceChecked: boolean,
-  experiences: IExperienceId[],
+  experiences: IExperience[],
 ) => {
   if (categories.length === 0 && !priceChecked) {
     return experiences;

@@ -2,11 +2,11 @@ import {
   deleteExperience,
   updateReviewed,
 } from "../services/experinceServices";
-import { IExperienceId } from "../components/interfaces/IExperience";
+import { IExperience } from "../components/interfaces/IExperience";
 
 export const publish = async (
   id: string | undefined,
-  experiences: IExperienceId[],
+  experiences: IExperience[],
 ) => {
   if (!id) return;
   const response = await updateReviewed({
@@ -21,16 +21,16 @@ export const publish = async (
       }
       return experience;
     });
-    return "success";
+    return experiences;
   } else {
     return "error";
   }
 };
 
 export const remove = async (
-  id: string | undefined,
-  experience: IExperienceId,
-  experiences: IExperienceId[],
+  id: string,
+  experience: IExperience,
+  experiences: IExperience[],
 ) => {
   if (!experience) return;
   const response = await deleteExperience(experience);
@@ -48,22 +48,18 @@ export const remove = async (
   }
 };
 
-export const newUnreviewedArr = (
+export const newExperienceArr = (
   id: string,
   action: string,
-  unreviewedExperiences: IExperienceId[],
-  experiences: IExperienceId[],
+  experiences: IExperience[],
 ) => {
-  let unreviewed: IExperienceId[] = unreviewedExperiences;
+  console.log(experiences);
   if (action === "remove") {
-    unreviewed = unreviewedExperiences.filter((experience) => {
+    experiences = experiences.filter((experience) => {
       return experience._id !== id;
     });
   } else if (action === "add") {
-    const experience = experiences.find((experience) => experience._id === id);
-    if (!experience) return;
-    unreviewed = [...unreviewedExperiences, experience];
+    console.log("tillagd");
   }
-
-  return unreviewed;
+  return experiences;
 };
