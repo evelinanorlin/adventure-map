@@ -1,6 +1,5 @@
 import { IExperience } from "../components/interfaces/IExperience";
 
-// Filter list of experiences based on search text and checkbox
 export const filterList = (
   experiences: IExperience[],
   text: string,

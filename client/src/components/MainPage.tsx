@@ -9,7 +9,6 @@ interface IMainPageProps {
 }
 
 export function MainPage({ isLoading }: IMainPageProps) {
-  // Start with a default location
   const [location, setLocation] = useState({
     latitude: 62,
     longitude: 16,

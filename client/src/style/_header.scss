@@ -46,8 +46,10 @@
       position: relative;
       top: 0px;
       left: 5px;
+      filter: $drop-shadow;
       @include tablet {
         display: none;
+        filter: $drop-shadow;
       }
       .admin-menu {
         height: 25px;

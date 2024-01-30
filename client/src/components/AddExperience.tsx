@@ -1,15 +1,22 @@
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import close from "/icons/close.svg";
 import ExperienceForm from "./ExperienceForm";
-import { useContext, useState } from "react";
 import { ClickableMapContext } from "../contexts/ClickableMapContext";
 import { ShowMarkerContext } from "../contexts/ShowMarkerContext";
+import { ChosenLocationContext } from "../contexts/ChosenLocationContext";
 
 export default function AddExperience() {
   const clickableCont = useContext(ClickableMapContext);
-  const clickableMap = clickableCont.clickable;
-  const setShowMarker = useContext(ShowMarkerContext).setShowMarker;
-  const [showMessage, setShowMessage] = useState(false);
+const clickableMap = clickableCont.clickable;
+
+const showMarkerContext = useContext(ShowMarkerContext);
+const setShowMarker = showMarkerContext.setShowMarker;
+
+const [showMessage, setShowMessage] = useState(false);
+
+const { setChosenLocation } = useContext(ChosenLocationContext);
+
   return (
     <section>
       <div
@@ -19,7 +26,7 @@ export default function AddExperience() {
             : "popup popup-right experience-form p-5"
         }
       >
-        <Link to="/" className="close-btn" onClick={() => setShowMarker(false)}>
+        <Link to="/" className="close-btn" onClick={() => {setShowMarker(false), setChosenLocation(null)}}>
           <img src={close} alt="close" className="close" />
         </Link>
         <h1>Tipsa om upplevelse</h1>

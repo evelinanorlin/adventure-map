@@ -49,7 +49,6 @@ export default function FilterSearch() {
 
     document.addEventListener("click", handler);
 
-    // Cleanup the event listener when the component unmounts
     return () => {
       document.removeEventListener("click", handler);
     };
@@ -61,7 +60,6 @@ export default function FilterSearch() {
   };
 
   const updateChosenCategories = (category: string) => {
-    console.log("Updating chosen categories:", category);
     const chosenCategoriesUpdated = chosenCategories.includes(category)
       ? chosenCategories.filter((item) => item !== category)
       : [...chosenCategories, category];

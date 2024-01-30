@@ -1,14 +1,13 @@
 import { MapContainer, TileLayer, useMapEvents, Marker } from "react-leaflet";
 import { ILocation } from "./interfaces/ILocation";
 import { LatLngExpression, LeafletMouseEvent } from "leaflet";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import "leaflet/dist/leaflet.css";
 import { ClickableMapContext } from "../contexts/ClickableMapContext";
 import { ChosenLocationContext } from "../contexts/ChosenLocationContext";
 import { getLocationName } from "../services/mapServices";
 import { ShowMarkerContext } from "../contexts/ShowMarkerContext";
 import { getIcon } from "../functions/markerFunction";
-//import loader from "/icons/loader.gif";
 
 interface IMapProps {
   location: ILocation;
@@ -19,7 +18,6 @@ export default function Map({ location, markers }: IMapProps) {
   const [markerLocation, setMarkerLocation] = useState<LatLngExpression>([
     0, 0,
   ]);
-  //const [isLoading, setIsLoading] = useState<boolean>(true);
   const showMarker = useContext(ShowMarkerContext).showMarker;
   const API_KEY: string = import.meta.env.VITE_MAPTILER_KEY;
   const clickableMap = useContext(ClickableMapContext).clickable;
@@ -40,16 +38,8 @@ export default function Map({ location, markers }: IMapProps) {
     });
   };
 
-  useEffect(() => {}, []);
-
   return (
     <>
-      {/* <div className="loader-container" style={isLoading ? {display: "block"} : {display: "none"}}>
-      <div className="loader">
-        <img src={loader} alt="map is loading"></img>
-        <p className="bold">Kartan laddas...</p>
-      </div>
-    </div> */}
       <MapContainer
         key={`${location.latitude}-${location.longitude}`}
         center={[location.latitude, location.longitude]}
@@ -91,6 +81,3 @@ const MapEventsHandler: React.FC<MapEventsHandlerProps> = ({
   });
   return null;
 };
-// function componentDidMount() {
-//   throw new Error("Function not implemented.");
-// }

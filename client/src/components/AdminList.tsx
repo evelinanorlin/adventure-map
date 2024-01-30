@@ -1,22 +1,27 @@
 import { ChangeEvent, useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { ExperienceContext } from "../contexts/ExperienceContext";
+import { IExperience } from "./interfaces/IExperience";
+import { filterList } from "../functions/filterFunction";
 import alert from "/icons/alert.svg";
 import check from "/icons/check.svg";
 import close from "/icons/close.svg";
-import { Link, useNavigate } from "react-router-dom";
-import { IExperience } from "./interfaces/IExperience";
 import search from "/icons/search.svg";
-import { filterList } from "../functions/filterFunction";
+
 
 export default function AdminList() {
-  const experiences = useContext(ExperienceContext).experiences;
-  const [visibleExperiences, setVisibleExperiences] =
-    useState<IExperience[]>(experiences);
-  const [isChecked, setIsChecked] = useState<boolean>(false);
-  const [searchText, setSearchText] = useState<string>("");
-  const navigate = useNavigate();
-  const isAdmin = localStorage.getItem("admin");
+const experienceContext = useContext(ExperienceContext);
+const experiences = experienceContext.experiences;
 
+const [visibleExperiences, setVisibleExperiences] = useState<IExperience[]>(experiences);
+const [isChecked, setIsChecked] = useState<boolean>(false);
+const [searchText, setSearchText] = useState<string>("");
+
+const navigate = useNavigate();
+
+const isAdmin = localStorage.getItem("admin");
+
+// Sort the list of experiences by date
   useEffect(() => {
     const sortedExperiences = [...experiences];
     sortedExperiences.sort(
@@ -26,6 +31,7 @@ export default function AdminList() {
     setVisibleExperiences(sortedExperiences);
   }, [experiences]);
 
+  // Filter function, .filtering on review and text
   const filterOnReview = (e: ChangeEvent<HTMLInputElement>) => {
     const checked: boolean = e.target.checked;
     setIsChecked(checked);

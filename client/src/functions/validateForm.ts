@@ -1,12 +1,8 @@
 import { IExperience } from "../components/interfaces/IExperience";
 import { ILocation } from "../components/interfaces/ILocation";
 
-// interface IValidateForm {
-//   experiences: IExperience,
-//   inputName: string
-// }
 export const validateTextInput = (experienceName: string) => {
-  if (experienceName.length < 3) {
+  if (experienceName.length < 2) {
     return false;
   }
   return true;

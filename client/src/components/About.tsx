@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+
 import close from "/icons/close.svg";
 import outdoors from "/outdoor.jpeg";
 

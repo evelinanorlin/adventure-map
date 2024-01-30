@@ -13,7 +13,7 @@ import {
 } from "../functions/validateForm";
 import { handleImg } from "../functions/handleImg";
 import { addExperience } from "../services/experinceServices";
-import { uploadImage } from "../functions/imageUpload";
+import { uploadImage } from "../services/imageUploadService";
 import "leaflet/dist/leaflet.css";
 import { ClickableMapContext } from "../contexts/ClickableMapContext";
 import { ChosenLocationContext } from "../contexts/ChosenLocationContext";
@@ -77,7 +77,6 @@ export default function ExperienceForm({showMessage, setShowMessage}: IExperienc
     const objectUrl = URL.createObjectURL(selectedFile);
     setPreview(objectUrl);
 
-    // Free memory when this component is unmounted
     return () => URL.revokeObjectURL(objectUrl);
   }, [selectedFile]);
 
