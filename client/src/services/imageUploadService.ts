@@ -17,28 +17,3 @@ export const uploadImage = async (img: string) => {
     console.log(error)
   }
 };
-
-// data.append("upload_preset", import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET);
-// data.append("cloud_name", import.meta.env.VITE_CLOUDINARY_CLOUD_NAME);
-// data.append("folder", "Cloudinary-React");
-
-// for (const value of data.values()) {
-//   console.log(value);
-// }
-
-// try {
-//   const response = await fetch(
-//     `https://api.cloudinary.com/v1_1/${
-//       import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
-//     }/image/upload`,
-//     {
-//       method: "POST",
-//       body: data,
-//     },
-//   );
-//   const res = await response.json();
-//   console.log(res);
-//   return res;
-// } catch (error) {
-//   console.log(error);
-// }
