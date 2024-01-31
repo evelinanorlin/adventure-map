@@ -28,14 +28,11 @@ const [unreviewed, setUnreviewed] = useState(
     };
     window.addEventListener("resize", updateDimension);
 
-    return () => {
-      window.removeEventListener("resize", updateDimension);
-      if (screenSize.width > 992) {
-        setShowMenu(true);
-      } else {
-        setShowMenu(false);
-      }
-    };
+    if (screenSize.width > 992) {
+      setShowMenu(true);
+    } else {
+      setShowMenu(false);
+    }
   }, [screenSize]);
 
   function getCurrentDimension() {

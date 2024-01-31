@@ -16,7 +16,6 @@
     "cloudinary-react": "^1.8.1",
     "compressorjs": "^1.2.1",
     "dompurify": "^3.0.8",
-    "image-size": "^1.1.1",
     "leaflet": "^1.9.4",
     "leaflet-control-geocoder": "^2.4.0",
     "maplibre-gl": "^3.6.2",
@@ -26,8 +25,7 @@
     "react-image-file-resizer": "^0.4.8",
     "react-leaflet": "^4.2.1",
     "react-router-dom": "^6.21.1",
-    "sass": "^1.69.7",
-    "webp-converter": "^2.3.3"
+    "sass": "^1.69.7"
   },
   "devDependencies": {
     "@types/crypto-js": "^4.2.2",
