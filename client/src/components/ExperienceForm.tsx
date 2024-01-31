@@ -117,8 +117,8 @@ export default function ExperienceForm({showMessage, setShowMessage}: IExperienc
 
   // Form Submission
   const handleSubmit = async () => {
-    console.log("handle Submit");
     const imgData = image.length > 0 ? await uploadImage(image) : null;
+    console.log(imgData)
     const experience = {
       experienceName,
       location,
