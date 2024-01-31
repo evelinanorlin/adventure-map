@@ -1,5 +1,7 @@
 import Resizer from "react-image-file-resizer";
 
+// This function is used to resize the image before uploading it to the server.
+
 export const handleImg = (files: FileList): Promise<string> => {
   return new Promise((resolve, reject) => {
     if (files.length === 0) {

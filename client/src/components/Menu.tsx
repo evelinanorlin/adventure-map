@@ -4,20 +4,17 @@ import { ExperienceContext } from "../contexts/ExperienceContext";
 import AdminMenu from "./AdminMenu";
 
 export default function Menu() {
-  const [showMenu, setShowMenu] = useState<boolean>(true);
-  const [screenSize, setScreenSize] = useState(getCurrentDimension());
-  const [showAdminMenu, setShowAdminMenu] = useState<boolean>(false);
-  const [hideOnClick, setHideOnClick] = useState<boolean>(false);
-  const admin = localStorage.getItem("admin");
-  const { experiences } = useContext(ExperienceContext);
-  const [unreviewed, setUnreviewed] = useState(
-    experiences.filter((experience) => {
-      return experience.isReviewed === false;
-    }),
-  );
+const [showMenu, setShowMenu] = useState<boolean>(true);
+const [screenSize, setScreenSize] = useState(getCurrentDimension());
+const [showAdminMenu, setShowAdminMenu] = useState<boolean>(false);
+const [hideOnClick, setHideOnClick] = useState<boolean>(false);
+const admin = localStorage.getItem("admin");
+const { experiences } = useContext(ExperienceContext);
+const [unreviewed, setUnreviewed] = useState(
+  experiences.filter((experience) => !experience.isReviewed),
+);
 
   useEffect(() => {
-    console.log("runs");
     setUnreviewed(
       experiences.filter((experience) => {
         return experience.isReviewed === false;
@@ -67,6 +64,7 @@ export default function Menu() {
         className="hide-on-click"
         onClick={() => {
           setShowAdminMenu(false);
+          setShowMenu(false);
           setHideOnClick(false);
           closeMenu;
         }}
@@ -124,7 +122,8 @@ export default function Menu() {
         className="burger"
         onClick={() => {
           setShowMenu(!showMenu);
-          setHideOnClick(!hideOnClick);
+          showMenu ? setHideOnClick(false) : setHideOnClick(true);
+          console.log("click")
         }}
       >
         <span></span>

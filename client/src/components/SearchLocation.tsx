@@ -27,7 +27,6 @@ export default function SearchLocation({ setLocation }: SearchLocationProps) {
     };
     document.addEventListener("click", handler);
 
-    // Cleanup the event listener when the component unmounts
     return () => {
       document.removeEventListener("click", handler);
     };
@@ -36,7 +35,7 @@ export default function SearchLocation({ setLocation }: SearchLocationProps) {
   // search for location when user types
   const handleChange = (searchValue: string) => {
     setSearchValue(searchValue);
-
+    
     if (searchValue.length > 2) {
       submitHandler(searchValue);
     } else {

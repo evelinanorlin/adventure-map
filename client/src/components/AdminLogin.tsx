@@ -1,7 +1,8 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import close from "/icons/close.svg";
-import { useState } from "react";
 import { checkLogin } from "../services/loginServices";
+
 
 export default function AdminLogin() {
   const [username, setUsername] = useState("");

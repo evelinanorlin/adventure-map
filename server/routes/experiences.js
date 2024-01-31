@@ -18,7 +18,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/add', async function(req, res, next) {
-  console.log(req.body)
   req.app.locals.db.collection('experiences').insertOne(req.body)
   .then(result => {
     console.log(result)

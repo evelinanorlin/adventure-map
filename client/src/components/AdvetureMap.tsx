@@ -1,27 +1,25 @@
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { Marker } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 import "leaflet-control-geocoder/dist/Control.Geocoder.css";
 import "leaflet-control-geocoder/dist/Control.Geocoder.js";
-import "leaflet/dist/leaflet.css";
-import { useContext } from "react";
 import { ExperienceContext } from "../contexts/ExperienceContext";
 import { IExperience } from "./interfaces/IExperience";
-import { useNavigate } from "react-router-dom";
 import Map from "./Map";
 import { getIcon } from "../functions/markerFunction";
+import { ILocation } from "./interfaces/ILocation";
 
-interface AdventureMapProps {
-  location: {
-    latitude: number;
-    longitude: number;
-    display_name: string;
-    zoom: number;
-  };
+
+interface IAdventureMapProps {
+  location: ILocation;
 }
 
-export default function AdventureMap({ location }: AdventureMapProps) {
+export default function AdventureMap({ location }: IAdventureMapProps) {
   const experiencesCont = useContext(ExperienceContext);
   const visualExperiences = experiencesCont.visualExperiences;
   const navigate = useNavigate();
+  
   const openExperience = (id: string) => {
     navigate(`/upplevelser/${id}`);
   };
