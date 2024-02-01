@@ -4,15 +4,15 @@ import { ExperienceContext } from "../contexts/ExperienceContext";
 import AdminMenu from "./AdminMenu";
 
 export default function Menu() {
-const [showMenu, setShowMenu] = useState<boolean>(true);
-const [screenSize, setScreenSize] = useState(getCurrentDimension());
-const [showAdminMenu, setShowAdminMenu] = useState<boolean>(false);
-const [hideOnClick, setHideOnClick] = useState<boolean>(false);
-const admin = localStorage.getItem("admin");
-const { experiences } = useContext(ExperienceContext);
-const [unreviewed, setUnreviewed] = useState(
-  experiences.filter((experience) => !experience.isReviewed),
-);
+  const [showMenu, setShowMenu] = useState<boolean>(true);
+  const [screenSize, setScreenSize] = useState(getCurrentDimension());
+  const [showAdminMenu, setShowAdminMenu] = useState<boolean>(false);
+  const [hideOnClick, setHideOnClick] = useState<boolean>(false);
+  const admin = localStorage.getItem("admin");
+  const { experiences } = useContext(ExperienceContext);
+  const [unreviewed, setUnreviewed] = useState(
+    experiences.filter((experience) => !experience.isReviewed),
+  );
 
   useEffect(() => {
     setUnreviewed(
@@ -120,7 +120,7 @@ const [unreviewed, setUnreviewed] = useState(
         onClick={() => {
           setShowMenu(!showMenu);
           showMenu ? setHideOnClick(false) : setHideOnClick(true);
-          console.log("click")
+          console.log("click");
         }}
       >
         <span></span>

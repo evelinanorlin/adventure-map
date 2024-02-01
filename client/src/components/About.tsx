@@ -30,7 +30,21 @@ export default function About() {
               låt Äventyrskartan vara din guide till en värld av spännande
               utomhusäventyr! ⛰️ 🥾
             </p>
-            <p>Äventyrskartan är utvecklad av <a href="https://evelinanorlin.com" target="_blank">Evelina Norlin</a>, som ett examensarbete inom YH-utbildningen Front-end developer. Är du intresserad av koden hittar du github-repo <a href="https://github.com/evelinanorlin/adventure-map" target="_blank">här</a>.</p>
+            <p>
+              Äventyrskartan är utvecklad av{" "}
+              <a href="https://evelinanorlin.com" target="_blank">
+                Evelina Norlin
+              </a>
+              , som ett examensarbete inom YH-utbildningen Front-end developer.
+              Är du intresserad av koden hittar du github-repo{" "}
+              <a
+                href="https://github.com/evelinanorlin/adventure-map"
+                target="_blank"
+              >
+                här
+              </a>
+              .
+            </p>
             <button className="btn btn-primary m-r-5">
               <Link to="/">Utforska</Link>
             </button>

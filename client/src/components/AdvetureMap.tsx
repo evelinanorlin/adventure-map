@@ -10,7 +10,6 @@ import Map from "./Map";
 import { getIcon } from "../functions/markerFunction";
 import { ILocation } from "./interfaces/ILocation";
 
-
 interface IAdventureMapProps {
   location: ILocation;
 }
@@ -19,7 +18,7 @@ export default function AdventureMap({ location }: IAdventureMapProps) {
   const experiencesCont = useContext(ExperienceContext);
   const visualExperiences = experiencesCont.visualExperiences;
   const navigate = useNavigate();
-  
+
   const openExperience = (id: string) => {
     navigate(`/upplevelser/${id}`);
   };
@@ -37,7 +36,7 @@ export default function AdventureMap({ location }: IAdventureMapProps) {
           icon={getIcon(experience.category, [30, 30])}
           eventHandlers={{
             click: () => {
-              if(!experience._id) return;
+              if (!experience._id) return;
               openExperience(experience._id);
             },
           }}

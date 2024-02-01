@@ -123,11 +123,11 @@ label {
   }
 }
 
-.input-flex{
+.input-flex {
   display: flex;
   flex-direction: row;
   gap: 60px;
-  select{
+  select {
     width: 200px;
   }
   @include xl-phone {

@@ -12,7 +12,8 @@
     transform: translate(-50%, 0) !important;
   }
 
-  .close-btn, .back-btn {
+  .close-btn,
+  .back-btn {
     position: absolute;
     transition: all 0.2s ease-in-out;
     &:hover {
@@ -22,7 +23,7 @@
   }
 }
 
-.close-btn{
+.close-btn {
   top: 10px;
   right: 10px;
   img {
@@ -62,7 +63,7 @@
   max-width: 1500px;
   height: fit-content;
   @include xl-phone {
-   top: 60px;
+    top: 60px;
   }
   .flex {
     width: 90%;
@@ -71,7 +72,7 @@
     gap: 60px;
     height: fit-content;
     @include tablet {
-     display: block;
+      display: block;
     }
     .img-div {
       height: 100%;
@@ -98,11 +99,11 @@
       max-width: 700px;
       @include tablet {
         width: 100%;
-        padding: 0px 30px 60px 30px; 
+        padding: 0px 30px 60px 30px;
         margin: 0 auto;
       }
       @include xl-phone {
-        padding: 0px 10px 30px 10px; 
+        padding: 0px 10px 30px 10px;
       }
       .content {
         .btn {
