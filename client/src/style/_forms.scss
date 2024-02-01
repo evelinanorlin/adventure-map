@@ -123,6 +123,18 @@ label {
   }
 }
 
+.input-flex{
+  display: flex;
+  flex-direction: row;
+  gap: 60px;
+  select{
+    width: 200px;
+  }
+  @include xl-phone {
+    display: block;
+  }
+}
+
 .tox-tinymce {
   border: 1px solid $color-grey !important;
   max-height: 350px;

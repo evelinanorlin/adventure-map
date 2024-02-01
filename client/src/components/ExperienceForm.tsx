@@ -254,7 +254,7 @@ export default function ExperienceForm({showMessage, setShowMessage}: IExperienc
             />
           </label>
           <br />
-          <div className="row justify-between">
+          <div className="input-flex">
             <label>
               <p>Kostnad*</p>
               <select
