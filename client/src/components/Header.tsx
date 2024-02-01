@@ -8,7 +8,7 @@ export default function Header() {
       <div className="content-wide">
         <div className="row direction-row justify-between align-items-center">
           <Link to="/" className="logotype p-t-1">
-            <img src={logotype} />
+            <img src={logotype} alt="logotype" height="100" width="100" />
           </Link>
           <Menu />
         </div>
