@@ -48,7 +48,7 @@ export default function Map({ location, markers }: IMapProps) {
       >
         <TileLayer
           key={`${location.latitude}-${location.longitude}`}
-          url={`https://api.maptiler.com/maps/outdoor-v2/256/{z}/{x}/{y}.png?key=${API_KEY}`}
+          url={`https://api.maptiler.com/maps/outdoor-v2/{z}/{x}/{y}.png?key=${API_KEY}`}
         />
         <MapEventsHandler handleMapClick={handleMapClick} />
         {markers}
