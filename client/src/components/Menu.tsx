@@ -75,7 +75,7 @@ export default function Menu() {
           Utforska
         </Link>
         <Link to="/om-aventyrskartan" onClick={closeMenu}>
-          Om upplevelseskartan
+          Om Äventyrskartan
         </Link>
         <Link
           to="/lagg-till-upplevelse"
