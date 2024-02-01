@@ -8,13 +8,13 @@
   p {
     font-size: 12px;
     margin-bottom: 0;
-    a{
+    a {
       font-size: 12px;
       font-weight: 700;
     }
   }
 
-  @include xl-phone{
+  @include xl-phone {
     left: auto;
     right: 0;
     bottom: 23px;

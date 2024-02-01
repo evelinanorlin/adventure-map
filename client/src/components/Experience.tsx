@@ -8,7 +8,6 @@ import ConfirmationPopup from "./ConfirmationPopup";
 import { publish, remove } from "../functions/handleExperiences";
 import { IExperience } from "./interfaces/IExperience";
 
-
 export default function Experience() {
   const { id } = useParams();
   const { experiences, setExperiences } = useContext(ExperienceContext);
@@ -17,7 +16,7 @@ export default function Experience() {
   const [showConfirmation, setShowConfirmation] = useState<boolean>(false);
   const [confirmed, setConfirmed] = useState<boolean | null>(false);
   const [action, setAction] = useState<string>("");
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (confirmed) {
@@ -29,7 +28,6 @@ export default function Experience() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [confirmed]);
-
 
   const removeExp = async () => {
     if (!experience || id === undefined) return;
@@ -78,9 +76,11 @@ export default function Experience() {
           </Link>
           {isAdmin ? (
             <Link to="/upplevelser-lista" className="back-btn">
-            <img src={goback} alt="go back to list" className="go-back" />
-          </Link>
-          ) : ""}
+              <img src={goback} alt="go back to list" className="go-back" />
+            </Link>
+          ) : (
+            ""
+          )}
           <h1 className="m-t-5">{experience.experienceName}</h1>
           {experience.imageURL && experience.imageURL.length > 0 ? (
             <img

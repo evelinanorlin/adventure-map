@@ -8,14 +8,14 @@ import { ChosenLocationContext } from "../contexts/ChosenLocationContext";
 
 export default function AddExperience() {
   const clickableCont = useContext(ClickableMapContext);
-const clickableMap = clickableCont.clickable;
+  const clickableMap = clickableCont.clickable;
 
-const showMarkerContext = useContext(ShowMarkerContext);
-const setShowMarker = showMarkerContext.setShowMarker;
+  const showMarkerContext = useContext(ShowMarkerContext);
+  const setShowMarker = showMarkerContext.setShowMarker;
 
-const [showMessage, setShowMessage] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
 
-const { setChosenLocation } = useContext(ChosenLocationContext);
+  const { setChosenLocation } = useContext(ChosenLocationContext);
 
   return (
     <section>
@@ -26,19 +26,41 @@ const { setChosenLocation } = useContext(ChosenLocationContext);
             : "popup popup-right experience-form p-5"
         }
       >
-        <Link to="/" className="close-btn" onClick={() => {setShowMarker(false), setChosenLocation(null)}}>
+        <Link
+          to="/"
+          className="close-btn"
+          onClick={() => {
+            setShowMarker(false), setChosenLocation(null);
+          }}
+        >
           <img src={close} alt="close" className="close" />
         </Link>
         <h1>Tipsa om upplevelse</h1>
-        { showMessage ? <p className="success-message">Tack för ditt tips! 🙏 Vi tittar på det och går det igenom vår kvalitetssäkring visas det på kartan inom kort.  </p> :
-        <>
-          <p>
-            Har du tips på en upplevelse som du vill dela med dig av? Vi på Äventyrskartan är alltid glada över av att få tips på nya upplevelser. 🤸‍♂️ <br />Skicka in ditt tips så tar vi en titt på det och lägger sedan in det på kartan.
+        {showMessage ? (
+          <p className="success-message">
+            Tack för ditt tips! 🙏 Vi tittar på det och går det igenom vår
+            kvalitetssäkring visas det på kartan inom kort.{" "}
           </p>
-          <p>PS... Om du vill dela med dig av inspiration genom dina sociala medier, är du välkommen att lämna en länk till dem. På så sätt kan våra besökare ta del av dina äventyr och upplevelser också!</p>
-          <ExperienceForm showMessage={showMessage} setShowMessage={setShowMessage}/>
+        ) : (
+          <>
+            <p>
+              Har du tips på en upplevelse som du vill dela med dig av? Vi på
+              Äventyrskartan är alltid glada över av att få tips på nya
+              upplevelser. 🤸‍♂️ <br />
+              Skicka in ditt tips så tar vi en titt på det och lägger sedan in
+              det på kartan.
+            </p>
+            <p>
+              PS... Om du vill dela med dig av inspiration genom dina sociala
+              medier, är du välkommen att lämna en länk till dem. På så sätt kan
+              våra besökare ta del av dina äventyr och upplevelser också!
+            </p>
+            <ExperienceForm
+              showMessage={showMessage}
+              setShowMessage={setShowMessage}
+            />
           </>
-        }
+        )}
       </div>
     </section>
   );

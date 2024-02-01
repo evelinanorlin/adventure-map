@@ -8,20 +8,20 @@ import check from "/icons/check.svg";
 import close from "/icons/close.svg";
 import search from "/icons/search.svg";
 
-
 export default function AdminList() {
-const experienceContext = useContext(ExperienceContext);
-const experiences = experienceContext.experiences;
+  const experienceContext = useContext(ExperienceContext);
+  const experiences = experienceContext.experiences;
 
-const [visibleExperiences, setVisibleExperiences] = useState<IExperience[]>(experiences);
-const [isChecked, setIsChecked] = useState<boolean>(false);
-const [searchText, setSearchText] = useState<string>("");
+  const [visibleExperiences, setVisibleExperiences] =
+    useState<IExperience[]>(experiences);
+  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [searchText, setSearchText] = useState<string>("");
 
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
-const isAdmin = localStorage.getItem("admin");
+  const isAdmin = localStorage.getItem("admin");
 
-// Sort the list of experiences by date
+  // Sort the list of experiences by date
   useEffect(() => {
     const sortedExperiences = [...experiences];
     sortedExperiences.sort(
@@ -101,7 +101,7 @@ const isAdmin = localStorage.getItem("admin");
             </label>
             <br></br>
             <label className="row direction-row align-items-center m-t-3">
-              <p className="strong m-z">Visa bara ogranskade upplevelser</p>
+              <p className="strong m-z">Visa bara ogranskade</p>
               <input
                 type="checkbox"
                 style={{ width: "15px" }}

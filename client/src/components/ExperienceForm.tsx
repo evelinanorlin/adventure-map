@@ -25,7 +25,10 @@ interface IExperienceFormProps {
   setShowMessage: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function ExperienceForm({showMessage, setShowMessage}: IExperienceFormProps) {
+export default function ExperienceForm({
+  showMessage,
+  setShowMessage,
+}: IExperienceFormProps) {
   // State variables
   const [location, setLocation] = useState<ILocation>({
     latitude: 0,
@@ -118,7 +121,7 @@ export default function ExperienceForm({showMessage, setShowMessage}: IExperienc
   // Form Submission
   const handleSubmit = async () => {
     const imgData = image.length > 0 ? await uploadImage(image) : null;
-    console.log(imgData)
+    console.log(imgData);
     const experience = {
       experienceName,
       location,
@@ -254,7 +257,7 @@ export default function ExperienceForm({showMessage, setShowMessage}: IExperienc
             />
           </label>
           <br />
-          <div className="row justify-between">
+          <div className="input-flex">
             <label>
               <p>Kostnad*</p>
               <select
