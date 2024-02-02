@@ -7,125 +7,128 @@
     background: transparent;
     filter: none;
   }
-  .logotype {
-    display: block;
-    height: 100%;
-    img {
-      height: 40px;
-    }
-  }
-  .hide-on-click {
-    height: 100vh;
-    width: 100vw;
-    background: transparent;
-    position: fixed;
-    top: 0;
-    left: 0;
-  }
-  nav {
-    .desktop-menu {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 20px;
-      @include tablet {
-        display: none;
+  .header-content{
+    width: 90%;
+    margin: 0 auto;
+    max-width: 1500px;
+    position: relative;
+    .logotype {
+      display: block;
+      height: 100%;
+      img {
+        height: 40px;
       }
     }
-    .mobile-menu {
-      display: none;
-      @include tablet {
-        padding: 60px 30px;
-        z-index: 2;
-        flex-direction: column;
+    .hide-on-click {
+      height: 100vh;
+      width: 100vw;
+      background: transparent;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+    nav {
+      .desktop-menu {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
         gap: 20px;
-        background-color: $color-light-beige;
-        filter: $drop-shadow;
-        width: fit-content;
-        position: absolute;
-        height: fit-content;
-        top: 0px;
-        right: 0px;
+        @include tablet {
+          display: none;
+        }
       }
-    }
-    .show {
-      display: flex;
-    }
-    .admin-menu-container {
-      position: relative;
-      top: 0px;
-      left: 5px;
-      filter: $drop-shadow;
-      @include tablet {
+      .mobile-menu {
         display: none;
+        @include tablet {
+          padding: 60px 30px;
+          z-index: 2;
+          flex-direction: column;
+          gap: 20px;
+          background-color: $color-light-beige;
+          filter: $drop-shadow;
+          width: fit-content;
+          position: absolute;
+          height: fit-content;
+          top: 0px;
+          right: 0px;
+        }
+      }
+      .show {
+        display: flex;
+      }
+      .admin-menu-container {
+        position: relative;
+        top: 0px;
+        left: 5px;
         filter: $drop-shadow;
-      }
-      .admin-menu {
-        height: 25px;
-        width: auto;
-        margin-bottom: 5px;
-      }
-      .admin-alerts {
-        background: $color-blue;
-        border-radius: 50%;
-        height: 20px;
-        width: 20px;
-        position: absolute;
-        top: 3px;
-        right: -10px;
-        p {
-          font-family: $font-main;
-          color: $color-white;
-          font-size: 0.8rem;
-          margin: 0;
-          text-align: center;
-          position: relative;
-          bottom: 2px;
+        @include tablet {
+          display: none;
+          filter: $drop-shadow;
+        }
+        .admin-menu {
+          height: 25px;
+          width: auto;
+          margin-bottom: 5px;
+        }
+        .admin-alerts {
+          background: $color-blue;
+          border-radius: 50%;
+          height: 20px;
+          width: 20px;
+          position: absolute;
+          top: 3px;
+          right: -10px;
+          p {
+            font-family: $font-main;
+            color: $color-white;
+            font-size: 0.8rem;
+            margin: 0;
+            text-align: center;
+            position: relative;
+            bottom: 2px;
+          }
         }
       }
     }
-  }
-
-  .admin-tablet {
-    display: none;
-    @include tablet {
-      display: block;
-      position: absolute !important;
-      top: 5px !important;
-      right: 90px !important;
+  
+    .admin-tablet {
+      display: none;
+      @include tablet {
+        display: block;
+        position: absolute !important;
+        top: 5px !important;
+        right: 90px !important;
+      }
     }
-  }
-  .burger {
-    display: none;
-    @include tablet {
-      display: block;
-      position: relative;
-      z-index: 3;
+    .burger {
+      display: none;
+      @include tablet {
+        display: block;
+        position: relative;
+        z-index: 3;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+      span {
+        display: block;
+        width: 30px;
+        height: 2px;
+        border-radius: 3px;
+        background: $color-black;
+        margin: 5px 0;
+      }
     }
-    &:hover {
-      cursor: pointer;
+    .admin-menu-container {
+      flex-direction: column;
+      position: absolute;
+      height: fit-content;
+      width: fit-content;
+      top: 55px;
+      right: 0px;
     }
-    span {
-      display: block;
-      width: 30px;
-      height: 2px;
-      border-radius: 3px;
-      background: $color-black;
-      margin: 5px 0;
+    .admin-menu-container > * {
+      margin: 10px 0;
     }
-  }
-  .admin-menu-container {
-    flex-direction: column;
-    position: absolute;
-    height: fit-content;
-    width: fit-content;
-    top: 55px;
-    right: 200px;
-    @include xl {
-      right: 5px;
-    }
-  }
-  .admin-menu-container > * {
-    margin: 10px 0;
   }
 }

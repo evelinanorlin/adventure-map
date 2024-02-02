@@ -21,9 +21,6 @@ export default function MenuLinks({
 }: IMenuLinksProps) {
   return (
     <>
-      <Link to="/" onClick={closeMenu}>
-        Utforska
-      </Link>
       <Link to="/om-aventyrskartan" onClick={closeMenu}>
         Om Äventyrskartan
       </Link>
