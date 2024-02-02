@@ -86,7 +86,7 @@ export default function Experience() {
             <img
               src={experience?.imageURL}
               alt={experience?.experienceName}
-              className="m-b-5"
+              className="m-b-5 exp-img"
             />
           ) : null}
           <div dangerouslySetInnerHTML={cleanDescription}></div>

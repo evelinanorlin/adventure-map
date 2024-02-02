@@ -2,10 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ExperienceContext } from "../contexts/ExperienceContext";
 import AdminMenu from "./AdminMenu";
+import MenuLinks from "./MenuLinks";
 
 export default function Menu() {
-  const [showMenu, setShowMenu] = useState<boolean>(true);
-  const [screenSize, setScreenSize] = useState(getCurrentDimension());
+  const [showMenu, setShowMenu] = useState<boolean>(false);
+  //const [screenSize, setScreenSize] = useState(getCurrentDimension());
   const [showAdminMenu, setShowAdminMenu] = useState<boolean>(false);
   const [hideOnClick, setHideOnClick] = useState<boolean>(false);
   const admin = localStorage.getItem("admin");
@@ -22,31 +23,31 @@ export default function Menu() {
     );
   }, [experiences]);
 
-  useEffect(() => {
-    const updateDimension = () => {
-      setScreenSize(getCurrentDimension());
-    };
-    window.addEventListener("resize", updateDimension);
+  // useEffect(() => {
+  //   const updateDimension = () => {
+  //     setScreenSize(getCurrentDimension());
+  //   };
+  //   window.addEventListener("resize", updateDimension);
 
-    if (screenSize.width > 992) {
-      setShowMenu(true);
-    } else {
-      setShowMenu(false);
-    }
-  }, [screenSize]);
+  //   if (screenSize.width > 992) {
+  //     setShowMenu(false);
+  //   } else {
+  //     setShowMenu(true);
+  //   }
+  // }, [screenSize]);
 
-  function getCurrentDimension() {
-    return {
-      width: window.innerWidth,
-      height: window.innerHeight,
-    };
-  }
+  // function getCurrentDimension() {
+  //   return {
+  //     width: window.innerWidth,
+  //     height: window.innerHeight,
+  //   };
+  // }
 
   function closeMenu() {
-    if (screenSize.width < 992) {
-      setShowMenu(false);
-      setHideOnClick(false);
-    }
+    // if (screenSize.width < 992) {
+    setShowMenu(false);
+    setHideOnClick(false);
+    // }
   }
 
   const logOut = () => {
@@ -69,29 +70,13 @@ export default function Menu() {
       ></div>
       <nav
         className="menu"
-        style={showMenu ? { display: "flex" } : { display: "none" }}
       >
-        <Link to="/" onClick={closeMenu}>
-          Utforska
-        </Link>
-        <Link to="/om-aventyrskartan" onClick={closeMenu}>
-          Om Äventyrskartan
-        </Link>
-        <Link
-          to="/lagg-till-upplevelse"
-          className="btn btn-primary"
-          onClick={closeMenu}
-        >
-          Tipsa om upplevelse
-        </Link>
-        {admin ? (
-          <AdminMenu
-            setShowAdminMenu={setShowAdminMenu}
-            showAdminMenu={showAdminMenu}
-            unreviewedExperiences={unreviewed}
-            setHideOnClick={setHideOnClick}
-          />
-        ) : null}
+        <div className="desktop-menu">
+        <MenuLinks closeMenu={closeMenu} admin={admin} showAdminMenu={showAdminMenu} setShowAdminMenu={setShowAdminMenu} unreviewed={unreviewed} setHideOnClick={setHideOnClick}/>
+        </div>
+        <div className={showMenu ? "mobile-menu show" : "mobile-menu"}>
+        <MenuLinks closeMenu={closeMenu} admin={admin} showAdminMenu={showAdminMenu} setShowAdminMenu={setShowAdminMenu} unreviewed={unreviewed} setHideOnClick={setHideOnClick}/>
+        </div>
       </nav>
       {admin ? (
         <AdminMenu

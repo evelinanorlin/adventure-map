@@ -17,7 +17,7 @@ export const Layout = () => {
   const [clickable, setClickable] = useState<boolean>(false);
   const [chosenLocation, setChosenLocation] = useState<ILocation | null>(null);
   const [showMarker, setShowMarker] = useState<boolean>(false);
-  //const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     if (experiences.length === 0) {
@@ -30,7 +30,7 @@ export const Layout = () => {
     const experienceList = await getExperiences();
     setExperiences(experienceList);
     setVisualExperiences(experienceList);
-    //setIsLoading(false);
+    setIsLoading(false);
   };
 
   return (
@@ -50,8 +50,7 @@ export const Layout = () => {
               value={{ chosenLocation, setChosenLocation }}
             >
               <ShowMarkerContext.Provider value={{ showMarker, setShowMarker }}>
-                {/* <MainPage isLoading={isLoading} /> */}
-                <MainPage />
+                <MainPage isLoading={isLoading} />
                 <Outlet />
               </ShowMarkerContext.Provider>
             </ChosenLocationContext.Provider>
