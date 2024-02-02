@@ -68,14 +68,26 @@ export default function Menu() {
         }}
         style={hideOnClick ? { display: "block" } : { display: "none" }}
       ></div>
-      <nav
-        className="menu"
-      >
+      <nav className="menu">
         <div className="desktop-menu">
-        <MenuLinks closeMenu={closeMenu} admin={admin} showAdminMenu={showAdminMenu} setShowAdminMenu={setShowAdminMenu} unreviewed={unreviewed} setHideOnClick={setHideOnClick}/>
+          <MenuLinks
+            closeMenu={closeMenu}
+            admin={admin}
+            showAdminMenu={showAdminMenu}
+            setShowAdminMenu={setShowAdminMenu}
+            unreviewed={unreviewed}
+            setHideOnClick={setHideOnClick}
+          />
         </div>
         <div className={showMenu ? "mobile-menu show" : "mobile-menu"}>
-        <MenuLinks closeMenu={closeMenu} admin={admin} showAdminMenu={showAdminMenu} setShowAdminMenu={setShowAdminMenu} unreviewed={unreviewed} setHideOnClick={setHideOnClick}/>
+          <MenuLinks
+            closeMenu={closeMenu}
+            admin={admin}
+            showAdminMenu={showAdminMenu}
+            setShowAdminMenu={setShowAdminMenu}
+            unreviewed={unreviewed}
+            setHideOnClick={setHideOnClick}
+          />
         </div>
       </nav>
       {admin ? (

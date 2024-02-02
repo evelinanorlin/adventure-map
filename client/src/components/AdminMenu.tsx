@@ -28,17 +28,17 @@ export default function AdminMenu({
             setHideOnClick(!showAdminMenu);
           }}
         />
+        <span
+          className="admin-alerts"
+          style={
+            unreviewedExperiences.length > 0
+              ? { display: "block" }
+              : { display: "none" }
+          }
+        >
+          <p>{unreviewedExperiences.length}</p>
+        </span>
       </button>
-      <div
-        className="admin-alerts"
-        style={
-          unreviewedExperiences.length > 0
-            ? { display: "block" }
-            : { display: "none" }
-        }
-      >
-        <p>{unreviewedExperiences.length}</p>
-      </div>
     </div>
   );
 }

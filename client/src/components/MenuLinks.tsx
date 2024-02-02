@@ -11,31 +11,37 @@ interface IMenuLinksProps {
   setHideOnClick: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function MenuLinks({closeMenu, admin, showAdminMenu, setShowAdminMenu, unreviewed, setHideOnClick} : IMenuLinksProps) {
-
+export default function MenuLinks({
+  closeMenu,
+  admin,
+  showAdminMenu,
+  setShowAdminMenu,
+  unreviewed,
+  setHideOnClick,
+}: IMenuLinksProps) {
   return (
     <>
-          <Link to="/" onClick={closeMenu}>
-          Utforska
-        </Link>
-        <Link to="/om-aventyrskartan" onClick={closeMenu}>
-          Om Äventyrskartan
-        </Link>
-        <Link
-          to="/lagg-till-upplevelse"
-          className="btn btn-primary"
-          onClick={closeMenu}
-        >
-          Tipsa om upplevelse
-        </Link>
-        {admin ? (
-          <AdminMenu
-            setShowAdminMenu={setShowAdminMenu}
-            showAdminMenu={showAdminMenu}
-            unreviewedExperiences={unreviewed}
-            setHideOnClick={setHideOnClick}
-          />
-        ) : null}
+      <Link to="/" onClick={closeMenu}>
+        Utforska
+      </Link>
+      <Link to="/om-aventyrskartan" onClick={closeMenu}>
+        Om Äventyrskartan
+      </Link>
+      <Link
+        to="/lagg-till-upplevelse"
+        className="btn btn-primary"
+        onClick={closeMenu}
+      >
+        Tipsa om upplevelse
+      </Link>
+      {admin ? (
+        <AdminMenu
+          setShowAdminMenu={setShowAdminMenu}
+          showAdminMenu={showAdminMenu}
+          unreviewedExperiences={unreviewed}
+          setHideOnClick={setHideOnClick}
+        />
+      ) : null}
     </>
-  )
+  );
 }
