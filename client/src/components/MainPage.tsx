@@ -4,11 +4,11 @@ import AdventureMap from "./AdvetureMap";
 import SearchFieldMap from "./SearchFieldMap";
 //import loader from "/icons/loader.gif";
 
-interface IMainPageProps {
-  isLoading: boolean;
-}
+// interface IMainPageProps {
+//   isLoading: boolean;
+// }
 
-export function MainPage({ isLoading }: IMainPageProps) {
+export function MainPage() {
   const [location, setLocation] = useState({
     latitude: 62,
     longitude: 16,
