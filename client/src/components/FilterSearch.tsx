@@ -15,16 +15,22 @@ export default function FilterSearch() {
     if (category === "Välj kategori") return null;
 
     return (
-      <li key={index} tabIndex={index + 1} style={{ cursor: "default" }}>
-        <label style={{ cursor: "pointer" }}>
-          <input
-            type="checkbox"
-            checked={chosenCategories.includes(category)}
-            onChange={() => updateChosenCategories(category)}
-            className="m-r-3"
-          />
-          {category}
-        </label>
+      <li
+        key={index}
+        tabIndex={index + 1}
+        style={{ cursor: "pointer" }}
+        onClick={() => updateChosenCategories(category)}
+      >
+        <input
+          type="checkbox"
+          checked={chosenCategories.includes(category)}
+          onChange={() => {
+            updateChosenCategories(category);
+          }}
+          onClick={(e) => e.stopPropagation()}
+          className="m-r-3"
+        />
+        <label style={{ cursor: "pointer" }}>{category}</label>
       </li>
     );
   });

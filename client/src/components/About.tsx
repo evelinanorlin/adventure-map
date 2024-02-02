@@ -11,7 +11,13 @@ export default function About() {
       </Link>
       <div className="flex">
         <div className="img-div">
-          <img src={outdoors} alt="Två personer utanför ett tält i solnedgången" className="adventurer" height="300" width="100" />
+          <img
+            src={outdoors}
+            alt="Två personer utanför ett tält i solnedgången"
+            className="adventurer"
+            height="300"
+            width="100"
+          />
         </div>
         <div className="content-container">
           <div className="content">
