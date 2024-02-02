@@ -2,13 +2,13 @@
 import { useState } from "react";
 import AdventureMap from "./AdvetureMap";
 import SearchFieldMap from "./SearchFieldMap";
-//import loader from "/icons/loader.gif";
+import loader from "/icons/loader.gif";
 
-// interface IMainPageProps {
-//   isLoading: boolean;
-// }
+interface IMainPageProps {
+  isLoading: boolean;
+}
 
-export function MainPage() {
+export function MainPage({ isLoading }: IMainPageProps) {
   const [location, setLocation] = useState({
     latitude: 62,
     longitude: 16,
@@ -18,7 +18,7 @@ export function MainPage() {
 
   return (
     <>
-      {/* <div
+      <div
         className="loader-container"
         style={isLoading ? { display: "block" } : { display: "none" }}
       >
@@ -26,7 +26,7 @@ export function MainPage() {
           <img src={loader} alt="map is loading"></img>
           <p className="bold">Kartan laddas...</p>
         </div>
-      </div> */}
+      </div>
       <div className="main-page">
         <SearchFieldMap setLocation={setLocation} />
         <AdventureMap location={location} />
