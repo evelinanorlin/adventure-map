@@ -77,8 +77,8 @@ export default function Experience() {
           {isAdmin ? (
             <Link to="/upplevelser-lista" className="back-btn">
               <div>
-              <img src={goback} alt="go back to list" className="go-back" />
-              <p>Till alla upplevelser</p>
+                <img src={goback} alt="go back to list" className="go-back" />
+                <p>Till alla upplevelser</p>
               </div>
             </Link>
           ) : (

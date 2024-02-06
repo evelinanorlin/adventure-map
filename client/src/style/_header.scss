@@ -7,7 +7,7 @@
     background: transparent;
     filter: none;
   }
-  .header-content{
+  .header-content {
     width: 90%;
     margin: 0 auto;
     max-width: 1500px;
@@ -90,7 +90,7 @@
         }
       }
     }
-  
+
     .admin-tablet {
       display: none;
       @include tablet {
